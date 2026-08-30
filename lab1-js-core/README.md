@@ -2,7 +2,7 @@
 ### 1. Перейдите в папку лабораторной работы
 cd lab1-js-core
 ### 2. Создайте свою ветку
-git checkout -b student-lab1-{ваш_номер}
+git checkout -b student-{ваш_номер}-lab1
 ### 3. Создайте папку с решениями и скопируйте в нее файл задания с переименованием
 mkdir solutions/student-{ваш_номер}
 
@@ -15,7 +15,7 @@ git add solutions/student-{ваш_номер}/solution.js
 
 git commit -m "Lab 1 solution by student {номер}"
 
-git push origin student-lab1-{ваш_номер}
+git push origin student-{ваш_номер}-lab1
 
 ### 6. Сроки сдачи
 Дата выдачи: 05.09.2026
