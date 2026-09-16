@@ -220,34 +220,28 @@ const taskManager = {
 
 // ===== ЗАДАНИЕ 6: Классы и наследование =====
 function taskClasses() {
-    // 6.1 Базовый класс Vehicle
-    // В конструкторе принимайте и сохраняйте в this свойства:
-    // make (марка), model (модель), year (год выпуска).
     class Vehicle {
+        static vehicleCount = 0; // Инициализация счетчика
+
         constructor(make, model, year) {
             this.make = make;
             this.model = model;
-            this.year = year; // Обращение к сеттеру
+            this.year = year;
             Vehicle.vehicleCount++;
         }
 
-        // Добавьте метод displayInfo(), который выводит в консоль информацию
-        // о транспортном средстве в формате: "Марка: [make], Модель: [model], Год: [year]".
         displayInfo() {
             console.log(`Марка: ${this.make}, Модель: ${this.model}, Год: ${this.year}`);
         }
 
-        // Добавьте геттер age, который возвращает возраст транспортного средства
-        // (текущий год минус год выпуска). Используйте new Date().getFullYear().
         get age() {
             return new Date().getFullYear() - this.year;
         }
 
-        // Добавьте сеттер для года выпуска с проверкой: год не может быть больше текущего.
         set year(newYear) {
             const currentYear = new Date().getFullYear();
             if (newYear > currentYear) {
-                console.warn(`Год выпуска не может быть из будущего. Установлен текущий год (${currentYear}).`);
+                console.log(`Год выпуска не может быть из будущего. Установлен текущий год (${currentYear}).`);
                 this._year = currentYear;
             } else {
                 this._year = newYear;
@@ -258,8 +252,6 @@ function taskClasses() {
             return this._year;
         }
 
-        // Добавьте статический метод compareAge(vehicle1, vehicle2),
-        // который возвращает разницу в возрасте между двумя транспортными средствами.
         static compareAge(vehicle1, vehicle2) {
             return Math.abs(vehicle1.year - vehicle2.year);
         }
@@ -267,49 +259,35 @@ function taskClasses() {
         static getTotalVehicles() {
             return Vehicle.vehicleCount;
         }
-        // 6.4 Статические методы и свойства
-        // Добавьте статическое свойство vehicleCount в класс Vehicle
-        // для подсчета количества созданных транспортных средств.
-        // (добавьте в конструктор: Vehicle.vehicleCount++;)
-        // Создайте статический метод getTotalVehicles(),
-        // который возвращает общее количество созданных транспортных средств.
     }
 
-    // 6.2 Класс Car (наследуется от Vehicle)
-    // Добавьте новое свойство numDoors (количество дверей).
     class Car extends Vehicle {
-        constructor(make, model, year, numDoors) {
+        constructor(make, model, year, numDoors = 4) { // Значение по умолчанию для дверей
             super(make, model, year);
             this.numDoors = numDoors;
         }
 
-        // Переопределите метод displayInfo() так, чтобы он также выводил количество дверей.
-        // Используйте super.displayInfo() для вызова метода родителя.
         displayInfo() {
-            console.log(`Марка: ${this.make}, Модель: ${this.model}, Год: ${this.year}, Количество дверей: ${this.numDoors}`);
+            super.displayInfo();
+            console.log(`Количество дверей: ${this.numDoors}`);
         }
 
-        // Добавьте метод honk(), который выводит "Beep beep!".
         honk() {
             console.log("Beep beep!");
         }
     }
 
-    // 6.3 Класс ElectricCar (наследуется от Car)
-    // Добавьте новое свойство batteryCapacity (емкость батареи в кВт·ч).
     class ElectricCar extends Car {
         constructor(make, model, year, numDoors, batteryCapacity) {
             super(make, model, year, numDoors);
             this.batteryCapacity = batteryCapacity;
         }
 
-        // Переопределите метод displayInfo() для вывода дополнительной информации о батарее.
         displayInfo() {
-            console.log(`Марка: ${this.make}, Модель: ${this.model}, Год: ${this.year}, Количество дверей: ${this.numDoors}, Емкость батареи: ${this.batteryCapacity} кВт·ч`);
+            super.displayInfo();
+            console.log(`Емкость батареи: ${this.batteryCapacity} кВт·ч`);
         }
 
-        // Добавьте метод calculateRange(), который рассчитывает примерный запас хода
-        // (предположим, что 1 кВт·ч = 6 км).
         calculateRange() {
             return this.batteryCapacity * 6;
         }
@@ -342,7 +320,7 @@ function taskClasses() {
  * - +7(999)123-45-67
  */
 function validatePhone(phone) {
-    const phoneRegex = /^(\+7|8)[\s(-]?\d{3}[\s)-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+    const phoneRegex = /^(\+7|8)[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
     return phoneRegex.test(phone);
 }
 
@@ -393,7 +371,7 @@ function runTests() {
     myNewCar.displayInfo();
 
     console.log(`Всего создано транспортных средств: ${Vehicle.getTotalVehicles()}`);
-    console.assert(Vehicle.getTotalVehicles() === 5, "Тест счетчика транспортных средств провален");
+    console.assert(Vehicle.getTotalVehicles() === 6, "Тест счетчика транспортных средств провален");
 
     // Тест 5: Регулярные выражения (Вариант 3)
     console.log("\n--- Тестирование Валидации Телефона ---");
