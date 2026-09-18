@@ -343,8 +343,8 @@ function taskClasses() {
     // ===== ЗАДАНИЕ 7: Каррирование =====
 // Создайте функцию createVehicleFactory, которая возвращает функцию
 // для создания транспортных средств определенного типа (каррирование).
-const createVehicleFactory = (VehicleClass) => (make, model, year) => {
-    return new VehicleClass(make, model, year);
+const createVehicleFactory = (VehicleClass) => (...params) => {
+    return new VehicleClass(...params);
 };
 
 return { Vehicle, Car, ElectricCar, createVehicleFactory };
@@ -544,6 +544,162 @@ function runTests() {
     console.log('Всего создано транспортных средств:', Vehicle.getTotalVehicles());
 
     // Добавьте остальные тесты...
+
+    // --- getReviewerNumber ---
+    console.log("\n--- getReviewerNumber ---");
+    console.assert(getReviewerNumber(30, 5) === 5, "getReviewerNumber(30, 5) должен быть 5 (зацикливание)");
+    console.assert(getReviewerNumber(1, 1) === 2, "getReviewerNumber(1, 1) должен быть 2");
+
+    // --- getVariant ---
+    console.log("\n--- getVariant ---");
+    console.assert(getVariant(4, 4) === 4, "getVariant(4, 4) должен быть 4");
+    console.assert(getVariant(5, 4) === 1, "getVariant(5, 4) должен быть 1 (зацикливание)");
+    console.assert(getVariant(1, 4) === 1, "getVariant(1, 4) должен быть 1");
+
+    // --- calculate: все операции ---
+    console.log("\n--- calculate ---");
+    console.assert(calculate(10, 5, "-") === 5, "calculate - провален");
+    console.assert(calculate(10, 5, "*") === 50, "calculate * провален");
+    console.assert(calculate(10, 5, "/") === 2, "calculate / провален");
+
+    try {
+        calculate(10, 0, "/");
+        console.assert(false, "calculate: деление на ноль должно бросать ошибку");
+    } catch (e) {
+        console.log("calculate: деление на ноль корректно отловлено");
+    }
+
+    try {
+        calculate(10, 5, "%");
+        console.assert(false, "calculate: неизвестная операция должна бросать ошибку");
+    } catch (e) {
+        console.log("calculate: неизвестная операция корректно отловлена");
+    }
+
+    // --- calculateArea ---
+    console.log("\n--- calculateArea ---");
+    console.assert(
+        Math.abs(calculateArea("circle", 5) - Math.PI * 25) < 0.0001,
+        "calculateArea circle провален"
+    );
+    console.assert(calculateArea("rectangle", 4, 6) === 24, "calculateArea rectangle провален");
+    console.assert(calculateArea("triangle", 4, 6) === 12, "calculateArea triangle провален");
+
+    try {
+        calculateArea("square", 5);
+        console.assert(false, "calculateArea: неизвестная фигура должна бросать ошибку");
+    } catch (e) {
+        console.log("calculateArea: неизвестная фигура корректно отловлена");
+    }
+
+    // --- reverseString, getRandomNumber ---
+    console.log("\n--- reverseString, getRandomNumber ---");
+    console.assert(reverseString("привет") === "тевирп", "reverseString провален");
+    console.assert(reverseString("") === "", "reverseString пустой строки провален");
+    console.assert(reverseString("a") === "a", "reverseString одного символа провален");
+
+    const random = getRandomNumber(1, 10);
+    console.assert(random >= 1 && random <= 10, "getRandomNumber вне диапазона");
+    console.assert(Number.isInteger(random), "getRandomNumber должен быть целым");
+
+    // --- book ---
+    console.log("\n--- book ---");
+    console.assert(typeof book.getInfo() === "string", "book.getInfo() должен возвращать строку");
+    const initialAvail = book.isAvailable;
+    const toggled = book.toggleAvailability();
+    console.assert(toggled === !initialAvail, "book.toggleAvailability не переключил значение");
+    console.assert(book.isAvailable === !initialAvail, "book.isAvailable не изменился");
+    book.toggleAvailability(); // вернуть как было
+
+    // --- student: getAverageGrade и addGrade ---
+    console.log("\n--- student ---");
+    console.assert(student.getAverageGrade() === 90, "student: начальный средний балл должен быть 90");
+
+    // Добавление нового предмета
+    student.addGrade("physics", 80);
+    console.assert(student.grades.physics === 80, "student.addGrade не добавил новый предмет");
+    console.assert(student.getAverageGrade() === 87.5, "student: средний после добавления должен быть 87.5");
+
+    // Перезапись существующей оценки
+    student.addGrade("math", 100);
+    console.assert(student.grades.math === 100, "student.addGrade не перезаписал оценку");
+
+    // --- taskManager: все методы ---
+    console.log("\n--- taskManager ---");
+
+    // getStats — все поля
+    console.assert(taskManager.getStats().total === 3, "taskManager: total должен быть 3");
+    console.assert(taskManager.getStats().completed === 1, "taskManager: completed должен быть 1");
+    console.assert(taskManager.getStats().pending === 2, "taskManager: pending должен быть 2");
+
+    // addTask
+    const newTask = taskManager.addTask("Новая задача", "low");
+    console.assert(newTask.id === 4, "addTask: id должен быть 4");
+    console.assert(newTask.priority === "low", "addTask: приоритет не передан");
+    console.assert(newTask.completed === false, "addTask: новая задача должна быть невыполнена");
+    console.assert(taskManager.getStats().total === 4, "addTask: total должен стать 4");
+
+    // addTask с приоритетом по умолчанию
+    const defaultTask = taskManager.addTask("Без приоритета");
+    console.assert(defaultTask.priority === "medium", "addTask: приоритет по умолчанию должен быть medium");
+
+    // completeTask
+    const completed = taskManager.completeTask(1);
+    console.assert(completed !== null, "completeTask: задача 1 должна найтись");
+    console.assert(completed.completed === true, "completeTask: задача 1 должна стать выполненной");
+
+    // completeTask для несуществующей
+    console.assert(taskManager.completeTask(999) === null, "completeTask: несуществующая задача должна вернуть null");
+
+    // getTasksByStatus
+    const pending = taskManager.getTasksByStatus(false);
+    const done = taskManager.getTasksByStatus(true);
+    console.assert(Array.isArray(pending), "getTasksByStatus должен вернуть массив");
+    console.assert(pending.every(t => !t.completed), "getTasksByStatus(false) вернул выполненные");
+    console.assert(done.every(t => t.completed), "getTasksByStatus(true) вернул невыполненные");
+
+    // deleteTask
+    const deleted = taskManager.deleteTask(2);
+    console.assert(deleted === true, "deleteTask: должен вернуть true");
+    console.assert(taskManager.tasks.find(t => t.id === 2) === undefined, "deleteTask: задача 2 не удалена");
+
+    // deleteTask для несуществующей
+    console.assert(taskManager.deleteTask(999) === false, "deleteTask: несуществующая должна вернуть false");
+
+    // getStats — инвариант
+    const stats = taskManager.getStats();
+    console.log("Итоговая статистика:", stats);
+    console.assert(stats.total === stats.completed + stats.pending, "getStats: total !== completed + pending");
+    console.assert(stats.completionRate >= 0 && stats.completionRate <= 100, "getStats: completionRate вне диапазона");
+
+    // --- Классы: сеттер года, compareAge, фабрика ---
+    console.log("\n--- Дополнительно по классам ---");
+
+    // Сеттер года
+    try {
+        new Vehicle("Future", "Model", 2050);
+        console.assert(false, "Сеттер года должен был бросить ошибку для 2050");
+    } catch (e) {
+        console.log("Сеттер года корректно отклонил год из будущего");
+    }
+
+    // compareAge
+    const older = new Vehicle("A", "B", 2010);
+    const newer = new Vehicle("C", "D", 2020);
+    console.assert(Vehicle.compareAge(older, newer) === 10, "compareAge неверный");
+
+    // Фабрика с полным набором аргументов
+    const createCar2 = createVehicleFactory(Car);
+    const bmw = createCar2("BMW", "X5", 2022, 4);
+    console.assert(bmw.numDoors === 4, "Фабрика не передала numDoors");
+
+    // --- validateDate (ваш вариант) ---
+    console.log("\n--- validateDate ---");
+    console.assert(validateDate("01.01.2000") === true, "validateDate: валидная провалена");
+    console.assert(validateDate("31.12.2099") === true, "validateDate: валидная граница провалена");
+    console.assert(validateDate("00.01.2000") === false, "validateDate: день 00 провален");
+    console.assert(validateDate("01.13.2000") === false, "validateDate: месяц 13 провален");
+    console.assert(validateDate("01-01-2000") === false, "validateDate: дефис вместо точки провален");
 
     console.log("Все тесты пройдены! ✅");
 }
