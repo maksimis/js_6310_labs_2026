@@ -18,6 +18,9 @@ function simpleTask() {
 
 // ===== ЗАДАНИЕ 2: Функции =====
 function getReviewerNumber(number, lab) {
+    if ((number + lab) % 30 === 0) {
+        return number + lab 
+    }
     return (number + lab) % 30;
     // 2.1 Функция определяющая номер ревьюера для вашей группы по вашему номеру и номеру лабораторной работы
 }
@@ -399,8 +402,14 @@ function runTests() {
 
     // Тест 1: getReviewerNumber
     console.assert(getReviewerNumber(5, 1) === 6, "Тест получения ревьюера провален");
+    console.assert(getReviewerNumber(28, 5) === 3, "Тест получения ревьюера провален");
+    console.assert(getReviewerNumber(28, 2) === 30, "Тест получения ревьюера провален");
+
+    console.assert(getVariant(7, 2) === 1, "Тест получения варианта провален");
+    console.assert(getVariant(5, 5) === 5, "Тест получения варианта провален");
 
     // Тест 2: calculate
+    console.assert(calculate(10, 5, '*') === 50, "Тест калькулятора провален");
     console.assert(calculate(10, 5, '+') === 15, "Тест калькулятора провален");
 
     // Тест 3: taskManager
