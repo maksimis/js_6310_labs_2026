@@ -344,7 +344,17 @@ const taskManager = {
 // ===== ЗАДАНИЕ 8: Валидация (регулярные выражения) =====
 function validateDate(date) {
     const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$/;
-    return dateRegex.test(date);
+    
+    if (!dateRegex.test(date)) return false;
+
+    const [day, month, year] = date.split('.').map(Number);
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    // Февраль в високосный год — 29 дней
+    const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    if (isLeapYear) daysInMonth[1] = 29;
+
+    return day <= daysInMonth[month - 1];
 }
 
 // ===== ТЕСТИРОВАНИЕ =====
@@ -455,6 +465,9 @@ function runTests() {
     console.log("\n=== Тест validateDate ===");
     console.log(`15.05.2026: ${validateDate("15.05.2026")}`);
     console.log(`32.01.2024: ${validateDate("32.01.2024")}`);
+    console.log(`29.02.2024: ${validateDate("29.02.2024")}`);
+    console.log(`31.02.2024: ${validateDate("31.02.2024")}`);
+    console.log(`01.13.2024: ${validateDate("01.13.2024")}`);
 
     console.log("\nВСЕ ТЕСТЫ ВЫПОЛНЕНЫ");
 }
