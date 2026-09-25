@@ -3,18 +3,18 @@
 // ===== ЗАДАНИЕ 1: Базовые операции =====
 function simpleTask() {
     // 1.1 Объявите переменные разных типов (не менее 5)
-    let Number = 99;
-    let String = 'morning' ;
-    let Boolean = true;
+    let num = 99;
+    let str = 'morning' ;
+    let bool = true;
     let zero = null;
     let empty;
     let array = ['one', 'two', 'three'];
     let data = new Date(2026, 5, 8); //так как месяцы с 0, сентябрь по счету 8-ой месяц
     
     // 1.2 Выведите типы всех переменных
-    console.log('тип данных number - ', Number);
-    console.log('тип данных string - ', String);
-    console.log('тип данных boolean - ', Boolean);
+    console.log('тип данных number - ', num);
+    console.log('тип данных string - ', str);
+    console.log('тип данных boolean - ', bool);
     console.log('тип данных null - ', zero);
     console.log('тип данных undefined - ', empty);
     console.log('тип данных array - ', array);
@@ -138,7 +138,7 @@ const student = {
     // Метод для добавления новой оценки
     addGrade(subject, grade) {
         this.grades[subject] = grade;
-        concole.log(`Добавлен новый предмет ${subject} и оценка по нему ${grade}`);
+        console.log(`Добавлен новый предмет ${subject} и оценка по нему ${grade}`);
     }
 };
 
@@ -203,7 +203,7 @@ const taskManager = {
 
     addTask(title, priority = "medium") {
         // 5.1 Добавление задачи
-        const new_id = this.tasks.lenght > 0 ? Math.max(this.tasks.map(n => n.id)) + 1 : 1;
+        const new_id = this.tasks.length > 0 ? Math.max(this.tasks.map(n => n.id)) + 1 : 1;
         const newTask = {
             id : new_id,
             title : title,
@@ -239,8 +239,8 @@ const taskManager = {
         pending,
         completionRate
         */
-       const total = this.tasks.lenght;
-       const completed = this.tasks.filter(n => n.complete).lenght;
+       const total = this.tasks.length;
+       const completed = this.tasks.filter(n => n.complete).length;
        const pending = total - completed;
        const completionRate = total == 0 ? 0 : (completed/total) * 100;
 
@@ -260,41 +260,42 @@ function taskClasses() {
     // В конструкторе принимайте и сохраняйте в this свойства:
     // make (марка), model (модель), year (год выпуска).
     class Vehicle {
+        static vehicleCount = 0;
+        //сохраняем свойства и увеличиваем кол-во объектов на 1 при создании нового
         constructor(make, model, year) {
-            //сохраняем свойства и увеличиваем кол-во объектов на 1 при создании нового
             this.make = make;
             this.model = model;
-            this.year = year;
-            Vehicle.vehicalCount ++;
+            this._year = year;
+            Vehicle.vehicleCount ++;
         }
 
         // Добавьте метод displayInfo(), который выводит в консоль информацию
         // о транспортном средстве в формате: "Марка: [make], Модель: [model], Год: [year]".
         displayInfo() {
-            console.log(`Марка: ${make}, Модель: ${model}, Год: ${year}`);
+            console.log(`Марка: ${this.make}, Модель: ${this.model}, Год: ${this._year}`);
         }
 
         // Добавьте геттер age, который возвращает возраст транспортного средства
         // (текущий год минус год выпуска). Используйте new Date().getFullYear().
         get age() {
-            current_year = new Date().getFullYear();
-            return current_year - this.year;
+            const current_year = new Date().getFullYear();
+            return current_year - this._year;
         }
 
         // Добавьте сеттер для года выпуска с проверкой: год не может быть больше текущего.
         set year(newYear) {
-            const NewYear = newYear <= this.year ? newYear : 0;
+            const NewYear = newYear <= this._year ? newYear : 0;
             NewYear == 0 ? console.log("Новый год выпуска не может быть больше текущего") : console.log(`Установлен новый год выпуска - ${NewYear}`);
         }
 
         get year() {
-            return this.year;
+            return this._year;
         }
 
         // Добавьте статический метод compareAge(vehicle1, vehicle2),
         // который возвращает разницу в возрасте между двумя транспортными средствами.
         static compareAge(vehicle1, vehicle2) {
-            return Math.abs(vehicle1.year - vehicle2.year);
+            return Math.abs(vehicle1._year - vehicle2._year);
         }
 
         static getTotalVehicles(){
@@ -444,6 +445,24 @@ function runTests() {
 
     // Тест 3: taskManager
     console.assert((taskManager.getStats() || {}).total === 3, "Тест taskManager провален");
+    // Тест 3.1: addTask
+    const lengthBefore = taskManager.tasks.length;
+    taskManager.addTask("Новая задача");
+    console.assert(taskManager.tasks.length === lengthBefore + 1, "Тест на добавление задачи провален");
+
+    // Тест 3.2: completeTask
+    taskManager.completeTask(1);
+    console.assert(taskManager.tasks.find(t => t.id === 1).completed === true, "Тест на завершение задачи провален");
+
+    // Тест 3.3: deleteTask
+    const lenBeforeDelete = taskManager.tasks.length;
+    taskManager.deleteTask(1);
+    console.assert(taskManager.tasks.length === lenBeforeDelete - 1, "Тест на удаление задачи провален");
+
+    // Тест 3.4: getStats
+    const stats = taskManager.getStats();
+    console.assert(stats.total === taskManager.tasks.length, "Тест на проверку длины массива провелен");
+    console.assert(typeof stats.completionRate === 'number', "Тест на проверку объема завершенных задач провелен");
 
     // Тест 4: классы и наследование
     const { Vehicle, Car, ElectricCar, createVehicleFactory } = taskClasses();
@@ -469,18 +488,39 @@ function runTests() {
 
     console.log('Всего создано транспортных средств:', Vehicle.getTotalVehicles());
 
-    //Тест 5
+    // Тест 4.1: Vehicle - конструктор и age
+    const v1 = new Vehicle('Toyota', 'RAV4', 2015);
+    console.assert(v1.make === 'Toyota' && v1.model === 'RAV4', "Тест на создание объекта класса провлен");
+    console.assert(v1.age === (new Date().getFullYear() - 2015), "Тест на проверку возраста машины провален");
+
+    // Тест 4.2: сеттер year (проверка что нельзя поставить год больше текущего)
+    const yearBefore = v1.year;
+    v1.year = 2106; // заведомо невалидный год 
+    console.assert(v1.year === yearBefore, "Проверка на обновление года провалена");
+
+    // Тест 4.3: Car - numDoors и honk 
+    const c1 = new Car('Ford', 'Mustang', 2020, 2);
+    console.assert(c1.numDoors === 2, "Проверка на количество дверей провалена");
+
+    // Тест 4.4: ElectricCar - calculateRange
+    const ec1 = new ElectricCar('Tesla', 'Model2', 2020, 4, 75);
+    console.assert(ec1.calculateRange() === 75 * 6, "Проверка на мощность хода провалена");
+
+    // Тест 4.5: compareAge
+    console.assert(Vehicle.compareAge(v1, c1) === Math.abs(v1.year - c1.year), "Проверка на сравнение возраста машин провалена");
+
+    // Тест 4.6: getTotalVehicles 
+    const countBefore = Vehicle.getTotalVehicles();
+    const v2 = new Vehicle('Jeep', 'Sahara', 2019);
+    console.assert(Vehicle.getTotalVehicles() === countBefore + 1, "Проверка на количество транспортов провалена");
+
+    // Тест 4.7: createVehicleFactory
+    console.assert(myNewCar instanceof Car, "Тест на проверку класса провален");
+    console.assert(myNewCar.make === 'BMW' && myNewCar.numDoors === undefined, "Тест на проверку добавления нового объекта провлен");
 
 
-    //тест 6
 
-
-
-    //тест 7
-
-
-
-    //тест 8
+    //задание 8
     //проверка email
     console.assert(validateEmail("ivanov-ivan@mail.ru") === true, "Тест проверки почты провален");
     console.assert(validateEmail("ivanov-ivan.ru") === false, "Тест проверки почты провален");
