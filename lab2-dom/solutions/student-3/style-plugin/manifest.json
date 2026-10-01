@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Night Vision",
+  "version": "1.0",
+  "description": "Изменяет оформление сайта kai.ru на стиль Night Vision",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.kai.ru/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
