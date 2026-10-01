@@ -1,0 +1,185 @@
+html, body {
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* яркий градиентный фон */
+body.vaporwave-active {
+    background: linear-gradient(135deg, #ff6ec7 0%, #7873f5 50%, #4ade80 100%) !important;
+    background-attachment: fixed !important;
+    color: #000000 !important;
+    font-family: 'Trebuchet MS', 'Verdana', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+    min-height: 100vh !important;
+}
+
+/* делаем главный контейнер прозрачным чтобы был виден фон body */
+body.vaporwave-active #page_wrapper {
+    background: transparent !important;
+    min-height: 100vh !important; /* Растягиваем и контейнер */
+}
+
+/* заголовки */
+body.vaporwave-active h1,
+body.vaporwave-active h2,
+body.vaporwave-active h3,
+body.vaporwave-active h4 {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    text-shadow: 3px 3px 0px #000000 !important;
+    background: linear-gradient(90deg, #8A2BE2, #00CED1) !important;
+    padding: 15px 20px !important;
+    margin: 20px 0 !important;
+    border: 3px solid #000000 !important;
+}
+
+/* ссылки */
+body.vaporwave-active a {
+    color: #ff1493 !important;
+    font-weight: 700 !important;
+    text-decoration: underline !important;
+    text-decoration-thickness: 3px !important;
+    transition: all 0.2s ease !important;
+}
+
+body.vaporwave-active a:hover {
+    color: #00CED1 !important;
+    background: #ffffff !important;
+    padding: 2px 5px !important;
+}
+
+/* изображения */
+body.vaporwave-active img {
+    border: 4px solid #000000 !important;
+    box-shadow: 6px 6px 0px #8A2BE2 !important;
+    background: #ffffff !important;
+    padding: 5px !important;
+}
+
+/* блоки контента */
+body.vaporwave-active .main_slider_holder,
+body.vaporwave-active .news_box,
+body.vaporwave-active main,
+body.vaporwave-active article,
+body.vaporwave-active .container {
+    background: #ffffff !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 8px 8px 0px #00CED1 !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/* кнопки */
+body.vaporwave-active button,
+body.vaporwave-active .btn,
+body.vaporwave-active input[type="submit"] {
+    background: #ff6ec7 !important;
+    color: #000000 !important;
+    border: 3px solid #000000 !important;
+    border-radius: 0 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    box-shadow: 4px 4px 0px #7873f5 !important;
+    cursor: pointer !important;
+    transition: all 0.1s ease !important;
+}
+
+body.vaporwave-active button:hover,
+body.vaporwave-active .btn:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0px #7873f5 !important;
+    background: #7873f5 !important;
+    color: #ffffff !important;
+}
+
+/* наша кнопка переключения */
+#vaporwave-toggle-btn {
+    background: linear-gradient(90deg, #ff6ec7, #7873f5) !important;
+    color: #ffffff !important;
+    border: 3px solid #000000 !important;
+    border-radius: 0 !important;
+    font-family: 'Trebuchet MS', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 13px !important;       /* Чуть меньше, чтобы точно влезло */
+    text-transform: uppercase !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+    transition: all 0.1s ease !important;
+    
+    /* свойства для исправления обрезки текста: */
+    min-width: 160px !important;      /* минимальная ширина */
+    white-space: nowrap !important;   /* запрет переноса строк */
+    padding: 0 15px !important;       /* отступы по бокам */
+    box-sizing: border-box !important; /* чтобы padding не увеличивал общую ширину сверх меры */
+}
+
+#vaporwave-toggle-btn:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+}
+
+/* поля ввода */
+body.vaporwave-active input[type="text"],
+body.vaporwave-active input[type="email"],
+body.vaporwave-active textarea,
+body.vaporwave-active select {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 3px solid #8A2BE2 !important;
+    border-radius: 0 !important;
+    font-weight: 600 !important;
+    padding: 10px !important;
+}
+
+body.vaporwave-active input:focus,
+body.vaporwave-active textarea:focus {
+    outline: none !important;
+    border-color: #00CED1 !important;
+    box-shadow: 0 0 10px #00CED1 !important;
+}
+
+/* таблицы */
+body.vaporwave-active table {
+    border-collapse: collapse !important;
+    background: #ffffff !important;
+}
+
+body.vaporwave-active th,
+body.vaporwave-active td {
+    border: 2px solid #000000 !important;
+    padding: 10px !important;
+}
+
+body.vaporwave-active th {
+    background: #ff6ec7 !important;
+    color: #ffffff !important;
+    font-weight: 900 !important;
+}
+
+/* панель навигации*/
+body.vaporwave-active header .menu,
+body.vaporwave-active #menu {
+    background: linear-gradient(90deg, #8A2BE2, #ff6ec7) !important;
+    border-bottom: 4px solid #000000 !important;
+    box-shadow: 0 5px 0px #00CED1 !important;
+    height: auto !important;
+    padding: 10px 0 !important;
+}
+
+/* перекрашиваем ссылки в меню */
+body.vaporwave-active header .menu a,
+body.vaporwave-active #menu a {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 2px 2px 0px #000000 !important;
+    text-decoration: none !important;
+}
+
+body.vaporwave-active header .menu a:hover,
+body.vaporwave-active #menu a:hover {
+    color: #00CED1 !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+}

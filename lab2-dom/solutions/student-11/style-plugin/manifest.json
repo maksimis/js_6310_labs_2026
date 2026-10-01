@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Vaporwave Style",
+  "version": "1.0",
+  "description": "Плагин, меняющий стиль сайта КАИ на эстетику Vaporwave / A E S T H E T I C",
+  "content_scripts": [
+    {
+      "matches": ["*://kai.ru/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
