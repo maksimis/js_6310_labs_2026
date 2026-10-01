@@ -12,20 +12,21 @@ function simpleTask() {
     let data = new Date(2026, 5, 8); //так как месяцы с 0, сентябрь по счету 8-ой месяц
     
     // 1.2 Выведите типы всех переменных
-    console.log('тип данных number - ', num);
-    console.log('тип данных string - ', str);
-    console.log('тип данных boolean - ', bool);
-    console.log('тип данных null - ', zero);
-    console.log('тип данных undefined - ', empty);
-    console.log('тип данных array - ', array);
-    console.log('тип данных date - ', data);
+    console.log('тип данных num - ', typeof(num));
+    console.log('тип данных str - ', typeof(str));
+    console.log('тип данных bool - ', typeof(bool));
+    console.log('тип данных zero - ', typeof(zero));
+    console.log('тип данных empty - ', typeof(empty));
+    console.log('тип данных array - ', typeof(array));
+    console.log('тип данных data - ', typeof(data));
 }
 
 // ===== ЗАДАНИЕ 2: Функции =====
 function getReviewerNumber(number, lab) {
     // 2.1 Функция определяющая номер ревьюера для вашей группы по вашему номеру и номеру лабораторной работы
     const result = (number + lab) % 30;
-    return result;
+    if (result == 0) return number + lab;
+    else return result;
 }
 
 function getVariant(number, variants) {
@@ -203,7 +204,7 @@ const taskManager = {
 
     addTask(title, priority = "medium") {
         // 5.1 Добавление задачи
-        const new_id = this.tasks.length > 0 ? Math.max(this.tasks.map(n => n.id)) + 1 : 1;
+        const new_id = this.tasks.length > 0 ? Math.max(...this.tasks.map(n => n.id)) + 1 : 1;
         const newTask = {
             id : new_id,
             title : title,
@@ -240,7 +241,7 @@ const taskManager = {
         completionRate
         */
        const total = this.tasks.length;
-       const completed = this.tasks.filter(n => n.complete).length;
+       const completed = this.tasks.filter(n => n.completed).length;
        const pending = total - completed;
        const completionRate = total == 0 ? 0 : (completed/total) * 100;
 
