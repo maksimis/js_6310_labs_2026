@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Avatar Four Elements Style",
+  "version": "1.0.0",
+  "description": "Светлая медитативная тема для kai.ru: баланс четырёх стихий (вода, земля, огонь, воздух)",
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*", "https://*.kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
