@@ -1,0 +1,185 @@
+body.kai-sepia-theme {
+    background-color: #f4ecd8 !important;
+    color: #5a4a42 !important;
+    font-family: 'Times New Roman', 'Georgia', 'Palatino Linotype', serif !important;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E") !important;
+}
+
+body.kai-sepia-theme #page_wrapper {
+    background-color: #f4ecd8 !important;
+    color: #5a4a42 !important;
+    font-family: 'Times New Roman', Georgia, serif !important;
+    border: 1px solid #d4c4a8 !important;
+    box-shadow: 0 0 20px rgba(90, 74, 66, 0.15) !important;
+}
+
+body.kai-sepia-theme .news_box,
+body.kai-sepia-theme .main_slider_holder,
+body.kai-sepia-theme .slider_box,
+body.kai-sepia-theme .institutes_slider_box,
+body.kai-sepia-theme .box_items {
+    background-color: #f8f1e3 !important;
+    background: #f8f1e3 !important;
+    border: 1px solid #c9b896 !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
+    box-shadow: inset 0 0 8px rgba(90, 74, 66, 0.08) !important;
+}
+
+body.kai-sepia-theme h1,
+body.kai-sepia-theme h2,
+body.kai-sepia-theme h3,
+body.kai-sepia-theme h4,
+body.kai-sepia-theme .portlet-title,
+body.kai-sepia-theme .news_box h2 {
+    color: #3e322c !important;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif !important;
+    letter-spacing: 0.5px !important;
+    border-bottom: 1px solid #c9b896 !important;
+    padding-bottom: 6px !important;
+}
+
+body.kai-sepia-theme a {
+    color: #6b4e3d !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+}
+
+body.kai-sepia-theme a:hover {
+    color: #8b5e3c !important;
+    background-color: rgba(244, 236, 216, 0.6) !important;
+}
+
+body.kai-sepia-theme .box_links,
+body.kai-sepia-theme .access-box,
+body.kai-sepia-theme header {
+    background-color: #ebe3cf !important;
+    border-bottom: 2px solid #c9b896 !important;
+}
+
+/* Top navigation bar */
+body.kai-sepia-theme #menu,
+body.kai-sepia-theme .menu,
+body.kai-sepia-theme .menu-list,
+body.kai-sepia-theme .lfr-nav-item,
+body.kai-sepia-theme .section .menu,
+body.kai-sepia-theme nav,
+body.kai-sepia-theme [class*="menu-list"],
+body.kai-sepia-theme [class*="nav-item"] {
+    background-color: #ebe3cf !important;
+    background: #ebe3cf !important;
+    color: #5a4a42 !important;
+    border-color: #c9b896 !important;
+}
+
+body.kai-sepia-theme #menu a,
+body.kai-sepia-theme .menu a,
+body.kai-sepia-theme .menu-list a,
+body.kai-sepia-theme .lfr-nav-item a,
+body.kai-sepia-theme .menu-list li,
+body.kai-sepia-theme .lfr-nav-item {
+    color: #5a4a42 !important;
+    background-color: transparent !important;
+}
+
+body.kai-sepia-theme #menu a:hover,
+body.kai-sepia-theme .menu a:hover,
+body.kai-sepia-theme .lfr-nav-item a:hover {
+    color: #3e322c !important;
+    background-color: #d4c4a8 !important;
+}
+
+/* Дополнительные контейнеры навигации */
+body.kai-sepia-theme .section,
+body.kai-sepia-theme [class*="nav"],
+body.kai-sepia-theme [class*="menu"],
+body.kai-sepia-theme .box.cf {
+    background-color: #f4ecd8 !important;
+}
+
+body.kai-sepia-theme .section > .menu,
+body.kai-sepia-theme header .section {
+    background-color: #ebe3cf !important;
+    border-bottom: 1px solid #c9b896 !important;
+}
+
+/* Footer */
+body.kai-sepia-theme footer,
+body.kai-sepia-theme [class*="footer"],
+body.kai-sepia-theme .page_buffer,
+body.kai-sepia-theme #footer,
+body.kai-sepia-theme .footer-wrapper {
+    background-color: #ebe3cf !important;
+    background: #ebe3cf !important;
+    color: #5a4a42 !important;
+    border-top: 2px solid #c9b896 !important;
+}
+
+body.kai-sepia-theme footer a,
+body.kai-sepia-theme footer span,
+body.kai-sepia-theme footer p,
+body.kai-sepia-theme footer li,
+body.kai-sepia-theme footer div,
+body.kai-sepia-theme [class*="footer"] a,
+body.kai-sepia-theme [class*="footer"] span {
+    color: #5a4a42 !important;
+}
+
+body.kai-sepia-theme footer a:hover {
+    color: #3e322c !important;
+    background-color: #d4c4a8 !important;
+}
+
+body.kai-sepia-theme .logo_box,
+body.kai-sepia-theme .search_box {
+    filter: sepia(0.3) !important;
+}
+
+body.kai-sepia-theme p,
+body.kai-sepia-theme li,
+body.kai-sepia-theme span,
+body.kai-sepia-theme .portlet-content {
+    color: #5a4a42 !important;
+    line-height: 1.6 !important;
+}
+
+body.kai-sepia-theme .btn,
+body.kai-sepia-theme button,
+body.kai-sepia-theme [class*="button"] {
+    background-color: #d4c4a8 !important;
+    color: #3e322c !important;
+    border: 1px solid #a89070 !important;
+    border-radius: 3px !important;
+    font-family: Georgia, serif !important;
+}
+
+/* Toggle button styles */
+#kai-sepia-toggle-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #a89070;
+    background-color: #ebe3cf;
+    color: #5a4a42;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 0 0 8px;
+    box-shadow: 0 2px 6px rgba(90, 74, 66, 0.2);
+    text-align: center;
+    float: left;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, background-color 0.2s;
+    font-family: serif;
+}
+
+#kai-sepia-toggle-btn:hover {
+    transform: scale(1.08);
+    background-color: #d4c4a8;
+}
+
+#kai-sepia-toggle-btn.active {
+    background-color: #c9b896;
+    border-color: #8b5e3c;
+}

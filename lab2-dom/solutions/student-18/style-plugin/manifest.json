@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Sepia / Old Paper",
+  "version": "1.0",
+  "description": "Добавляет кнопку для переключения стиля «Состаренная бумага» (Sepia) на сайте kai.ru",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
