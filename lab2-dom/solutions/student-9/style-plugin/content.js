@@ -16,12 +16,12 @@ if (!document.getElementById(styleId)) {
             color: #4a3b2a !important;
         }
         
-        /* 3. Цвет всех ссылок по умолчанию */
+        /* 3. Цвет всех ссылок */
         body.air-nomad-active a {
             color: #d35400 !important;
         }
 
-        /* 4. УБИРАЕМ СТУПЕНЬКИ: прозрачность для общих оберток Liferay */
+        /* 4. Прочее */
         body.air-nomad-active .portlet,
         body.air-nomad-active .portlet-boundary,
         body.air-nomad-active .portlet-topper,
@@ -67,7 +67,7 @@ if (!document.getElementById(styleId)) {
             margin-bottom: 15px !important;
         }
 
-        /* Для .item со стратегическими проектами — фон прозрачный (там картинка!), но с рамкой */
+        /* Для .item со стратегическими проектами */
         body.air-nomad-active .research_box .item {
             background-color: transparent !important;
             border: 2px solid #e67e22 !important;
@@ -77,7 +77,7 @@ if (!document.getElementById(styleId)) {
             margin-bottom: 15px !important;
         }
 
-        /* Описание ВНУТРИ карточек: цвет #fde8c8 */
+        /* Описание карточек: цвет #fde8c8 */
         body.air-nomad-active .box_items .item .desc,
         body.air-nomad-active .events_box .item .desc,
         body.air-nomad-active .welcome_box .item .desc,
@@ -88,7 +88,7 @@ if (!document.getElementById(styleId)) {
             padding: 12px !important;
         }
 
-        /*  АКТИВНАЯ вкладка (например, "АВИАТЕХ"): цвет #fde8c8 */
+        /*  АКТИВНАЯ вкладка : цвет #fde8c8 */
         body.air-nomad-active .tab_items .nav a.active,
         body.air-nomad-active .institutes_box .nav a.active {
             background-color: #fde8c8 !important;
@@ -98,7 +98,7 @@ if (!document.getElementById(styleId)) {
             border-radius: 6px !important;
         }
 
-        /*  НОВОЕ: Кнопки типа "все события", "все новости", RSS — не белые! */
+        /* Кнопки */
         body.air-nomad-active .kai-btn-block {
             background-color: #ffac7a !important;
             color: #4a3b2a !important;
@@ -111,7 +111,7 @@ if (!document.getElementById(styleId)) {
             color: #ffffff !important;
         }
 
-        /* Сложный селектор (требование: класс + прямой потомок) */
+        /* Сложный селектор  */
         body.air-nomad-active .box_links > div,
         body.air-nomad-active .portlet-title-text {
             background-color: #fff8f0 !important;
@@ -121,7 +121,7 @@ if (!document.getElementById(styleId)) {
             padding: 4px 8px !important;
         }
 
-        /* Стили самой кнопки переключения */
+        /* Стили кнопки переключения */
         #air-toggle-btn {
             float: left;
             padding: 6px 14px !important;
@@ -146,18 +146,18 @@ if (!document.getElementById(styleId)) {
 function initAirStylePlugin() {
     console.log('[Lab2] Запуск плагина...');
     
-    // getElementById (обязательное требование)
+    // getElementById 
     if (document.getElementById('air-toggle-btn')) {
         return;
     }
 
-    // querySelector (обязательное требование)
+    // querySelector 
     let buttonContainer = document.querySelector('.box_links');
     const button = document.createElement('button');
     button.id = 'air-toggle-btn';
     button.textContent = 'Воздух: Выкл';
 
-    // localStorage (обязательное требование)
+    // localStorage 
     const isThemeActive = localStorage.getItem('kai_air_theme_active') === 'true';
 
     function updateThemeState(isActive) {
@@ -186,11 +186,11 @@ function initAirStylePlugin() {
         localStorage.setItem('kai_air_theme_active', newState.toString());
         updateThemeState(newState);
 
-        // querySelectorAll (обязательное требование)
+        // querySelectorAll 
         const elements = document.querySelectorAll('.portlet-boundary, .news_box, #wrapper');
         console.log(`[Lab2] querySelectorAll нашёл элементов: ${elements.length}`);
         
-        // parentElement и children (обязательное требование)
+        // parentElement и children 
         const firstLink = document.querySelector('a');
         if (firstLink) {
             console.log(`[Lab2] parentElement ссылки:`, firstLink.parentElement.tagName);
@@ -200,7 +200,7 @@ function initAirStylePlugin() {
 
     // Вставка кнопки
     if (buttonContainer) {
-        // children (обязательное требование)
+        // children 
         if (buttonContainer.children.length > 0) {
             buttonContainer.appendChild(button);
         } else {
