@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "KAI — BoJack Hollywood Style",
+  "version": "1.1",
+  "description": "Добавляет на kai.ru стиль в духе голливудского заката из BoJack Horseman",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
