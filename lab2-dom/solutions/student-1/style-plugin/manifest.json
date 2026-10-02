@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Springfield Style",
+  "version": "1.0.0",
+  "description": "Переключает страницы kai.ru в мультяшный стиль Симпсонов.",
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
