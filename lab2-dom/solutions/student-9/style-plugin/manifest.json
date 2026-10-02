@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Air Style Plugin",
+  "version": "1.0",
+  "description": "Меняет стиль сайта kai.ru на персиково-кремовые тона варианта 'Воздух'",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://kai.ru/*", "*://*.kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
