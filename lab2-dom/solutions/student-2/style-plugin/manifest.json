@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Slytherin Theme",
+  "version": "1.0",
+  "description": "Плагин для изменения стиля сайта kai.ru",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://kai.ru/*", 
+        "https://*.kai.ru/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
