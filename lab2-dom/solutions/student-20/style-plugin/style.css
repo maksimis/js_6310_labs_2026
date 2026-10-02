@@ -1,0 +1,51 @@
+/* Основной класс, который вешается на body */
+body.comic-theme-active {
+    font-family: "Comic Sans MS", "Comic Sans", cursive !important;
+    background-color: #fff8e7 !important; /* Изменение 1, 2 */
+    color: #4a4a4a !important; /* Изменение 3 */
+    letter-spacing: 1px !important; /* Изменение 4 */
+    line-height: 1.6 !important; /* Изменение 5 */
+}
+
+body.comic-theme-active * {
+    font-family: "Comic Sans MS", "Comic Sans", cursive !important;
+}
+
+/* Стили для дочерних блоков, новостей и кнопок */
+.comic-box {
+    border-radius: 15px !important; /* Изменение 6 */
+    border: 2px dashed #ffb6c1 !important; /* Изменение 7 */
+    box-shadow: 5px 5px 15px rgba(255, 105, 180, 0.3) !important; /* Изменение 8 */
+    padding: 12px !important; /* Изменение 9 */
+    background-color: #ffffff !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Игривый поворот для некоторых элементов */
+.comic-rotate {
+    transform: rotate(-1deg) !important; /* Изменение 10 */
+}
+
+/* Кнопка переключения */
+#comic-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99999;
+    padding: 10px 15px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    background-color: #ff69b4;
+    color: white;
+    border: 3px solid #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#comic-toggle-btn:hover {
+    transform: scale(1.1) rotate(3deg);
+    background-color: #ff1493;
+}
