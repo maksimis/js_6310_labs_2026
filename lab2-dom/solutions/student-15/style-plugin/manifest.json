@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "KAI to DARK",
+  "version": "1.0",
+  "description": "Добавляет кнопку для переключения темного режима",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
