@@ -1,0 +1,1238 @@
+/* ===== 1. БАЗА ===== */
+html.cyberpunk-mode,
+body.cyberpunk-mode {
+    background: linear-gradient(135deg, #0a0014 0%, #14002a 50%, #001033 100%) !important;
+    background-attachment: fixed !important;
+    color: #e0e0ff !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+}
+
+body.cyberpunk-mode p,
+body.cyberpunk-mode span,
+body.cyberpunk-mode li,
+body.cyberpunk-mode td {
+    color: #e0e0ff !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+}
+
+body.cyberpunk-mode a {
+    color: #ff5fff !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+}
+body.cyberpunk-mode a:hover { color: #00ffff !important; }
+
+body.cyberpunk-mode::after {
+    content: '' !important;
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg,
+        rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 1px,
+        transparent 1px, transparent 4px) !important;
+    pointer-events: none !important;
+    z-index: 999998 !important;
+}
+
+/* ===== 2. УБИРАЕМ БЕЛЫЕ ФОНЫ ===== */
+body.cyberpunk-mode #page_wrapper,
+body.cyberpunk-mode #wrapper,
+body.cyberpunk-mode #container,
+body.cyberpunk-mode .page,
+body.cyberpunk-mode .page-wrapper,
+body.cyberpunk-mode .page_holder,
+body.cyberpunk-mode .content,
+body.cyberpunk-mode .content-wrapper,
+body.cyberpunk-mode .main-content,
+body.cyberpunk-mode .page-content,
+body.cyberpunk-mode main,
+body.cyberpunk-mode section,
+body.cyberpunk-mode article,
+body.cyberpunk-mode aside,
+body.cyberpunk-mode [class*="layout"],
+body.cyberpunk-mode [class*="region"],
+body.cyberpunk-mode [class*="area"],
+body.cyberpunk-mode [class*="section"],
+body.cyberpunk-mode .lfr-portlet-column,
+body.cyberpunk-mode [class*="lfr-"],
+body.cyberpunk-mode [class*="portlet-"],
+body.cyberpunk-mode [class*="aui-"],
+body.cyberpunk-mode [id^="p_p_id_"],
+body.cyberpunk-mode [id^="column-"],
+body.cyberpunk-mode [id^="p_p_id_"] > div,
+body.cyberpunk-mode [class*="column"],
+body.cyberpunk-mode [class*="grid"],
+body.cyberpunk-mode [class*="col-"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+body.cyberpunk-mode [style*="background: white"],
+body.cyberpunk-mode [style*="background-color: white"],
+body.cyberpunk-mode [style*="background:#fff"],
+body.cyberpunk-mode [style*="background: #fff"],
+body.cyberpunk-mode [style*="background-color:#fff"],
+body.cyberpunk-mode [style*="background-color: #fff"],
+body.cyberpunk-mode [style*="background-color:#ffffff"],
+body.cyberpunk-mode [style*="background-color: #ffffff"],
+body.cyberpunk-mode [style*="background:#ffffff"],
+body.cyberpunk-mode [style*="background: #ffffff"],
+body.cyberpunk-mode [style*="rgb(255, 255, 255)"],
+body.cyberpunk-mode [style*="rgba(255, 255, 255"],
+body.cyberpunk-mode [style*="background: #f"],
+body.cyberpunk-mode [style*="background-color: #f"] {
+    background: #0a0014 !important;
+    background-color: #0a0014 !important;
+    background-image: none !important;
+}
+
+/* Скрываем служебные заголовки портлетов */
+body.cyberpunk-mode .portlet-title,
+body.cyberpunk-mode .portlet-topper,
+body.cyberpunk-mode .portlet-header,
+body.cyberpunk-mode [class*="portlet-title"],
+body.cyberpunk-mode [class*="portlet-topper"],
+body.cyberpunk-mode [class*="portlet-header"],
+body.cyberpunk-mode .portlet-content-editable {
+    display: none !important;
+}
+
+body.cyberpunk-mode .portlet-boundary,
+body.cyberpunk-mode .portlet,
+body.cyberpunk-mode .portlet-content,
+body.cyberpunk-mode .portlet-body {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    background: transparent !important;
+}
+
+/* ===== 3. ЗАГОЛОВКИ ===== */
+body.cyberpunk-mode h1,
+body.cyberpunk-mode h2,
+body.cyberpunk-mode h3,
+body.cyberpunk-mode h4,
+body.cyberpunk-mode h1[style],
+body.cyberpunk-mode h1[id] {
+    color: #ff00ff !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+    font-size: 32px !important;
+    font-weight: bold !important;
+    letter-spacing: 4px !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px rgba(255,0,255,0.6) !important;
+    border: none !important;
+    padding: 15px 0 !important;
+    margin: 30px auto !important;
+    background: transparent !important;
+    line-height: 1.3 !important;
+}
+
+body.cyberpunk-mode .portlet-title h1,
+body.cyberpunk-mode .portlet-header h1,
+body.cyberpunk-mode .section-wide h1,
+body.cyberpunk-mode .section h1 {
+    margin: 0 auto 20px !important;
+    padding: 10px 0 !important;
+}
+
+/* ===== 4. ТЕКСТ ШАПКИ ===== */
+body.cyberpunk-mode .header h1,
+body.cyberpunk-mode .header h2,
+body.cyberpunk-mode .header h3,
+body.cyberpunk-mode .header p,
+body.cyberpunk-mode .header span:not([class*="icon"]):not([class*="social"]),
+body.cyberpunk-mode .header a,
+body.cyberpunk-mode .header [class*="title"],
+body.cyberpunk-mode .header [class*="name"]:not([class*="user"]),
+body.cyberpunk-mode .header .site-title,
+body.cyberpunk-mode .header .site-name,
+body.cyberpunk-mode .header .sitename,
+body.cyberpunk-mode .header .logo-title,
+body.cyberpunk-mode .header .company-name,
+body.cyberpunk-mode .header [style*="color"] {
+    color: #00ffff !important;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px rgba(0,255,255,0.7) !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+    letter-spacing: 1px !important;
+    font-size: inherit !important;
+    text-align: left !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    line-height: inherit !important;
+}
+
+body.cyberpunk-mode .top-header a,
+body.cyberpunk-mode .header a {
+    color: inherit !important;
+    font-family: inherit !important;
+}
+
+/* ===== 5. КАРТОЧКИ НОВОСТЕЙ И СОБЫТИЙ ===== */
+body.cyberpunk-mode .news_box,
+body.cyberpunk-mode .news_box_holder,
+body.cyberpunk-mode .news-item,
+body.cyberpunk-mode .news_item,
+body.cyberpunk-mode .news-card,
+body.cyberpunk-mode .news_list,
+body.cyberpunk-mode .teaser,
+body.cyberpunk-mode .event-item,
+body.cyberpunk-mode .event_item,
+body.cyberpunk-mode [class*="news"],
+body.cyberpunk-mode [class*="event"],
+body.cyberpunk-mode [class*="asset"],
+body.cyberpunk-mode [class*="journal"] {
+    background: #14082a !important;
+    background-color: #14082a !important;
+    background-image: none !important;
+    border: 1px solid rgba(0,255,255,0.25) !important;
+}
+
+body.cyberpunk-mode .news_box *,
+body.cyberpunk-mode .news_item *,
+body.cyberpunk-mode [class*="news"] *,
+body.cyberpunk-mode [class*="event"] *,
+body.cyberpunk-mode [class*="asset"] *,
+body.cyberpunk-mode [class*="journal"] * {
+    color: #e0e0ff !important;
+    background-color: transparent !important;
+    text-shadow: none !important;
+}
+
+body.cyberpunk-mode .news_box h1,
+body.cyberpunk-mode .news_box h2,
+body.cyberpunk-mode .news_box h3,
+body.cyberpunk-mode .news_item h3,
+body.cyberpunk-mode [class*="news"] h3 {
+    color: #ff5fff !important;
+}
+
+/* ===== 6. СТРАТЕГИЧЕСКИЕ ПРОЕКТЫ ===== */
+body.cyberpunk-mode [class*="strateg"],
+body.cyberpunk-mode [class*="project"] {
+    background: #05010a !important;
+    color: #e0e0ff !important;
+}
+
+body.cyberpunk-mode [class*="strateg"] *,
+body.cyberpunk-mode [class*="project"] * {
+    color: #e0e0ff !important;
+    background-color: transparent !important;
+}
+
+/* ===== 7. СЛАЙДЕРЫ — СТРЕЛКИ ‹ › ===== */
+body.cyberpunk-mode #main_slider,
+body.cyberpunk-mode .slider_box,
+body.cyberpunk-mode .slick-list,
+body.cyberpunk-mode .slick-track,
+body.cyberpunk-mode .slick-slide,
+body.cyberpunk-mode .slick-slide .pic,
+body.cyberpunk-mode .slick-slide .desc,
+body.cyberpunk-mode .slick-slide .text_holder {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+body.cyberpunk-mode .slick-slide p { color: #e0e0ff !important; }
+
+body.cyberpunk-mode .slick-prev,
+body.cyberpunk-mode .slick-next {
+    background: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: transparent !important;
+    font-size: 0 !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    width: 40px !important;
+    height: 40px !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 100 !important;
+    cursor: pointer !important;
+}
+
+body.cyberpunk-mode .slick-prev { left: 10px !important; }
+body.cyberpunk-mode .slick-next { right: 10px !important; }
+
+body.cyberpunk-mode .slick-prev *,
+body.cyberpunk-mode .slick-next *,
+body.cyberpunk-mode .slick-prev::after,
+body.cyberpunk-mode .slick-next::after,
+body.cyberpunk-mode .slick-prev span,
+body.cyberpunk-mode .slick-next span,
+body.cyberpunk-mode .slick-slider .slick-arrow svg,
+body.cyberpunk-mode .slick-slider .slick-arrow i,
+body.cyberpunk-mode .slick-slider .slick-arrow img {
+    display: none !important;
+    visibility: hidden !important;
+    content: none !important;
+    font-size: 0 !important;
+}
+
+body.cyberpunk-mode .slick-prev::before,
+body.cyberpunk-mode .slick-next::before {
+    content: '' !important;
+    display: block !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 36px !important;
+    line-height: 40px !important;
+    text-align: center !important;
+    color: #00ffff !important;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff !important;
+    text-indent: 0 !important;
+    font-family: Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: transparent !important;
+    position: static !important;
+}
+body.cyberpunk-mode .slick-prev::before { content: '‹' !important; }
+body.cyberpunk-mode .slick-next::before { content: '›' !important; }
+
+body.cyberpunk-mode .slick-prev:hover::before,
+body.cyberpunk-mode .slick-next:hover::before {
+    color: #ff00ff !important;
+    text-shadow: 0 0 15px #ff00ff, 0 0 30px #00ffff !important;
+}
+
+body.cyberpunk-mode .slick-dots li button {
+    background: rgba(0,255,255,0.3) !important;
+    border: 1px solid #00ffff !important;
+    border-radius: 50% !important;
+}
+body.cyberpunk-mode .slick-dots li.slick-active button {
+    background: #00ffff !important;
+    box-shadow: 0 0 10px #00ffff !important;
+}
+
+body.cyberpunk-mode .kai-btn,
+body.cyberpunk-mode .slick-slide a {
+    color: #ff5fff !important;
+    background: rgba(10,0,20,0.7) !important;
+    border: 1px solid #ff5fff !important;
+    padding: 8px 20px !important;
+    text-shadow: 0 0 6px rgba(255,0,255,0.6) !important;
+}
+body.cyberpunk-mode .kai-btn:hover,
+body.cyberpunk-mode .slick-slide a:hover {
+    background: #ff5fff !important;
+    color: #05010a !important;
+    text-shadow: none !important;
+}
+
+/* ===== 7.1 СТРЕЛКИ "УЧЕБНЫХ ПОДРАЗДЕЛЕНИЙ" ===== */
+body.cyberpunk-mode .institutes_slider_box,
+body.cyberpunk-mode .institutes_box {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+body.cyberpunk-mode .inst-slide,
+body.cyberpunk-mode .inst-slide.prev,
+body.cyberpunk-mode .inst-slide.next {
+    position: absolute !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 100 !important;
+}
+
+body.cyberpunk-mode .inst-slide.prev { left: 10px !important; right: auto !important; }
+body.cyberpunk-mode .inst-slide.next { right: 10px !important; left: auto !important; }
+
+body.cyberpunk-mode .inst-slide *,
+body.cyberpunk-mode .inst-slide span,
+body.cyberpunk-mode .inst-slide svg,
+body.cyberpunk-mode .inst-slide i,
+body.cyberpunk-mode .inst-slide img,
+body.cyberpunk-mode .inst-slide .slick-prev,
+body.cyberpunk-mode .inst-slide .slick-next,
+body.cyberpunk-mode .inst-slide::after {
+    display: none !important;
+    visibility: hidden !important;
+    font-size: 0 !important;
+    color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.cyberpunk-mode .inst-slide::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 40px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    color: #00ffff !important;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+}
+body.cyberpunk-mode .inst-slide.prev::before { content: '‹' !important; }
+body.cyberpunk-mode .inst-slide.next::before { content: '›' !important; }
+
+body.cyberpunk-mode .inst-slide:hover::before {
+    color: #ff00ff !important;
+    text-shadow: 0 0 15px #ff00ff, 0 0 30px #00ffff !important;
+}
+
+body.cyberpunk-mode #inst-prev-btn,
+body.cyberpunk-mode #inst-next-btn,
+body.cyberpunk-mode [id*="inst-prev"],
+body.cyberpunk-mode [id*="inst-next"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ===== 8. МОДАЛКА ВХОДА ===== */
+body.cyberpunk-mode .popup_box,
+body.cyberpunk-mode .login_popup,
+body.cyberpunk-mode #login_popup,
+body.cyberpunk-mode .modal-content,
+body.cyberpunk-mode .popup-content,
+body.cyberpunk-mode .dialog,
+body.cyberpunk-mode .modal,
+body.cyberpunk-mode .popup,
+body.cyberpunk-mode [class*="login-form"],
+body.cyberpunk-mode [class*="sign-in"],
+body.cyberpunk-mode [class*="cabinet"],
+body.cyberpunk-mode [class*="modal-body"] {
+    background: linear-gradient(135deg, #0a0d2e 0%, #14002a 50%, #0d1a4a 100%) !important;
+    color: #e0e0ff !important;
+    border: 1px solid rgba(0,255,255,0.5) !important;
+    box-shadow: 0 0 30px rgba(0,255,255,0.4), 0 0 60px rgba(255,0,255,0.3) !important;
+}
+
+body.cyberpunk-mode #login_popup *,
+body.cyberpunk-mode .login_popup *,
+body.cyberpunk-mode .popup_box *,
+body.cyberpunk-mode .modal-content *,
+body.cyberpunk-mode .popup-content *,
+body.cyberpunk-mode [class*="login-form"] *,
+body.cyberpunk-mode [class*="sign-in"] *,
+body.cyberpunk-mode [class*="cabinet"] *,
+body.cyberpunk-mode [class*="modal-body"] * {
+    background: transparent !important;
+    color: #e0e0ff !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+}
+
+body.cyberpunk-mode #login_popup .title,
+body.cyberpunk-mode .login_popup .title,
+body.cyberpunk-mode .modal-content h1,
+body.cyberpunk-mode .modal-content h2,
+body.cyberpunk-mode .modal-content .title,
+body.cyberpunk-mode .modal-content .header,
+body.cyberpunk-mode [class*="login-form"] h1,
+body.cyberpunk-mode [class*="login-form"] h2,
+body.cyberpunk-mode [class*="cabinet"] h1,
+body.cyberpunk-mode [class*="cabinet"] h2 {
+    color: #00ffff !important;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0,255,255,0.6) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    border-bottom: 1px solid rgba(0,255,255,0.4) !important;
+    padding-bottom: 10px !important;
+    font-weight: bold !important;
+}
+
+body.cyberpunk-mode #login_popup .control-label,
+body.cyberpunk-mode .modal-content label,
+body.cyberpunk-mode .popup-content label,
+body.cyberpunk-mode [class*="login-form"] label,
+body.cyberpunk-mode [class*="cabinet"] label {
+    color: #ff5fff !important;
+    text-shadow: 0 0 6px rgba(255,0,255,0.7) !important;
+    background: transparent !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+}
+
+body.cyberpunk-mode #login_popup .field,
+body.cyberpunk-mode #login_popup input,
+body.cyberpunk-mode .modal-content input,
+body.cyberpunk-mode .popup-content input,
+body.cyberpunk-mode .dialog input,
+body.cyberpunk-mode [class*="login-form"] input,
+body.cyberpunk-mode [class*="cabinet"] input,
+body.cyberpunk-mode [class*="modal-body"] input {
+    background: #05010a !important;
+    color: #00ffff !important;
+    border: 1px solid rgba(0,255,255,0.7) !important;
+    box-shadow: inset 0 0 10px rgba(0,255,255,0.2) !important;
+    padding: 10px 12px !important;
+}
+
+body.cyberpunk-mode #login_popup input:focus,
+body.cyberpunk-mode .modal-content input:focus,
+body.cyberpunk-mode [class*="login-form"] input:focus {
+    outline: none !important;
+    border-color: #00ffff !important;
+    box-shadow: inset 0 0 15px rgba(0,255,255,0.3), 0 0 15px rgba(0,255,255,0.7) !important;
+}
+
+body.cyberpunk-mode #login_popup button,
+body.cyberpunk-mode #login_popup .submit_btn,
+body.cyberpunk-mode #login_popup .btn,
+body.cyberpunk-mode .login_popup button,
+body.cyberpunk-mode .modal-content button,
+body.cyberpunk-mode .popup-content button,
+body.cyberpunk-mode .dialog button,
+body.cyberpunk-mode [class*="login-form"] button,
+body.cyberpunk-mode [class*="cabinet"] button {
+    background: linear-gradient(135deg, #1a0a2e, #0a0d2e) !important;
+    color: #00ffff !important;
+    border: 2px solid #00ffff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 8px rgba(0,255,255,0.8) !important;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5), inset 0 0 15px rgba(0,255,255,0.1) !important;
+    padding: 12px 30px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+body.cyberpunk-mode #login_popup button:hover,
+body.cyberpunk-mode .modal-content button:hover,
+body.cyberpunk-mode [class*="login-form"] button:hover {
+    background: #00ffff !important;
+    color: #05010a !important;
+    text-shadow: none !important;
+    box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(255,0,255,0.6) !important;
+    transform: translateY(-2px) !important;
+}
+
+body.cyberpunk-mode #login_popup .close,
+body.cyberpunk-mode .login_popup .close,
+body.cyberpunk-mode .modal-content [class*="close"],
+body.cyberpunk-mode .popup-content [class*="close"],
+body.cyberpunk-mode [class*="login-form"] [class*="close"] {
+    background: rgba(26,10,46,0.7) !important;
+    color: #ff00ff !important;
+    border: 2px solid #ff00ff !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    box-shadow: 0 0 15px #ff00ff, 0 0 30px rgba(255,0,255,0.5) !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+body.cyberpunk-mode #login_popup .close:hover,
+body.cyberpunk-mode .modal-content [class*="close"]:hover {
+    background: #ff00ff !important;
+    color: #05010a !important;
+    transform: scale(1.15) rotate(90deg) !important;
+}
+
+body.cyberpunk-mode [class*="overlay"]:not([class*="login-form"]):not([class*="cabinet"]),
+body.cyberpunk-mode [class*="backdrop"],
+body.cyberpunk-mode .modal-backdrop {
+    background: rgba(5,1,10,0.6) !important;
+}
+
+/* ===== 9. ВЕРХНЕЕ МЕНЮ ===== */
+body.cyberpunk-mode ul.menu-list,
+body.cyberpunk-mode .menu-list,
+body.cyberpunk-mode [role="menubar"],
+body.cyberpunk-mode ul[role="menubar"],
+body.cyberpunk-mode .lfr-nav,
+body.cyberpunk-mode [class*="lfr-nav"],
+body.cyberpunk-mode nav.navbar,
+body.cyberpunk-mode .navbar,
+body.cyberpunk-mode .navigation-menu,
+body.cyberpunk-mode .navigation-menu-top,
+body.cyberpunk-mode header ul.nav,
+body.cyberpunk-mode .navbar-inner {
+    background: linear-gradient(135deg, #0a0d2e 0%, #0d1a4a 50%, #0a0d2e 100%) !important;
+    background-color: #0a0d2e !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+body.cyberpunk-mode li.lfr-nav-item,
+body.cyberpunk-mode .lfr-nav-item {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+    min-height: 0 !important;
+    height: auto !important;
+    line-height: 1 !important;
+}
+
+body.cyberpunk-mode li.lfr-nav-item + li.lfr-nav-item,
+body.cyberpunk-mode li.lfr-nav-item[style] {
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+body.cyberpunk-mode li.lfr-nav-item:first-child[style] {
+    border-left: none !important;
+}
+
+body.cyberpunk-mode li.lfr-nav-item > a,
+body.cyberpunk-mode .lfr-nav-item > a {
+    color: #e0e0ff !important;
+    background: transparent !important;
+    text-shadow: 0 0 4px rgba(224,224,255,0.3) !important;
+    padding: 12px 18px !important;
+    display: block !important;
+    text-transform: uppercase !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+    font-size: 13px !important;
+    letter-spacing: 1px !important;
+    font-weight: bold !important;
+    line-height: 1.2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    transition: all 0.25s ease !important;
+    text-decoration: none !important;
+}
+
+body.cyberpunk-mode li.lfr-nav-item > a:hover,
+body.cyberpunk-mode .lfr-nav-item > a:hover {
+    color: #00ffff !important;
+    background: rgba(0,255,255,0.1) !important;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0,255,255,0.6) !important;
+    box-shadow: inset 0 -2px 0 #00ffff !important;
+}
+
+body.cyberpunk-mode li.lfr-nav-item > a span {
+    color: inherit !important;
+    background: transparent !important;
+}
+
+body.cyberpunk-mode nav.navbar::before,
+body.cyberpunk-mode nav.navbar::after,
+body.cyberpunk-mode .navbar::before,
+body.cyberpunk-mode .navbar::after,
+body.cyberpunk-mode ul.lfr-nav::before,
+body.cyberpunk-mode ul.lfr-nav::after,
+body.cyberpunk-mode ul.menu-list::before,
+body.cyberpunk-mode ul.menu-list::after,
+body.cyberpunk-mode [role="menubar"]::before,
+body.cyberpunk-mode [role="menubar"]::after,
+body.cyberpunk-mode [class*="lfr-nav"]::before,
+body.cyberpunk-mode [class*="lfr-nav"]::after,
+body.cyberpunk-mode li.lfr-nav-item::before,
+body.cyberpunk-mode li.lfr-nav-item::after,
+body.cyberpunk-mode .lfr-nav-item::before,
+body.cyberpunk-mode .lfr-nav-item::after,
+body.cyberpunk-mode li.lfr-nav-item > a::before,
+body.cyberpunk-mode li.lfr-nav-item > a::after,
+body.cyberpunk-mode li.lfr-nav-item > a > span::before,
+body.cyberpunk-mode li.lfr-nav-item > a > span::after,
+body.cyberpunk-mode li.lfr-nav-item + li.lfr-nav-item::before {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+body.cyberpunk-mode .nav-wrapper,
+body.cyberpunk-mode .navigation-wrapper,
+body.cyberpunk-mode .menu-wrapper,
+body.cyberpunk-mode [class*="nav-wrap"],
+body.cyberpunk-mode [class*="navigation-wrap"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* ===== 10. ВЫПАДАЮЩЕЕ МЕНЮ ===== */
+body.cyberpunk-mode li.lfr-nav-item { position: relative !important; }
+
+body.cyberpunk-mode .sub,
+body.cyberpunk-mode .lfr-nav-item .sub,
+body.cyberpunk-mode .lfr-nav-item > .sub,
+body.cyberpunk-mode .submenu,
+body.cyberpunk-mode .sub-menu,
+body.cyberpunk-mode .dropdown-menu,
+body.cyberpunk-mode .layouts,
+body.cyberpunk-mode ul.layouts,
+body.cyberpunk-mode nav ul ul {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    border-top: none !important;
+    inset: auto auto auto 0 !important;
+    background: linear-gradient(135deg, #0a0d2e 0%, #0d1a4a 50%, #0a0d2e 100%) !important;
+    background-color: #0a0d2e !important;
+    color: #e0e0ff !important;
+    border: 1px solid rgba(0,255,255,0.4) !important;
+    box-shadow: 0 0 25px rgba(0,255,255,0.25), 0 10px 40px rgba(0,0,0,0.8) !important;
+    border-radius: 0 !important;
+    z-index: 200 !important;
+    max-width: calc(100vw - 40px) !important;
+    box-sizing: border-box !important;
+}
+
+body.cyberpunk-mode .sub .page_holder,
+body.cyberpunk-mode .sub > * {
+    background: transparent !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body.cyberpunk-mode .child-menu,
+body.cyberpunk-mode ul.child-menu {
+    background: transparent !important;
+    list-style: none !important;
+    padding: 15px 0 10px !important;
+    margin: 0 !important;
+}
+
+body.cyberpunk-mode .child-menu li,
+body.cyberpunk-mode ul.child-menu li.lfr-nav-item,
+body.cyberpunk-mode .layouts li,
+body.cyberpunk-mode ul.layouts li {
+    background: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+body.cyberpunk-mode .child-menu li[style],
+body.cyberpunk-mode ul.child-menu li[style] {
+    border-left: none !important;
+}
+
+body.cyberpunk-mode .layouts > li + li,
+body.cyberpunk-mode .child-menu li + li,
+body.cyberpunk-mode .main_menu ul ul > li + li,
+body.cyberpunk-mode nav ul ul li + li {
+    border-top: 1px solid rgba(0,255,255,0.15) !important;
+}
+
+body.cyberpunk-mode .child-menu a,
+body.cyberpunk-mode ul.child-menu a,
+body.cyberpunk-mode .submenu a,
+body.cyberpunk-mode .sub-menu a,
+body.cyberpunk-mode .dropdown-menu a,
+body.cyberpunk-mode .layouts a,
+body.cyberpunk-mode ul.layouts a,
+body.cyberpunk-mode nav ul ul a,
+body.cyberpunk-mode .main_menu ul ul a {
+    color: #00ffff !important;
+    background: transparent !important;
+    text-shadow: 0 0 6px rgba(0,255,255,0.7) !important;
+    padding: 10px 25px !important;
+    display: block !important;
+    transition: all 0.25s ease !important;
+    border-left: 3px solid transparent !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    max-width: 300px !important;
+}
+
+body.cyberpunk-mode .child-menu a:hover,
+body.cyberpunk-mode ul.child-menu a:hover,
+body.cyberpunk-mode .submenu a:hover,
+body.cyberpunk-mode .sub-menu a:hover,
+body.cyberpunk-mode .layouts a:hover,
+body.cyberpunk-mode nav ul ul a:hover,
+body.cyberpunk-mode .main_menu ul ul a:hover {
+    background: linear-gradient(90deg, rgba(255,0,255,0.2), transparent) !important;
+    color: #ff5fff !important;
+    text-shadow: 0 0 12px #ff00ff, 0 0 20px rgba(255,0,255,0.5) !important;
+    border-left-color: #ff00ff !important;
+    padding-left: 35px !important;
+}
+
+body.cyberpunk-mode .layouts li.selected > a,
+body.cyberpunk-mode .layouts a.selected,
+body.cyberpunk-mode .layouts li.open > a,
+body.cyberpunk-mode .layouts a.open,
+body.cyberpunk-mode .main_menu ul ul li.active > a {
+    background: linear-gradient(90deg, rgba(0,255,255,0.15), transparent) !important;
+    color: #ff00ff !important;
+    text-shadow: 0 0 10px #ff00ff !important;
+    border-left-color: #ff00ff !important;
+    font-weight: bold !important;
+}
+
+body.cyberpunk-mode .layouts img,
+body.cyberpunk-mode .child-menu img,
+body.cyberpunk-mode .submenu img {
+    filter: invert(1) hue-rotate(180deg) brightness(1.5) !important;
+    opacity: 0.9 !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    vertical-align: middle !important;
+    margin-right: 8px !important;
+}
+
+/* ===== 11. БОКОВОЕ МЕНЮ ===== */
+body.cyberpunk-mode .side-menu,
+body.cyberpunk-mode .side_menu,
+body.cyberpunk-mode .sidebar,
+body.cyberpunk-mode .left-menu,
+body.cyberpunk-mode .left_menu,
+body.cyberpunk-mode .left-sidebar,
+body.cyberpunk-mode .aside,
+body.cyberpunk-mode .page-sidebar,
+body.cyberpunk-mode [class*="sidebar"],
+body.cyberpunk-mode [class*="side-menu"],
+body.cyberpunk-mode [class*="side_menu"],
+body.cyberpunk-mode [class*="left-menu"],
+body.cyberpunk-mode [class*="left_menu"] {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    z-index: 1 !important;
+    width: auto !important;
+    max-width: 100% !important;
+    float: none !important;
+}
+
+body.cyberpunk-mode [id^="column-"],
+body.cyberpunk-mode [class*="portlet-column"],
+body.cyberpunk-mode [class*="portlet-column-content"] {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    z-index: 1 !important;
+}
+
+/* ===== 12. ФИКС АДРЕСА ===== */
+body.cyberpunk-mode .portlet-boundary_73_,
+body.cyberpunk-mode #p_p_id_73_,
+body.cyberpunk-mode .portlet-breadcrumb,
+body.cyberpunk-mode .portlet-boundary.portlet-breadcrumb,
+body.cyberpunk-mode #portlet_73,
+body.cyberpunk-mode section.portlet.kai-article,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-topper,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-content,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-content-container,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-body,
+body.cyberpunk-mode ul.breadcrumb,
+body.cyberpunk-mode .breadcrumb.breadcrumb-horizontal {
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: auto !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+
+body.cyberpunk-mode .portlet-breadcrumb .portlet-title,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-title-text,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-topper-toolbar,
+body.cyberpunk-mode .portlet-breadcrumb .portlet-topper > h1,
+body.cyberpunk-mode .portlet-breadcrumb header.portlet-topper {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* ===== 13. АДРЕС ===== */
+body.cyberpunk-mode .breadcrumb,
+body.cyberpunk-mode .breadcrumb-horizontal,
+body.cyberpunk-mode ul.breadcrumb,
+body.cyberpunk-mode [aria-label="Навигационная полоска"],
+body.cyberpunk-mode .portlet-breadcrumb,
+body.cyberpunk-mode .breadcrumb-container,
+body.cyberpunk-mode .breadcrumbs-container,
+body.cyberpunk-mode .breadcrumbs-wrapper {
+    background: linear-gradient(90deg, #0a0d2e 0%, #0d1a4a 50%, #0a0d2e 100%) !important;
+    color: #e0e0ff !important;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(0,255,255,0.4) !important;
+    border-top: 1px solid rgba(0,255,255,0.2) !important;
+    box-shadow: inset 0 0 20px rgba(0,255,255,0.05) !important;
+    list-style: none !important;
+}
+
+body.cyberpunk-mode .breadcrumb li {
+    background: transparent !important;
+    color: #e0e0ff !important;
+    padding: 0 8px !important;
+    border-left: none !important;
+}
+
+body.cyberpunk-mode .breadcrumb a {
+    color: #00ffff !important;
+    text-shadow: 0 0 6px rgba(0,255,255,0.7) !important;
+    text-decoration: none !important;
+}
+
+body.cyberpunk-mode .breadcrumb a:hover {
+    color: #ff5fff !important;
+    text-shadow: 0 0 10px rgba(255,0,255,0.9) !important;
+}
+
+body.cyberpunk-mode .breadcrumb .divider {
+    color: #ff5fff !important;
+    text-shadow: 0 0 8px rgba(255,0,255,0.8) !important;
+    margin: 0 8px !important;
+    font-weight: bold !important;
+}
+
+/* ===== 14. СПИСОК ПУНКТОВ ===== */
+body.cyberpunk-mode .accordion-toggle,
+body.cyberpunk-mode [class*="accordion-toggle"],
+body.cyberpunk-mode [class*="accordion_toggle"] {
+    background: linear-gradient(135deg, #0a0d2e 0%, #0d1a4a 100%) !important;
+    color: #00ffff !important;
+    border: 1px solid rgba(0,255,255,0.4) !important;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    box-shadow: inset 0 0 20px rgba(0,255,255,0.05) !important;
+    transition: all 0.3s ease !important;
+}
+
+body.cyberpunk-mode .accordion-toggle:hover {
+    background: linear-gradient(135deg, #0d1a4a 0%, #1a0a3a 100%) !important;
+    border-color: rgba(255,0,255,0.6) !important;
+}
+
+body.cyberpunk-mode .accordion-toggle.open,
+body.cyberpunk-mode .accordion-toggle.active,
+body.cyberpunk-mode .accordion-toggle[aria-expanded="true"] {
+    background: linear-gradient(135deg, #1a0a3a 0%, #0d1a4a 100%) !important;
+    color: #ff00ff !important;
+    border-color: rgba(255,0,255,0.7) !important;
+}
+
+body.cyberpunk-mode .accordion-toggle .title-text,
+body.cyberpunk-mode .accordion-toggle span {
+    color: #00ffff !important;
+    background: transparent !important;
+    text-shadow: 0 0 6px rgba(0,255,255,0.7) !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+}
+
+body.cyberpunk-mode .accordion-toggle.open .title-text {
+    color: #ff00ff !important;
+    text-shadow: 0 0 10px #ff00ff !important;
+}
+
+body.cyberpunk-mode .accordion,
+body.cyberpunk-mode [class*="accordion"]:not(.accordion-toggle) {
+    background: transparent !important;
+    border: none !important;
+}
+
+body.cyberpunk-mode .accordion-content,
+body.cyberpunk-mode .accordion-body {
+    background: linear-gradient(135deg, #0a0d2e 0%, #14002a 100%) !important;
+    color: #e0e0ff !important;
+    border: 1px solid rgba(0,255,255,0.3) !important;
+    border-top: none !important;
+    padding: 15px 20px !important;
+}
+
+body.cyberpunk-mode .accordion-content a,
+body.cyberpunk-mode .accordion-body a {
+    color: #ff5fff !important;
+    text-shadow: 0 0 6px rgba(255,0,255,0.6) !important;
+    padding: 8px 15px !important;
+    display: block !important;
+    transition: all 0.2s ease !important;
+    border-left: 2px solid transparent !important;
+}
+
+body.cyberpunk-mode .accordion-content a:hover,
+body.cyberpunk-mode .accordion-body a:hover {
+    background: rgba(255,0,255,0.15) !important;
+    color: #00ffff !important;
+    text-shadow: 0 0 10px #00ffff !important;
+    border-left-color: #00ffff !important;
+    padding-left: 20px !important;
+}
+
+body.cyberpunk-mode [class*="accordion"] *,
+body.cyberpunk-mode [class*="accordion-toggle"] * {
+    background-color: transparent !important;
+}
+
+/* ===== 15. ПОДВАЛ ===== */
+body.cyberpunk-mode footer,
+body.cyberpunk-mode .footer,
+body.cyberpunk-mode .bottom,
+body.cyberpunk-mode .footer-wrapper,
+body.cyberpunk-mode .footer_wrapper,
+body.cyberpunk-mode .bottom-footer,
+body.cyberpunk-mode .footer-bottom,
+body.cyberpunk-mode #footer,
+body.cyberpunk-mode [class*="footer"]:not(a):not(img) {
+    background: linear-gradient(135deg, #0a0d2e 0%, #0d1a4a 50%, #0a0d2e 100%) !important;
+    color: #e0e0ff !important;
+    border-top: 1px solid rgba(0,255,255,0.4) !important;
+    box-shadow: inset 0 0 40px rgba(0,255,255,0.05) !important;
+}
+
+body.cyberpunk-mode footer *,
+body.cyberpunk-mode .footer *,
+body.cyberpunk-mode .bottom *,
+body.cyberpunk-mode .footer-wrapper *,
+body.cyberpunk-mode .footer_wrapper *,
+body.cyberpunk-mode #footer *,
+body.cyberpunk-mode [class*="footer"] *,
+body.cyberpunk-mode [class*="footer"] [class*="block"],
+body.cyberpunk-mode [class*="footer"] [class*="section"],
+body.cyberpunk-mode [class*="footer"] [class*="column"] {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+body.cyberpunk-mode footer p,
+body.cyberpunk-mode footer span,
+body.cyberpunk-mode footer div,
+body.cyberpunk-mode .footer p,
+body.cyberpunk-mode .footer span,
+body.cyberpunk-mode .footer div,
+body.cyberpunk-mode .bottom p,
+body.cyberpunk-mode .bottom span {
+    color: #e0e0ff !important;
+    text-shadow: 0 0 3px rgba(224,224,255,0.3) !important;
+}
+
+body.cyberpunk-mode footer a,
+body.cyberpunk-mode .footer a,
+body.cyberpunk-mode .bottom a,
+body.cyberpunk-mode .footer-wrapper a,
+body.cyberpunk-mode footer li a,
+body.cyberpunk-mode .footer li a {
+    color: #00ffff !important;
+    text-shadow: 0 0 6px rgba(0,255,255,0.7) !important;
+    transition: all 0.2s ease !important;
+}
+
+body.cyberpunk-mode footer a:hover,
+body.cyberpunk-mode .footer a:hover,
+body.cyberpunk-mode .bottom a:hover,
+body.cyberpunk-mode footer li a:hover,
+body.cyberpunk-mode .footer li a:hover {
+    color: #ff5fff !important;
+    text-shadow: 0 0 10px #ff00ff !important;
+}
+
+body.cyberpunk-mode footer img,
+body.cyberpunk-mode .footer img,
+body.cyberpunk-mode .bottom img {
+    filter: brightness(1.2) hue-rotate(180deg) !important;
+    opacity: 0.95 !important;
+    background: transparent !important;
+}
+
+body.cyberpunk-mode footer [class*="logo"],
+body.cyberpunk-mode .footer [class*="logo"],
+body.cyberpunk-mode footer [class*="logo"] img {
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+body.cyberpunk-mode footer input,
+body.cyberpunk-mode .footer input,
+body.cyberpunk-mode .bottom input,
+body.cyberpunk-mode footer .search-input,
+body.cyberpunk-mode [class*="search"] input {
+    background: #05010a !important;
+    color: #e0e0ff !important;
+    border: 1px solid rgba(0,255,255,0.5) !important;
+    box-shadow: inset 0 0 8px rgba(0,255,255,0.15) !important;
+}
+
+body.cyberpunk-mode footer button,
+body.cyberpunk-mode .footer button,
+body.cyberpunk-mode footer [class*="search-btn"],
+body.cyberpunk-mode footer [class*="search_btn"] {
+    background: #1a0a2e !important;
+    color: #00ffff !important;
+    border: 1px solid #00ffff !important;
+    box-shadow: 0 0 8px rgba(0,255,255,0.4) !important;
+}
+
+body.cyberpunk-mode footer [class*="address"],
+body.cyberpunk-mode footer [class*="contact"],
+body.cyberpunk-mode footer [class*="info"] {
+    color: #e0e0ff !important;
+}
+
+body.cyberpunk-mode footer ul,
+body.cyberpunk-mode footer li,
+body.cyberpunk-mode .footer ul,
+body.cyberpunk-mode .footer li {
+    background: transparent !important;
+    list-style: none !important;
+    color: #00ffff !important;
+}
+
+body.cyberpunk-mode footer li a,
+body.cyberpunk-mode .footer li a {
+    padding: 4px 0 !important;
+    display: block !important;
+}
+
+body.cyberpunk-mode footer li a:hover,
+body.cyberpunk-mode .footer li a:hover {
+    padding-left: 5px !important;
+}
+
+/* ===== 16. КНОПКА "СОХРАНИТЬ" ===== */
+body.cyberpunk-mode button[type="submit"],
+body.cyberpunk-mode input[type="submit"],
+body.cyberpunk-mode .btn-save,
+body.cyberpunk-mode .btn_save,
+body.cyberpunk-mode [class*="btn-save"],
+body.cyberpunk-mode [class*="save-btn"],
+body.cyberpunk-mode button[value*="Save"],
+body.cyberpunk-mode button[value*="Сохранить"] {
+    background: linear-gradient(135deg, #1a0a2e, #0a0d2e) !important;
+    color: #00ffff !important;
+    border: 2px solid #00ffff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 8px rgba(0,255,255,0.8) !important;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5), inset 0 0 15px rgba(0,255,255,0.1) !important;
+    padding: 12px 30px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    border-radius: 4px !important;
+}
+
+body.cyberpunk-mode button[type="submit"]:hover,
+body.cyberpunk-mode input[type="submit"]:hover,
+body.cyberpunk-mode .btn-save:hover,
+body.cyberpunk-mode [class*="btn-save"]:hover {
+    background: #00ffff !important;
+    color: #05010a !important;
+    text-shadow: none !important;
+    box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(255,0,255,0.6) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* ===== 17. КНОПКА ПЕРЕКЛЮЧЕНИЯ ПЛАГИНА ===== */
+#cyberpunk-toggle-btn {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 2147483647 !important;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #05010a !important;
+    color: #00ffff !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    border: 2px solid #00ffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 10px #00ffff, 0 0 25px rgba(255,0,255,0.8) !important;
+    cursor: pointer !important;
+    text-shadow: 0 0 6px #00ffff !important;
+}
+
+#cyberpunk-toggle-btn.active {
+    border-color: #ff00ff !important;
+    color: #ff00ff !important;
+}
+
+/* ===== 18. КНОПКА "НАВЕРХ" ===== */
+body.cyberpunk-mode [class*="scroll-top"],
+body.cyberpunk-mode [class*="scroll_up"],
+body.cyberpunk-mode [class*="to-top"],
+body.cyberpunk-mode [class*="totop"],
+body.cyberpunk-mode .scroll-up {
+    background: #1a0a2e !important;
+    color: #00ffff !important;
+    border: 2px solid #00ffff !important;
+    box-shadow: 0 0 15px rgba(0,255,255,0.6) !important;
+}
+
+body.cyberpunk-mode [class*="scroll-top"]:hover {
+    background: #00ffff !important;
+    color: #05010a !important;
+    box-shadow: 0ы 0 25px #00ffff, 0 0 50px rgba(255,0,255,0.6) !important;
+}
