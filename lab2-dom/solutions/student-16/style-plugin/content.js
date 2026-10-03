@@ -1,9 +1,5 @@
 'use strict';
 
-// ============================================================
-// CYBERPUNK / NEON NOIR для kai.ru
-// ============================================================
-
 const STORAGE_KEY = 'cyberpunk-neon-enabled';
 
 // ===== Применение/снятие стиля =====
@@ -97,7 +93,6 @@ function createToggleButton() {
     btn.title = 'Включить Cyberpunk';
     btn.addEventListener('click', toggleCyberpunk);
 
-    // Вставляем в body, чтобы точно был виден
     document.body.appendChild(btn);
 }
 
@@ -113,7 +108,6 @@ function loadSavedState() {
 
 // ===== Инициализация =====
 function init() {
-    // УДАЛИЛИ injectStyles() — теперь CSS только из style.css!
     createToggleButton();
     loadSavedState();
     console.log('Cyberpunk Neon Noir initialized');
