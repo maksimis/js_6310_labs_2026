@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "KAI South Park Style",
+  "version": "1.0",
+  "description": "Меняет стиль сайта kai.ru на стиль бумажных аппликаций Южного Парка",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
