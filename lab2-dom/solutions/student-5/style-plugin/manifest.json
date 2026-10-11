@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "KAI UGLY MODE",
+  "version": "1.0",
+  "description": "Плагин, который делает сайт kai.ru максимально уродливым",
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
