@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="310" viewBox="0 0 760 310">
+  <rect width="760" height="310" fill="#17212b" rx="14"/>
+  <text x="32" y="45" fill="#ffffff" font-family="Arial" font-size="24" font-weight="bold">ExpenseBot</text>
+  <text x="32" y="90" fill="#75c0ff" font-family="Arial" font-size="18">/add_expense</text>
+  <text x="32" y="125" fill="#e8f0f7" font-family="Arial" font-size="18">Введите сумму расхода положительным числом, например: 250.50</text>
+  <text x="32" y="160" fill="#75c0ff" font-family="Arial" font-size="18">250,50</text>
+  <text x="32" y="195" fill="#e8f0f7" font-family="Arial" font-size="18">Выберите категорию: продукты, транспорт, развлечения, жильё, здоровье, прочее.</text>
+  <text x="32" y="230" fill="#75c0ff" font-family="Arial" font-size="18">продукты</text>
+  <text x="32" y="270" fill="#8ee8a1" font-family="Arial" font-size="18">Расход 250.50 ₽ в категории «продукты» добавлен.</text>
+</svg>
