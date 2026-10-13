@@ -1,0 +1,1 @@
+export const formatEchoMessage = (text) => `Вы сказали: "${text}"`;
