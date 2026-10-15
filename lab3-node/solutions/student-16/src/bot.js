@@ -2,8 +2,6 @@ import TelegramBot from 'node-telegram-bot-api';
 import { config } from './config.js';
 import { getSession, resetSession, STEPS } from './state.js';
 import {
-  MODE_KEYBOARD,
-  topicKeyboard,
   handleNewQuiz,
   handleModeChoice,
   handleTopicChoice,
