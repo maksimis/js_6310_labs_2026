@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Air Style Plugin",
+  "version": "1.0",
+  "description": "Расширение изменяет стиль сайта kai.ru в соответствии с темой «Воздух».",
+  "content_scripts": [
+    {
+      "matches": ["*://kai.ru/*", "*://*.kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
