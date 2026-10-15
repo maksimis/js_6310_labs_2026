@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Retro 90s Mode для КНИТУ-КАИ",
+  "version": "1.0",
+  "description": "Переключает сайт kai.ru в ретро-стиль 90-х с сохранением состояния.",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
