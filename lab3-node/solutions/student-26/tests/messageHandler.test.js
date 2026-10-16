@@ -118,4 +118,17 @@ describe('Обработка сообщений', () => {
     await handleMessage(101, '/type abc', reply);
     expect(reply).toHaveBeenCalledWith('Сначала начните тренировку командой /start.');
   });
+
+  test('clearUsers очищает состояние пользователей', async () => {
+  const reply = jest.fn().mockResolvedValue();
+  await handleMessage(200, '/start', reply);
+  reply.mockClear();
+  await handleMessage(200, '/type abc', reply);
+  expect(reply.mock.calls[0][0]).toContain('Результат:');
+
+  clearUsers();
+  reply.mockClear();
+  await handleMessage(200, '/type abc', reply);
+  expect(reply).toHaveBeenCalledWith('Сначала начните тренировку командой /start.');
+  });
 });
