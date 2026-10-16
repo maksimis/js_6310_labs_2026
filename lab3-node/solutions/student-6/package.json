@@ -1,0 +1,24 @@
+{
+  "name": "taskbot",
+  "version": "1.0.0",
+  "description": "Telegram task planner with reminders and recurring tasks",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "node --test",
+    "test:coverage": "c8 --check-coverage --lines 80 --functions 80 --branches 70 --statements 80 node --test"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "c8": "^10.1.3",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0"
+  }
+}
