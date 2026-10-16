@@ -128,31 +128,6 @@ GET /api/surveys/:id/results
 
 ![Результаты](images/results.png)
 
-## Структура проекта
-
-```
-src/
-├── bots/
-│   ├── telegramBot.js
-│   └── vkBot.js
-├── handlers/
-│   └── messageHandler.js
-├── services/
-│   ├── api.js
-│   └── surveyService.js
-├── utils/
-│   ├── index.js
-│   └── math.js
-└── index.js
-tests/
-├── api.test.js
-├── math.test.js
-├── messageHandler.test.js
-├── surveyService.test.js
-├── telegramBot.test.js
-└── vkBot.test.js
-```
-
 ## Как это работает
 
 - **Конечный автомат (FSM).** Каждая команда (`/create_survey`, `/vote`, `/results`) переводит пользователя в отдельное состояние. Состояние хранится в `Map` по ключу `platform_userId`, поэтому диалоги разных пользователей не пересекаются.
