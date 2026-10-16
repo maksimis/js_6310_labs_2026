@@ -5,16 +5,16 @@ VK-бот и REST API для генерации и проверки учебны
 
 ## Установка
 
-```bash
+```powershell
 npm install
-cp .env.example .env
+Copy-Item .env.example .env
 ```
 
 В файл `.env` впишите свой `VK_TOKEN` из настроек сообщества ВКонтакте.
 
 ## Запуск
 
-```bash
+```powershell
 npm run start
 ```
 
