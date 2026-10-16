@@ -1,0 +1,32 @@
+{
+  "name": "2048 bot",
+  "version": "1.0.0",
+  "description": "Бот для игры 2048",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "dependencies": {
+    "dotenv": "^18.0.7",
+    "eslint": "^10.12.0",
+    "jest": "^30.5.2",
+    "vk-io": "^4.10.1"
+  }
+}
