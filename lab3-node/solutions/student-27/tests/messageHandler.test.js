@@ -35,7 +35,6 @@ describe('Message handler', () => {
   });
 
   test('handles vote flow', async () => {
-    // Сначала создадим опрос через сервис, чтобы получить код
     const { createSurvey } = await import('../src/services/surveyService.js');
     const { code } = createSurvey('Vote Test', [{ question: 'Q', options: ['Yes', 'No'] }]);
 

@@ -1,10 +1,8 @@
-// Хранилище опросов и состояний пользователей (в памяти, сбрасывается при перезапуске)
 const surveys = new Map();
 const userStates = new Map(); // Ключ: `${platform}_${userId}`, Значение: { state, data }
 
 let nextId = 1;
 
-// Генерирует случайный код для голосования
 const generateCode = () => {
   const random = Math.random().toString(36).slice(2, 8);
   return random.toUpperCase();
@@ -28,7 +26,6 @@ export const saveVote = (surveyId, userId, answers) => {
   const survey = surveys.get(Number(surveyId));
   if (!survey) return false;
 
-  // Инициализируем голосование для пользователя
   if (!survey.votes[userId]) {
     survey.votes[userId] = answers;
     return true;
@@ -43,7 +40,6 @@ export const getResults = (surveyId) => {
   const total = Object.keys(survey.votes).length;
   const distribution = {};
 
-  // Подсчет голосов по каждому вопросу
   survey.questions.forEach((q, qIndex) => {
     distribution[qIndex] = {};
     q.options.forEach((opt) => {
@@ -59,7 +55,6 @@ export const getResults = (surveyId) => {
     });
   });
 
-  // Перевод в проценты
   const distributionPercent = {};
   Object.keys(distribution).forEach((qIndex) => {
     distributionPercent[qIndex] = {};
@@ -72,7 +67,6 @@ export const getResults = (surveyId) => {
   return { total, distribution: distributionPercent };
 };
 
-// Управление состояниями пользователя (FSM)
 export const getUserState = (platform, userId) => {
   return userStates.get(`${platform}_${userId}`) || { state: 'IDLE', data: {} };
 };
@@ -85,7 +79,6 @@ export const clearUserState = (platform, userId) => {
   userStates.delete(`${platform}_${userId}`);
 };
 
-// Для тестов (сброс состояния)
 export const _resetStore = () => {
   surveys.clear();
   userStates.clear();

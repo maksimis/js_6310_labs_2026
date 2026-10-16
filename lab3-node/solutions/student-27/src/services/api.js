@@ -4,11 +4,9 @@ import { createSurvey, getResults } from './surveyService.js';
 const app = express();
 app.use(express.json());
 
-// POST /api/surveys
 app.post('/api/surveys', (req, res) => {
   const { topic, questions } = req.body;
 
-  // Валидация
   if (!topic || typeof topic !== 'string' || topic.trim() === '') {
     return res.status(400).json({ error: 'Тема обязательна и должна быть строкой' });
   }
@@ -25,7 +23,6 @@ app.post('/api/surveys', (req, res) => {
   res.status(201).json({ id, code });
 });
 
-// GET /api/surveys/:id/results
 app.get('/api/surveys/:id/results', (req, res) => {
   const { id } = req.params;
   const results = getResults(id);
@@ -37,10 +34,8 @@ app.get('/api/surveys/:id/results', (req, res) => {
   res.json(results);
 });
 
-// Экспортируем app для тестов
 export default app;
 
-// Функция запуска сервера
 export const startApi = (port = 3000) => {
   return app.listen(port, () => {
     console.log(`API сервер запущен на порту ${port}`);
