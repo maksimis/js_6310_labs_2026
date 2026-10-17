@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Spring Theme",
+  "version": "1.0",
+  "description": "Весенняя тема для kai.ru: светло-зелёный фон, розовые ссылки, цветочные акценты",
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
