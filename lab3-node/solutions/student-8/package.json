@@ -1,5 +1,5 @@
 {
-  "name": "knowledge-base-bot",
+  "name": "word-trainer-bot",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "type": "module",
   "author": "",
   "license": "ISC",
-  "description": "Бот-ассистент с базой знаний KnowledgeBaseBot",
+  "description": "Бот-тренажер иностранных слов WordTrainerBot",
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^4.21.1",
