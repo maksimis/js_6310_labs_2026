@@ -1,203 +1,126 @@
 'use strict';
 
-import {
-  addFragment,
-  searchFragments
-} from '../knowledge/knowledgeBase.js';
+import { addCard, getCardsForReview, getProgress, updateCardLevel, getCardById, LEVELS } from '../cards/cardManager.js';
+import { STATES, getState, setState, resetState } from '../state/stateMachine.js';
 
-import {
-  STATES,
-  getState,
-  setState,
-  resetState
-} from '../state/stateMachine.js';
-
-// Команды, которые понимает бот
 const COMMANDS = {
   START: '/start',
   HELP: '/help',
-  ASK: '/ask',
-  ADD_KNOWLEDGE: '/add_knowledge',
-  SEARCH: '/search',
+  LEARN: '/learn',
+  REPEAT: '/repeat',
+  PROGRESS: '/progress',
   CANCEL: '/cancel'
 };
 
-// Текст помощи
-function getHelpText() {
-  return [
-    'Доступные команды:',
-    '/ask <вопрос> — задать вопрос по базе знаний',
-    '/add_knowledge — добавить новый фрагмент',
-    '/search <слова> — найти фрагменты по ключевым словам',
-    '/cancel — отменить текущее действие',
-    '/help — показать эту справку'
-  ].join('\n');
-}
+const getHelpText = () => [
+  'Доступные команды:',
+  '/learn — учить новые слова',
+  '/repeat — повторить слова по интервальному повторению',
+  '/progress — посмотреть прогресс и добавить слова',
+  '/cancel — отменить действие',
+  '/help — справка'
+].join('\n');
 
-// Обработка команды /ask
-async function handleAsk(args, reply) {
-  const query = args.trim();
-
-  if (!query) {
-    await reply('Использование: /ask <вопрос>');
+const handleLearn = async (userId, reply) => {
+  const cardsToLearn = getCardsForReview();
+  if (cardsToLearn.length === 0) {
+    await reply('Нет карточек для изучения. Добавьте слова через /progress.');
     return;
   }
+  const card = cardsToLearn[0];
+  setState(userId, STATES.LEARNING, { cardId: card.id, showTranslation: false });
+  await reply(`Слово: ${card.word}\nНапишите что-нибудь, чтобы увидеть перевод.`);
+};
 
-  const results = searchFragments(query);
-
-  if (results.length === 0) {
-    await reply(`По запросу "${query}" ничего не найдено.`);
+const handleRepeat = async (userId, reply) => {
+  const cardsToRepeat = getCardsForReview();
+  if (cardsToRepeat.length === 0) {
+    await reply('Сейчас нет слов для повторения. Отдохните!');
     return;
   }
+  const card = cardsToRepeat[0];
+  setState(userId, STATES.LEARNING, { cardId: card.id, showTranslation: false });
+  await reply(`Повторение: ${card.word}\nНапишите что-нибудь, чтобы увидеть перевод.`);
+};
 
-  const top = results.slice(0, 3);
-  const lines = [`Найдено по запросу "${query}":`];
-
-  top.forEach((item, index) => {
-    lines.push('');
-    lines.push(`${index + 1}. ${item.title} (релевантность: ${item.relevance})`);
-    lines.push(item.content);
-  });
-
-  await reply(lines.join('\n'));
-}
-
-// Обработка команды /search
-async function handleSearch(args, reply) {
-  const query = args.trim();
-
-  if (!query) {
-    await reply('Использование: /search <ключевые слова>');
+const handleProgress = async (userId, reply) => {
+  const progress = getProgress();
+  if (progress.total === 0) {
+    await reply('Ваша база пуста. Введите слово для добавления:');
+    setState(userId, STATES.AWAITING_WORD);
     return;
   }
+  await reply(`Выучено слов: ${progress.learned} из ${progress.total}.\nЧтобы добавить новое слово, введите его:`);
+  setState(userId, STATES.AWAITING_WORD);
+};
 
-  const results = searchFragments(query);
-
-  if (results.length === 0) {
-    await reply(`По запросу "${query}" ничего не найдено.`);
-    return;
-  }
-
-  const lines = [`Результаты поиска по "${query}":`];
-  results.forEach((item) => {
-    lines.push(`- [${item.relevance}] ${item.title}`);
-  });
-
-  await reply(lines.join('\n'));
-}
-
-// Начало добавления фрагмента — переход в состояние AWAITING_TITLE
-async function startAddKnowledge(userId, reply) {
-  setState(userId, STATES.AWAITING_TITLE);
-  await reply('Введите заголовок фрагмента (или /cancel для отмены):');
-}
-
-// Обработка ввода заголовка — переход в состояние AWAITING_CONTENT
-async function handleTitleInput(userId, text, reply) {
-  const title = text.trim();
-
-  if (!title) {
-    await reply('Заголовок не может быть пустым. Попробуйте ещё раз:');
-    return;
-  }
-
-  setState(userId, STATES.AWAITING_CONTENT, title);
-  await reply(`Заголовок: "${title}"\nТеперь введите текст фрагмента:`);
-}
-
-// Обработка ввода контента — добавление фрагмента и возврат в IDLE
-async function handleContentInput(userId, text, reply) {
-  const content = text.trim();
-
-  if (!content) {
-    await reply('Текст не может быть пустым. Попробуйте ещё раз:');
-    return;
-  }
-
+const handleLearning = async (userId, text, reply) => {
   const current = getState(userId);
-  const title = current.title;
-
-  if (!title) {
-    await reply('Что-то пошло не так. Начните заново: /add_knowledge');
+  const { cardId, showTranslation } = current.data;
+  
+  if (!showTranslation) {
+    // Пользователь написал что угодно, чтобы перевернуть карточку
+    setState(userId, STATES.LEARNING, { cardId, showTranslation: true });
+    
+    // Находим карточку, чтобы показать перевод
+    const card = getCardById(cardId);
+    await reply(`Перевод: ${card.translation}\nНапишите "выучил" или "трудно".`);
+  } else {
+    // Пользователь отвечает, выучил он или нет
+    const lower = text.toLowerCase();
+    if (lower.includes('выучил') || lower.includes('знаю')) {
+      updateCardLevel(cardId, LEVELS.LEARNED);
+      await reply('Отлично! Слово выучено.');
+    } else {
+      updateCardLevel(cardId, LEVELS.HARD);
+      await reply('Ок, повторим позже.');
+    }
     resetState(userId);
-    return;
   }
+};
 
-  try {
-    const fragment = addFragment(title, content);
-    resetState(userId);
-    await reply(`Фрагмент добавлен!\nID: ${fragment.id}\nЗаголовок: ${fragment.title}`);
-  } catch (error) {
-    resetState(userId);
-    await reply(`Ошибка при добавлении: ${error.message}`);
-  }
-}
-
-// Главный обработчик всех сообщений
-// Возвращает объект: { userId, text, reply }
 const handleMessage = async (userId, text, reply) => {
-  // Проверка входных данных
-  if (!text || typeof text !== 'string') {
-    return;
-  }
-
+  if (!text || typeof text !== 'string') return;
   const trimmed = text.trim();
-
-  // Проверяем текущее состояние пользователя (конечный автомат)
+  if (!trimmed) return;
+  
   const current = getState(userId);
-
-  // Если пользователь в середине диалога — обрабатываем ввод
-  if (current.state === STATES.AWAITING_TITLE) {
-    if (trimmed === COMMANDS.CANCEL) {
-      resetState(userId);
-      await reply('Действие отменено.');
-      return;
-    }
-    await handleTitleInput(userId, trimmed, reply);
+  
+  if (current.state === STATES.LEARNING) {
+    await handleLearning(userId, trimmed, reply);
     return;
   }
-
-  if (current.state === STATES.AWAITING_CONTENT) {
+  
+  if (current.state === STATES.AWAITING_WORD) {
     if (trimmed === COMMANDS.CANCEL) {
       resetState(userId);
-      await reply('Действие отменено.');
+      await reply('Отменено.');
       return;
     }
-    await handleContentInput(userId, trimmed, reply);
+    setState(userId, STATES.AWAITING_TRANSLATION, { word: trimmed });
+    await reply('Теперь введите перевод:');
     return;
   }
-
-  // Если состояние IDLE — обрабатываем команды
+  
+  if (current.state === STATES.AWAITING_TRANSLATION) {
+    const word = current.data.word;
+    addCard(word, trimmed);
+    resetState(userId);
+    await reply(`Слово "${word}" сохранено!`);
+    return;
+  }
+  
   if (trimmed === COMMANDS.START || trimmed === COMMANDS.HELP) {
     await reply(getHelpText());
-    return;
+  } else if (trimmed === COMMANDS.LEARN) {
+    await handleLearn(userId, reply);
+  } else if (trimmed === COMMANDS.REPEAT) {
+    await handleRepeat(userId, reply);
+  } else if (trimmed === COMMANDS.PROGRESS) {
+    await handleProgress(userId, reply);
+  } else {
+    await reply('Неизвестная команда. Введите /help');
   }
-
-  if (trimmed === COMMANDS.ADD_KNOWLEDGE) {
-    await startAddKnowledge(userId, reply);
-    return;
-  }
-
-  if (trimmed.startsWith(COMMANDS.ASK)) {
-    const args = trimmed.slice(COMMANDS.ASK.length);
-    await handleAsk(args, reply);
-    return;
-  }
-
-  if (trimmed.startsWith(COMMANDS.SEARCH)) {
-    const args = trimmed.slice(COMMANDS.SEARCH.length);
-    await handleSearch(args, reply);
-    return;
-  }
-
-  if (trimmed === COMMANDS.CANCEL) {
-    resetState(userId);
-    await reply('Нечего отменять.');
-    return;
-  }
-
-  // Если непонятная команда — подсказка
-  await reply('Неизвестная команда. Введите /help для списка команд.');
 };
 
 export default handleMessage;

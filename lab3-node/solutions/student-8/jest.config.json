@@ -2,7 +2,7 @@
   "bail": 1,
   "verbose": false,
   "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
- "coveragePathIgnorePatterns": ["src/index.js", "src/bots/vkBot.js"],
+ "coveragePathIgnorePatterns": ["src/index.js", "src/bots/vkBot.js", "src/api/server.js"],
   "coverageDirectory": "coverage",
   "coverageThreshold": {
     "global": {

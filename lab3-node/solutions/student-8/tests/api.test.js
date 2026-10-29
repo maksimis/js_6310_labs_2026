@@ -1,128 +1,60 @@
 import { describe, test, expect, beforeEach } from '@jest/globals';
 import request from 'supertest';
 import { app } from '../src/api/server.js';
-import { clearFragments, addFragment } from '../src/knowledge/knowledgeBase.js';
+import { clearCards } from '../src/cards/cardManager.js';
 
-describe('API', () => {
-  beforeEach(() => {
-    clearFragments();
+describe('API Cards', () => {
+  beforeEach(() => clearCards());
+
+  test('GET /api/cards возвращает пустой массив', async () => {
+    const res = await request(app).get('/api/cards');
+    expect(res.status).toBe(200);
+    expect(res.body.cards).toEqual([]);
   });
 
-  describe('GET /api/search', () => {
-    test('возвращает пустой массив, если база пуста', async () => {
-      const response = await request(app).get('/api/search?query=javascript');
-
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual([]);
-    });
-
-    test('находит фрагмент по запросу', async () => {
-      addFragment('JavaScript', 'Язык программирования');
-
-      const response = await request(app).get('/api/search?query=javascript');
-
-      expect(response.status).toBe(200);
-      expect(response.body).toHaveLength(1);
-      expect(response.body[0].title).toBe('JavaScript');
-      expect(response.body[0]).toHaveProperty('id');
-      expect(response.body[0]).toHaveProperty('relevance');
-    });
-
-    test('возвращает 400 без параметра query', async () => {
-      const response = await request(app).get('/api/search');
-
-      expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty('error');
-    });
-
-    test('возвращает 400 при пустом query', async () => {
-      const response = await request(app).get('/api/search?query=');
-
-      expect(response.status).toBe(400);
-    });
-
-    test('не возвращает content в ответе (только id, title, relevance)', async () => {
-      addFragment('JavaScript', 'Язык программирования');
-
-      const response = await request(app).get('/api/search?query=javascript');
-
-      expect(response.body[0]).not.toHaveProperty('content');
-    });
+  test('POST /api/cards создает карточку', async () => {
+    const res = await request(app).post('/api/cards').send({ word: 'cat', translation: 'кот' });
+    expect(res.status).toBe(201);
+    expect(res.body.word).toBe('cat');
   });
 
-  describe('POST /api/knowledge', () => {
-    test('добавляет фрагмент', async () => {
-      const response = await request(app)
-        .post('/api/knowledge')
-        .send({ title: 'Python', content: 'Язык для анализа данных' });
-
-      expect(response.status).toBe(201);
-      expect(response.body.title).toBe('Python');
-      expect(response.body.id).toBe(1);
-    });
-
-    test('добавленный фрагмент доступен в поиске', async () => {
-      await request(app)
-        .post('/api/knowledge')
-        .send({ title: 'Python', content: 'Язык программирования' });
-
-      const searchResponse = await request(app).get('/api/search?query=python');
-
-      expect(searchResponse.body).toHaveLength(1);
-      expect(searchResponse.body[0].title).toBe('Python');
-    });
-
-    test('возвращает 400 без title', async () => {
-      const response = await request(app)
-        .post('/api/knowledge')
-        .send({ content: 'Только контент' });
-
-      expect(response.status).toBe(400);
-    });
-
-    test('возвращает 400 без content', async () => {
-      const response = await request(app)
-        .post('/api/knowledge')
-        .send({ title: 'Только заголовок' });
-
-      expect(response.status).toBe(400);
-    });
-
-    test('возвращает 400 при пустом title', async () => {
-      const response = await request(app)
-        .post('/api/knowledge')
-        .send({ title: '   ', content: 'Текст' });
-
-      expect(response.status).toBe(400);
-    });
-
-    test('возвращает 400 при пустом content', async () => {
-      const response = await request(app)
-        .post('/api/knowledge')
-        .send({ title: 'Заголовок', content: '   ' });
-
-      expect(response.status).toBe(400);
-    });
-
-    test('возвращает 400 при пустом теле запроса', async () => {
-      const response = await request(app).post('/api/knowledge');
-
-      expect(response.status).toBe(400);
-    });
+  test('GET /api/cards возвращает список карточек', async () => {
+    await request(app).post('/api/cards').send({ word: 'cat', translation: 'кот' });
+    const res = await request(app).get('/api/cards');
+    expect(res.status).toBe(200);
+    expect(res.body.cards.length).toBe(1);
   });
 
-  describe('404 для несуществующих путей', () => {
-    test('возвращает 404 на неизвестный путь', async () => {
-      const response = await request(app).get('/api/unknown');
+  test('POST без данных выдает 400', async () => {
+    const res = await request(app).post('/api/cards').send({});
+    expect(res.status).toBe(400);
+  });
 
-      expect(response.status).toBe(404);
-      expect(response.body).toHaveProperty('error');
-    });
+  test('POST с пустым словом выдает 400', async () => {
+    const res = await request(app).post('/api/cards').send({ word: '', translation: 'кот' });
+    expect(res.status).toBe(400);
+  });
 
-    test('возвращает 404 на корень', async () => {
-      const response = await request(app).get('/');
+  test('POST без Content-Type (вызывает req.body || {})', async () => {
+    const res = await request(app)
+      .post('/api/cards')
+      .send('word=cat&translation=кот'); 
+    expect(res.status).toBe(400);
+  });
 
-      expect(response.status).toBe(404);
-    });
+  test('404 для несуществующего пути', async () => {
+    const res = await request(app).get('/api/unknown');
+    expect(res.status).toBe(404);
+  });
+
+    test('POST /api/cards с некорректным типом данных вызывает 500', async () => {
+    // Отправляем в поле word не строку, а объект. 
+    // Наш cardManager попытается сделать .trim() и выбросит ошибку.
+    const res = await request(app)
+      .post('/api/cards')
+      .send({ word: { bad: 'object' }, translation: 'кот' });
+    
+    expect(res.status).toBe(500);
+    expect(res.body.error).toBe('Внутренняя ошибка');
   });
 });
