@@ -1,0 +1,15 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: linear-gradient(135deg, #ffe6f0 0%, #e6c9ff 100%);
+  padding: 15px;
+  border-radius: 16px;
+  border: 4px solid #ffd6e7;
+  box-shadow: 0 8px 25px rgba(255, 158, 207, 0.4);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
