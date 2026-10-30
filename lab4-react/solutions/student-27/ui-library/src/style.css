@@ -1,0 +1,278 @@
+.review-card,
+.voting-card {
+    box-sizing: border-box;
+    font-family: inherit;
+    color: #203c35;
+    background: #fff;
+    border: 1px solid #e4e8e0;
+    border-radius: 16px;
+}
+
+.review-card {
+    padding: 26px 28px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.review-avatar {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #eaf0df;
+    color: #486043;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.review-person {
+    flex: 1;
+}
+
+.review-person h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.review-person time {
+    color: #859087;
+    font-size: 11px;
+}
+
+.review-rating {
+    color: #ae7f30;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
+.empty-stars {
+    color: #dddcd3;
+}
+
+.review-text {
+    margin: 20px 0 23px;
+    font-size: 14px;
+    line-height: 1.85;
+    color: #56645d;
+}
+
+.review-footer {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #edf0e8;
+    padding-top: 17px;
+    color: #7b857c;
+    font-size: 11px;
+}
+
+.review-reactions {
+    display: flex;
+    gap: 8px;
+}
+
+.review-reactions button {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    padding: 7px 10px;
+    border: 1px solid #e5e9e1;
+    border-radius: 7px;
+    background: #fff;
+    color: #69776b;
+    font: inherit;
+    cursor: pointer;
+}
+
+.review-reactions button[aria-pressed="true"] {
+    background: #e9f0dd;
+    border-color: #aebf94;
+    color: #254b37;
+}
+
+.review-reactions button:hover {
+    border-color: #76946e;
+}
+
+.review-reactions button span:last-child {
+    font-variant-numeric: tabular-nums;
+}
+
+.voting-card {
+    padding: 28px;
+}
+
+.voting-eyebrow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: 1.5px;
+    color: #6c8066;
+}
+
+.live-dot {
+    background: #8aa45c;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+}
+
+.voting-card h2 {
+    font-size: 24px;
+    letter-spacing: -0.8px;
+    line-height: 1.25;
+    margin: 20px 0 12px;
+    max-width: 240px;
+}
+
+.voting-description {
+    color: #7b857c;
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0 0 25px;
+}
+
+.voting-options {
+    display: grid;
+    gap: 11px;
+}
+
+.voting-option {
+    display: block;
+    width: 100%;
+    border: 1px solid #e3e8de;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: left;
+    background: #fafbf7;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.voting-option:hover:not(:disabled) {
+    border-color: #859e71;
+    background: #f1f5e9;
+}
+
+.voting-option[aria-pressed="true"] {
+    background: #eef3e3;
+    border-color: #7b975f;
+}
+
+.voting-option:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.voting-option-top {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.voting-option-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.vote-radio {
+    display: grid;
+    place-items: center;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    border: 1px solid #bac5b1;
+    border-radius: 50%;
+    font-size: 10px;
+}
+
+.voting-option[aria-pressed="true"] .vote-radio {
+    background: #335d45;
+    color: #fff;
+    border-color: #335d45;
+}
+
+.vote-track {
+    display: block;
+    height: 4px;
+    background: #e6ebde;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 13px 0 8px;
+}
+
+.vote-track > span {
+    display: block;
+    height: 100%;
+    background: #91a879;
+    border-radius: inherit;
+    transition: width 200ms ease;
+}
+
+.vote-count {
+    font-size: 10px;
+    color: #819075;
+}
+
+.voting-footer {
+    border-top: 1px solid #e9ece3;
+    margin-top: 23px;
+    padding-top: 17px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #7b857c;
+}
+
+.voting-footer strong {
+    color: #334d3a;
+}
+
+.review-reactions button:focus-visible,
+.voting-option:focus-visible {
+    outline: 3px solid #507b58;
+    outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+    .review-card,
+    .voting-card {
+        padding: 21px;
+    }
+
+    .review-header {
+        flex-wrap: wrap;
+    }
+
+    .review-rating {
+        margin-left: 54px;
+    }
+
+    .review-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vote-track > span {
+        transition: none;
+    }
+}
