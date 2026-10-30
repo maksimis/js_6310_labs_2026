@@ -1,0 +1,28 @@
+.button {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: #f5f5f5;
+  border-color: #8a471b;
+}
+
+.active {
+  background: #8a471b;
+  color: #ffffff;
+  border-color: #3a2c0d;
+  box-shadow: 0 4px 10px rgba(145, 138, 78, 0.3);
+}
+
+.active:hover {
+  background: #dfbb5b;
+  border-color: #c7b35c;
+}
