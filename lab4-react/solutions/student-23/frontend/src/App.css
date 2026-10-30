@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  background-color: #f0f4f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #334155;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__header {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app__header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+.app__header p {
+  margin: 0.5rem 0 0;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.app__layout {
+  display: flex;
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.app__sidebar {
+  width: 300px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+.app__sidebar-title {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.app__topic-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #334155;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.app__topic-btn:hover {
+  background: #e2e8f0;
+  transform: translateX(5px);
+}
+
+.app__topic-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 8px;
+  margin-right: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.app__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.app__task-header h3 {
+  margin: 0;
+  color: #1e293b;
+}
+
+.app__task-type {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.app__placeholder {
+  background: white;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.app__placeholder h2, .app__placeholder h3 {
+  color: #1e293b;
+  margin-top: 0;
+}
