@@ -3,9 +3,9 @@
 // ===== ЗАДАНИЕ 1: Базовые операции =====
 function simpleTask() {
     const name = 'Анна';
-    const age = 20;
+    let age = 20;
     const isStudent = true;
-    const score = null;
+    let score = null;
     let city;
     const subjects = ['математика', 'JavaScript'];
     [name, age, isStudent, score, city, subjects].forEach((value) => {
@@ -15,8 +15,7 @@ function simpleTask() {
 
 // ===== ЗАДАНИЕ 2: Функции =====
 function getReviewerNumber(number, lab) {
-    const studentCount = 30;
-    return (number + lab) % studentCount || studentCount;
+    return ((number + lab - 1) % 30) + 1;
 }
 
 function getVariant(number, variants) {
