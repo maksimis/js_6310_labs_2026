@@ -4,16 +4,16 @@ import styles from './GameField.module.css'
 import { Snake, type Direction, type Segment } from '../Snake/Snake'
 
 export interface SnakeConfig {
-  id: string;
-  segments: Segment[];
-  direction: Direction;
-  color?: string;
+  id: string
+  segments: Segment[]
+  direction: Direction
+  color?: string
 }
 
 export interface GameFieldProps {
-  size: number;
-  snakes: SnakeConfig[];
-  cellSize?: number;
+  size: number
+  snakes: SnakeConfig[]
+  cellSize?: number
 }
 
 export const GameField: React.FC<GameFieldProps> = ({
@@ -27,17 +27,18 @@ export const GameField: React.FC<GameFieldProps> = ({
   return (
     <div
       className={styles.field}
+      data-testid="game-field"
       style={{
         width: `${fieldWidth}px`,
         height: `${fieldHeight}px`,
       }}
     >
-      {/* Сетка */}
       {Array.from({ length: size }).map((_, row) =>
         Array.from({ length: size }).map((_, col) => (
           <div
             key={`cell-${row}-${col}`}
             className={styles.cell}
+            data-testid="game-field-cell"
             style={{
               left: `${col * cellSize}px`,
               top: `${row * cellSize}px`,
@@ -47,8 +48,6 @@ export const GameField: React.FC<GameFieldProps> = ({
           />
         )),
       )}
-
-      {/* Змейки */}
       {snakes.map((snake) => (
         <Snake
           key={snake.id}

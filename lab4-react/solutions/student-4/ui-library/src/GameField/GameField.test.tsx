@@ -1,22 +1,18 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 import { GameField } from './GameField'
 
 describe('GameField', () => {
   test('renders grid with correct size', () => {
-    const { container } = render(<GameField size={10} snakes={[]} />)
+    render(<GameField size={10} snakes={[]} />)
+    const cells = screen.getAllByTestId('game-field-cell')
 
-    const cells = container.querySelectorAll('[class*="cell"]')
-
-    expect(cells.length).toBe(100) // 10 * 10
+    expect(cells.length).toBe(100)
   })
 
   test('applies correct field dimensions', () => {
-    const { container } = render(
-      <GameField size={10} snakes={[]} cellSize={30} />,
-    )
-
-    const field = container.firstChild as HTMLElement
+    render(<GameField size={10} snakes={[]} cellSize={30} />)
+    const field = screen.getByTestId('game-field')
 
     expect(field.style.width).toBe('300px')
     expect(field.style.height).toBe('300px')
@@ -26,17 +22,21 @@ describe('GameField', () => {
     const snakes = [
       {
         id: 'snake-1',
-        segments: [{ x: 1, y: 1 }, { x: 0, y: 1 }],
+        segments: [
+          { x: 1, y: 1 },
+          { x: 0, y: 1 },
+        ],
         direction: 'right' as const,
         color: '#4caf50',
       },
     ]
 
-    const { container } = render(<GameField size={10} snakes={snakes} />)
+    render(<GameField size={10} snakes={snakes} />)
+    const heads = screen.getAllByTestId('snake-head')
+    const segments = screen.getAllByTestId('snake-segment')
 
-    const segments = container.querySelectorAll('[class*="segment"]')
-
-    expect(segments.length).toBe(2)
+    expect(heads.length).toBe(1)
+    expect(segments.length).toBe(1)
   })
 
   test('renders multiple snakes', () => {
@@ -53,10 +53,15 @@ describe('GameField', () => {
       },
     ]
 
-    const { container } = render(<GameField size={10} snakes={snakes} />)
+    render(<GameField size={10} snakes={snakes} />)
+    const heads = screen.getAllByTestId('snake-head')
 
-    const segments = container.querySelectorAll('[class*="segment"]')
+    expect(heads.length).toBe(2)
+  })
 
-    expect(segments.length).toBe(2)
+  test('renders zero segments when snakes list is empty', () => {
+    render(<GameField size={5} snakes={[]} />)
+    expect(screen.queryByTestId('snake-head')).toBeNull()
+    expect(screen.queryByTestId('snake-segment')).toBeNull()
   })
 })
