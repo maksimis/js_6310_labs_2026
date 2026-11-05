@@ -76,9 +76,9 @@ const moveInDirection = (grid: Grid, direction: string): { newGrid: Grid; moved:
   let rotated: Grid = grid
   let rotations = 0
 
-  if (direction === 'up') rotations = 1
+  if (direction === 'up') rotations = 3
   else if (direction === 'right') rotations = 2
-  else if (direction === 'down') rotations = 3
+  else if (direction === 'down') rotations = 1
   
   if (rotations > 0) rotated = rotateGrid(grid, rotations)
   const result = moveLeft(rotated)

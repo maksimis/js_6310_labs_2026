@@ -16,73 +16,80 @@
   border: 3px dashed rgba(184, 169, 201, 0.3);
 }
 
-.tile--2 { 
-  background: linear-gradient(135deg, #b8e6ff 0%, #d4f1ff 100%);
-  color: #5a4a6a;
-  box-shadow: 0 4px 10px rgba(184, 230, 255, 0.5);
+.tile--2 {
+  background: linear-gradient(135deg, #fff5fa 0%, #ffeaf3 100%);
+  color: #7a6a8a;
+  box-shadow: 0 3px 8px rgba(255, 234, 243, 0.6);
 }
-.tile--4 { 
-  background: linear-gradient(135deg, #ffd6e7 0%, #ffe6f0 100%);
-  color: #5a4a6a;
-  box-shadow: 0 4px 10px rgba(255, 214, 231, 0.5);
+
+.tile--4 {
+  background: linear-gradient(135deg, #e3f4ff 0%, #d2edff 100%);
+  color: #5a6a8a;
+  box-shadow: 0 3px 9px rgba(210, 237, 255, 0.7);
 }
-.tile--8 { 
-  background: linear-gradient(135deg, #e6c9ff 0%, #f0d9ff 100%);
-  color: #5a4a6a;
-  box-shadow: 0 4px 12px rgba(230, 201, 255, 0.6);
+
+.tile--8 {
+  background: linear-gradient(135deg, #e0fbec 0%, #cff8e0 100%);
+  color: #4a7a62;
+  box-shadow: 0 4px 10px rgba(207, 248, 224, 0.7);
 }
-.tile--16 { 
-  background: linear-gradient(135deg, #ffcc99 0%, #ffddb3 100%);
-  color: #5a4a6a;
-  box-shadow: 0 4px 12px rgba(255, 204, 153, 0.6);
+
+.tile--16 {
+  background: linear-gradient(135deg, #fff6d6 0%, #ffefbd 100%);
+  color: #8a7a3a;
+  box-shadow: 0 4px 11px rgba(255, 239, 189, 0.8);
 }
-.tile--32 { 
-  background: linear-gradient(135deg, #ffb3ba 0%, #ffc9cd 100%);
-  color: #5a4a6a;
-  box-shadow: 0 4px 15px rgba(255, 179, 186, 0.7);
+
+.tile--32 {
+  background: linear-gradient(135deg, #ffe3c2 0%, #ffd6a8 100%);
+  color: #8a6a3a;
+  box-shadow: 0 4px 12px rgba(255, 214, 168, 0.8);
 }
-.tile--64 { 
-  background: linear-gradient(135deg, #bae1ff 0%, #d4ecff 100%);
-  color: #5a4a6a;
-  box-shadow: 0 4px 15px rgba(186, 225, 255, 0.7);
+
+.tile--64 {
+  background: linear-gradient(135deg, #ffb1a8 0%, #ff9d92 100%);
+  color: #ffffff;
+  box-shadow: 0 5px 14px rgba(255, 157, 146, 0.85);
 }
-.tile--128 { 
-  background: linear-gradient(135deg, #d4a5ff 0%, #e6c9ff 100%);
-  color: #fff;
+
+.tile--128 {
+  background: linear-gradient(135deg, #ff8fc0 0%, #ff7ab3 100%);
+  color: #ffffff;
   font-size: 24px;
-  box-shadow: 0 4px 18px rgba(212, 165, 255, 0.8);
+  box-shadow: 0 5px 16px rgba(255, 122, 179, 0.85);
 }
-.tile--256 { 
-  background: linear-gradient(135deg, #ff9ecf 0%, #ffb3d9 100%);
-  color: #fff;
+
+.tile--256 {
+  background: linear-gradient(135deg, #ff6ec7 0%, #ff54bb 100%);
+  color: #ffffff;
   font-size: 24px;
-  box-shadow: 0 4px 18px rgba(255, 158, 207, 0.8);
+  box-shadow: 0 6px 18px rgba(255, 84, 187, 0.9);
 }
-.tile--512 { 
-  background: linear-gradient(135deg, #ff8c94 0%, #ffa3a8 100%);
-  color: #fff;
+
+/* 512 — сочная фиалка */
+.tile--512 {
+  background: linear-gradient(135deg, #b07cf0 0%, #9d64ec 100%);
+  color: #ffffff;
   font-size: 24px;
-  box-shadow: 0 4px 20px rgba(255, 140, 148, 0.9);
+  box-shadow: 0 6px 20px rgba(157, 100, 236, 0.9);
 }
-.tile--1024 { 
-  background: linear-gradient(135deg, #a8d8ea 0%, #b8e6ff 100%);
-  color: #fff;
+
+.tile--1024 {
+  background: linear-gradient(135deg, #6ea8ff 0%, #5293ff 100%);
+  color: #ffffff;
   font-size: 20px;
-  box-shadow: 0 4px 22px rgba(168, 216, 234, 1);
+  box-shadow: 0 7px 22px rgba(82, 147, 255, 0.95);
 }
-.tile--2048 { 
-  background: linear-gradient(135deg, #ffd700 0%, #ffe66d 100%);
-  color: #fff;
+
+.tile--2048 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffdf33 100%);
+  color: #ffffff;
   font-size: 20px;
-  box-shadow: 0 4px 25px rgba(255, 215, 0, 1);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 7px 24px rgba(255, 215, 0, 0.9);
   animation: bounce 1s ease-in-out infinite;
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
