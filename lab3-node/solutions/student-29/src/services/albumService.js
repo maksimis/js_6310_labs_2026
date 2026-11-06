@@ -33,6 +33,9 @@ export const removeImageFromAlbum = (albumId, imageId, ownerId) => {
   const album = albums.get(albumId);
   if (!album) return { ok: false, error: 'Альбом не найден' };
   if (album.ownerId !== ownerId) return { ok: false, error: 'Нет доступа к альбому' };
+  if (!album.imageIds.includes(imageId)) {
+    return { ok: false, error: 'Изображение с таким ID не найдено в альбоме' };
+  }
   album.imageIds = album.imageIds.filter((id) => id !== imageId);
   persist();
   return { ok: true, album };

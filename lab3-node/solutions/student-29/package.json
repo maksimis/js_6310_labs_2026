@@ -19,7 +19,6 @@
     "dotenv": "^17.2.3",
     "express": "^5.3.0",
     "multer": "^2.4.0",
-    "node-telegram-bot-api": "^0.66.0",
     "vk-io": "^4.10.1"
   },
   "devDependencies": {

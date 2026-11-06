@@ -72,5 +72,11 @@ describe('albumService', () => {
       expect(removeImageFromAlbum(album.id, img.id, 'u1').ok).toBe(true);
       expect(getAlbumImages(album.id, 'u1').images.length).toBe(0);
     });
+    test('removeImageFromAlbum на несуществующий imageId возвращает ошибку', () => {
+      const { album } = createAlbum('A', 'u1');
+      const result = removeImageFromAlbum(album.id, 'nonexistent', 'u1');
+      expect(result.ok).toBe(false);
+      expect(result.error).toMatch(/не найдено/i);
+    });
   });
 });
