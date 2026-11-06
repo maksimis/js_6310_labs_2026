@@ -20,6 +20,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     
+    // Логика для тестов (варианты ответов)
     if (options && selectedOption !== null) {
       const correctLetter = String.fromCharCode(65 + Number(correctAnswer))
       const correctIndex = String(Number(correctAnswer) + 1)
@@ -27,14 +28,17 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       const answerIndex = String(selectedOption + 1)
       
       const isCorrect = answerLetter === correctLetter || answerIndex === correctIndex
-
       onCheck(isCorrect, options[selectedOption])
-
       return
     }
 
+    // Логика для текстового поля (ТЕПЕРЬ ОНА ПРАВИЛЬНАЯ!)
     if (answer.trim() === '') return
-    onCheck(false, answer) 
+    
+    const isCorrect =
+      answer.trim().toLowerCase() === String(correctAnswer).toLowerCase()
+    
+    onCheck(isCorrect, answer) 
   }
 
   return (

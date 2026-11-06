@@ -1,3 +1,4 @@
+/** @type {import('jest').Config} */
 export default {
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/src'],
@@ -18,7 +19,12 @@ export default {
     ]
   },
   moduleNameMapper: {
+    // 1. Берем исходники библиотеки (ts-jest их скомпилирует без проблем с ESM)
     '^@my-app/ui-library$': '<rootDir>/../ui-library/src/index.ts',
+    // 2. ЖЕСТКО привязываем React к фронтенду, чтобы не было двух копий
+    '^react$': '<rootDir>/node_modules/react',
+    '^react-dom$': '<rootDir>/node_modules/react-dom',
+    '^react/jsx-runtime$': '<rootDir>/node_modules/react/jsx-runtime',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
   }
 }
