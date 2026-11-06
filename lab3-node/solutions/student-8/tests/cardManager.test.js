@@ -23,7 +23,7 @@ describe('cardManager', () => {
     expect(() => addCard('', 'test')).toThrow();
   });
 
-    test('getAllCards возвращает все карточки', () => {
+  test('getAllCards возвращает все карточки', () => {
     addCard('apple', 'яблоко');
     addCard('dog', 'собака');
     expect(getAllCards().length).toBe(2);

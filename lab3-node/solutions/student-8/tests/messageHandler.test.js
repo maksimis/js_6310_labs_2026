@@ -32,7 +32,7 @@ describe('messageHandler', () => {
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('Слово: apple'));
   });
 
-    test('/repeat без карточек', async () => {
+  test('/repeat без карточек', async () => {
     await handleMessage(1, '/repeat', mockReply);
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('нет слов для повторения'));
   });
