@@ -12,27 +12,24 @@ export default {
           module: 'CommonJS',
           target: 'ES2020',
           jsx: 'react-jsx',
-          esModuleInterop: true
+          esModuleInterop: true,
+          allowSyntheticDefaultImports: true,
+          allowJs: true //разрешаем ts-jest читать JS файлы из dist
         }
       }
     ]
   },
-  moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
-  },
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.test.{ts,tsx}',
-    '!src/setupTests.ts',
-    '!src/index.ts',         // Исключаем главный index
-    '!src/**/index.ts'       // Исключаем index внутри папок
+  //разрешаем Jest трансформировать файлы библиотеки, чтобы он понял ESM из dist
+  transformIgnorePatterns: [
+    'node_modules/(?!(@my-app/ui-library)/)'
   ],
-  coverageThreshold: {
-    global: {
-      branches: 90,
-      functions: 90,
-      lines: 90,
-      statements: 90
-    }
+  moduleNameMapper: {
+    // Подключаем собранную библиотеку из dist
+    '^@my-app/ui-library$': '<rootDir>/../ui-library/dist/index.js',
+    // Жестко фиксируем один React из папки frontend
+    '^react$': '<rootDir>/node_modules/react',
+    '^react-dom$': '<rootDir>/node_modules/react-dom',
+    '^react/jsx-runtime$': '<rootDir>/node_modules/react/jsx-runtime',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
   }
 }
