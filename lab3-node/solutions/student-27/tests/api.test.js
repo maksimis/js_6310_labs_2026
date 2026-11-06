@@ -1,10 +1,10 @@
-import { describe, test, expect, beforeAll } from '@jest/globals';
-import request from 'supertest'; // Нужно установить: npm install --save-dev supertest
+import { describe, test, expect, beforeEach } from '@jest/globals';
+import request from 'supertest';
 import app from '../src/services/api.js';
 import { _resetStore } from '../src/services/surveyService.js';
 
 describe('API Endpoints', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     _resetStore();
   });
 
@@ -13,36 +13,97 @@ describe('API Endpoints', () => {
         .post('/api/surveys')
         .send({
           topic: 'API Test',
-          questions: [{ question: 'Q1', options: ['Yes', 'No'] }],
+          questions: [
+            { question: 'Q1', options: ['Yes', 'No'] }
+          ]
         });
+
     expect(response.status).toBe(201);
-    expect(response.body.id).toBeDefined();
-    expect(response.body.code).toBeDefined();
+    expect(response.body.id).toBe(1);
+    expect(typeof response.body.code).toBe('string');
   });
 
-  test('POST /api/surveys returns 400 for invalid data', async () => {
+  test('POST rejects empty topic and questions', async () => {
     const response = await request(app)
         .post('/api/surveys')
-        .send({ topic: '', questions: [] });
+        .send({
+          topic: '',
+          questions: []
+        });
+
     expect(response.status).toBe(400);
   });
 
-  test('GET /api/surveys/:id/results returns results', async () => {
-    const createRes = await request(app)
+  test('POST rejects null question with 400', async () => {
+    const response = await request(app)
+        .post('/api/surveys')
+        .send({
+          topic: 'Test',
+          questions: [null]
+        });
+
+    expect(response.status).toBe(400);
+  });
+
+  test('POST rejects missing fields', async () => {
+    const response = await request(app)
+        .post('/api/surveys')
+        .send({});
+
+    expect(response.status).toBe(400);
+  });
+
+  test('POST rejects blank question', async () => {
+    const response = await request(app)
+        .post('/api/surveys')
+        .send({
+          topic: 'Test',
+          questions: [
+            { question: ' ', options: ['A', 'B'] }
+          ]
+        });
+
+    expect(response.status).toBe(400);
+  });
+
+  test('POST rejects invalid options', async () => {
+    const response = await request(app)
+        .post('/api/surveys')
+        .send({
+          topic: 'Test',
+          questions: [
+            { question: 'Q', options: ['A', null] }
+          ]
+        });
+
+    expect(response.status).toBe(400);
+  });
+
+  test('GET returns survey results', async () => {
+    const createResponse = await request(app)
         .post('/api/surveys')
         .send({
           topic: 'API Test 2',
-          questions: [{ question: 'Q1', options: ['Yes', 'No'] }],
+          questions: [
+            { question: 'Q1', options: ['Yes', 'No'] }
+          ]
         });
-    const { id } = createRes.body;
 
-    const response = await request(app).get(`/api/surveys/${id}/results`);
+    const response = await request(app)
+        .get(`/api/surveys/${createResponse.body.id}/results`);
+
     expect(response.status).toBe(200);
     expect(response.body.total).toBe(0);
+    expect(response.body.distribution[0]).toEqual({
+      Yes: 0,
+      No: 0
+    });
   });
 
-  test('GET /api/surveys/:id/results returns 404 for unknown id', async () => {
-    const response = await request(app).get('/api/surveys/unknown/results');
+  test('GET returns 404 for unknown survey', async () => {
+    const response = await request(app)
+        .get('/api/surveys/unknown/results');
+
     expect(response.status).toBe(404);
   });
 });

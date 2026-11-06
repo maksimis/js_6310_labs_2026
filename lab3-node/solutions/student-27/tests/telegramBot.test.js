@@ -1,51 +1,104 @@
 import { describe, test, expect, jest, beforeEach } from '@jest/globals';
 
 let botInstances = [];
-let messageHandlers = [];
 
 jest.unstable_mockModule('node-telegram-bot-api', () => ({
   default: jest.fn().mockImplementation(() => {
+    const handlers = new Map();
+
     const bot = {
-      onText: jest.fn(),
-      on: jest.fn(),
-      sendMessage: jest.fn().mockResolvedValue({}),
+      handlers,
+      on: jest.fn((event, callback) => {
+        handlers.set(event, callback);
+      }),
+      sendMessage: jest.fn().mockResolvedValue({})
     };
-    bot.onText.mockImplementation((re, cb) => { messageHandlers.push(cb); });
-    bot.on.mockImplementation((event, cb) => { messageHandlers.push(cb); });
+
     botInstances.push(bot);
     return bot;
-  }),
+  })
 }));
 
-const { default: runTelegramBot } = await import('../src/bots/telegramBot');
-const { default: TelegramBot } = await import('node-telegram-bot-api');
+const { default: runTelegramBot } = await import(
+  '../src/bots/telegramBot.js'
+);
+
+const { default: TelegramBot } = await import(
+  'node-telegram-bot-api'
+);
 
 describe('runTelegramBot', () => {
   beforeEach(() => {
+    botInstances = [];
+    jest.clearAllMocks();
     process.env.TELEGRAM_BOT_TOKEN = 'test-token';
   });
 
-  test('creates a Telegram bot instance and subscribes to events', () => {
+  test('creates bot and registers message handler', () => {
     runTelegramBot();
+
     expect(TelegramBot).toHaveBeenCalled();
+    expect(botInstances[0].handlers.has('message')).toBe(true);
   });
 
-  test('replies to /start through the registered handler', async () => {
-    const bot = botInstances[0];
-    const cb = messageHandlers.find((h) => h.toString().includes('msg.text'));
-    cb({ chat: { id: 1 }, from: { id: 1 }, text: '/start' });
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    expect(bot.sendMessage).toHaveBeenCalledWith(1, expect.stringContaining('SurveyBot'));
+  test('replies to /start', async () => {
+    const bot = runTelegramBot();
+
+    await bot.handlers.get('message')({
+      chat: { id: 1 },
+      from: { id: 1 },
+      text: '/start'
+    });
+
+    expect(bot.sendMessage).toHaveBeenCalledWith(
+      1,
+      expect.stringContaining('SurveyBot')
+    );
   });
 
-  test('does not use onText subscription', () => {
-    expect(botInstances[0].onText).not.toHaveBeenCalled();
+  test('ignores non-text messages', async () => {
+    const bot = runTelegramBot();
+
+    await bot.handlers.get('message')({
+      chat: { id: 1 }
+    });
+
+    expect(bot.sendMessage).not.toHaveBeenCalled();
   });
 
-  test('skips bot creation when token is missing', () => {
+  test('catches sendMessage error', async () => {
+    const bot = runTelegramBot();
+
+    bot.sendMessage.mockRejectedValueOnce(
+      new Error('Telegram API error')
+    );
+
+    const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+    try {
+      await expect(
+        bot.handlers.get('message')({
+          chat: { id: 1 },
+          from: { id: 1 },
+          text: '/start'
+        })
+      ).resolves.toBeUndefined();
+
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Ошибка обработки сообщения Telegram:',
+        expect.any(Error)
+      );
+    } finally {
+      consoleSpy.mockRestore();
+    }
+  });
+
+  test('skips bot when token is missing', () => {
     process.env.TELEGRAM_BOT_TOKEN = '';
-    const countBefore = botInstances.length;
-    runTelegramBot();
-    expect(botInstances.length).toBe(countBefore);
+
+    expect(runTelegramBot()).toBeUndefined();
+    expect(botInstances).toHaveLength(0);
   });
 });

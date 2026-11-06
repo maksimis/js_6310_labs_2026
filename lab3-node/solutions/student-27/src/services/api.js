@@ -2,36 +2,68 @@ import express from 'express';
 import { createSurvey, getResults } from './surveyService.js';
 
 const app = express();
+
 app.use(express.json());
 
 app.post('/api/surveys', (req, res) => {
-  const { topic, questions } = req.body;
+  const { topic, questions } = req.body ?? {};
 
-  if (!topic || typeof topic !== 'string' || topic.trim() === '') {
-    return res.status(400).json({ error: 'Тема обязательна и должна быть строкой' });
+  if (typeof topic !== 'string' || topic.trim() === '') {
+    return res.status(400).json({
+      error: 'Тема обязательна и должна быть строкой'
+    });
   }
+
   if (!Array.isArray(questions) || questions.length === 0) {
-    return res.status(400).json({ error: 'Вопросы обязательны и должны быть массивом' });
+    return res.status(400).json({
+      error: 'Вопросы обязательны и должны быть массивом'
+    });
   }
+
   for (const q of questions) {
-    if (!q.question || !Array.isArray(q.options) || q.options.length < 2) {
-      return res.status(400).json({ error: 'Каждый вопрос должен иметь текст и минимум 2 варианта' });
+    if (
+      !q ||
+        typeof q !== 'object' ||
+        Array.isArray(q) ||
+        typeof q.question !== 'string' ||
+        q.question.trim() === '' ||
+        !Array.isArray(q.options) ||
+        q.options.length < 2 ||
+        q.options.some(
+          (option) =>
+            typeof option !== 'string' ||
+                option.trim() === ''
+        )
+    ) {
+      return res.status(400).json({
+        error: 'Каждый вопрос должен иметь текст и минимум 2 непустых варианта'
+      });
     }
   }
 
-  const { id, code } = createSurvey(topic, questions);
-  res.status(201).json({ id, code });
+  const normalizedQuestions = questions.map((q) => ({
+    question: q.question.trim(),
+    options: q.options.map((option) => option.trim())
+  }));
+
+  const { id, code } = createSurvey(
+    topic.trim(),
+    normalizedQuestions
+  );
+
+  return res.status(201).json({ id, code });
 });
 
 app.get('/api/surveys/:id/results', (req, res) => {
-  const { id } = req.params;
-  const results = getResults(id);
+  const results = getResults(req.params.id);
 
   if (!results) {
-    return res.status(404).json({ error: 'Опрос не найден' });
+    return res.status(404).json({
+      error: 'Опрос не найден'
+    });
   }
 
-  res.json(results);
+  return res.json(results);
 });
 
 export default app;

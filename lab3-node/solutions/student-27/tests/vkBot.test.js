@@ -1,56 +1,111 @@
 import { describe, test, expect, jest, beforeEach } from '@jest/globals';
 
 let vkInstances = [];
-let messageHandlers = [];
 
 jest.unstable_mockModule('vk-io', () => ({
   VK: jest.fn().mockImplementation(() => {
+    const handlers = new Map();
+
     const vk = {
+      handlers,
       updates: {
-        on: jest.fn(),
-        startPolling: jest.fn().mockResolvedValue({}),
-      },
+        on: jest.fn((event, callback) => {
+          handlers.set(event, callback);
+        }),
+        startPolling: jest.fn().mockResolvedValue({})
+      }
     };
-    vk.updates.on.mockImplementation((event, cb) => { messageHandlers.push(cb); });
+
     vkInstances.push(vk);
     return vk;
-  }),
+  })
 }));
 
-const { default: runVkBot } = await import('../src/bots/vkBot');
+const { default: runVkBot } = await import(
+  '../src/bots/vkBot.js'
+);
+
+const { VK } = await import('vk-io');
 
 describe('runVkBot', () => {
   beforeEach(() => {
+    vkInstances = [];
+    jest.clearAllMocks();
     process.env.VK_GROUP_TOKEN = 'test-token';
   });
 
-  test('creates a VK instance and starts polling', async () => {
-    const { VK } = await import('vk-io');
-    runVkBot();
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    expect(VK).toHaveBeenCalled();
-  });
+  test('creates VK bot and starts polling', () => {
+    const vk = runVkBot();
 
-  test('replies to /start through the registered handler', async () => {
-    const vk = vkInstances[0];
-    const context = { text: '/start', isOutbox: false, send: jest.fn().mockResolvedValue({}) };
-    const cb = messageHandlers[0];
-    await cb(context);
-    expect(context.send).toHaveBeenCalledWith(expect.stringContaining('SurveyBot'));
+    expect(VK).toHaveBeenCalled();
     expect(vk.updates.startPolling).toHaveBeenCalled();
   });
 
-  test('ignores outbox messages to avoid an infinite loop', async () => {
-    const context = { text: 'Привет! Я твой первый бот!', isOutbox: true, send: jest.fn().mockResolvedValue({}) };
-    const cb = messageHandlers.find((h) => h.toString().includes('isOutbox'));
-    await cb(context);
+  test('replies to /start', async () => {
+    const vk = runVkBot();
+
+    const context = {
+      text: '/start',
+      isOutbox: false,
+      senderId: 1,
+      send: jest.fn().mockResolvedValue({})
+    };
+
+    await vk.handlers.get('message_new')(context);
+
+    expect(context.send).toHaveBeenCalledWith(
+      expect.stringContaining('SurveyBot')
+    );
+  });
+
+  test('ignores outgoing messages', async () => {
+    const vk = runVkBot();
+
+    const context = {
+      text: '/start',
+      isOutbox: true,
+      send: jest.fn()
+    };
+
+    await vk.handlers.get('message_new')(context);
+
     expect(context.send).not.toHaveBeenCalled();
   });
 
-  test('skips bot creation when token is missing', () => {
+  test('catches errors while sending replies', async () => {
+    const vk = runVkBot();
+
+    const context = {
+      text: '/start',
+      isOutbox: false,
+      senderId: 1,
+      send: jest.fn().mockRejectedValue(
+        new Error('VK API error')
+      )
+    };
+
+    const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+    try {
+      await expect(
+        vk.handlers.get('message_new')(context)
+      ).resolves.toBeUndefined();
+
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Ошибка обработки сообщения VK:',
+        expect.any(Error)
+      );
+    } finally {
+      consoleSpy.mockRestore();
+    }
+  });
+
+  test('skips VK bot without token', () => {
     process.env.VK_GROUP_TOKEN = '';
-    const countBefore = vkInstances.length;
-    runVkBot();
-    expect(vkInstances.length).toBe(countBefore);
+
+    expect(runVkBot()).toBeUndefined();
+    expect(vkInstances).toHaveLength(0);
   });
 });

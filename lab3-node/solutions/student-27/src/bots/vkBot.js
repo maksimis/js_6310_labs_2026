@@ -1,9 +1,7 @@
 import { VK } from 'vk-io';
-import dotenv from 'dotenv';
 import handleMessage from '../handlers/messageHandler.js';
 
 const runVkBot = () => {
-  dotenv.config();
   const token = process.env.VK_GROUP_TOKEN;
 
   if (!token) {
@@ -14,16 +12,29 @@ const runVkBot = () => {
   const vk = new VK({ token });
 
   vk.updates.on('message_new', async (context) => {
-    if (context.isOutbox) return;
-    const reply = (text) => context.send(text);
-    await handleMessage(context.text, reply, 'vk', context.senderId);
+    if (context.isOutbox || !context.text) return;
+
+    try {
+      const reply = (text) => context.send(text);
+
+      await handleMessage(
+        context.text,
+        reply,
+        'vk',
+        context.senderId
+      );
+    } catch (error) {
+      console.error('Ошибка обработки сообщения VK:', error);
+    }
   });
 
-  vk.updates.startPolling().then(() => {
-    console.log('VK-бот запущен...');
-  }).catch((error) => {
-    console.error('Ошибка запуска VK-бота:', error.message);
-  });
+  vk.updates.startPolling()
+      .then(() => {
+        console.log('VK-бот запущен...');
+      })
+      .catch((error) => {
+        console.error('Ошибка запуска VK-бота:', error.message);
+      });
 
   return vk;
 };
