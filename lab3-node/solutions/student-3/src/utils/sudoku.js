@@ -130,8 +130,8 @@ export const parseUserBoard = (rawInput) => {
   }
 
   const normalized = rawInput
-    .replace(/\./g, '0')
-    .replace(/[^0-9]/g, '');
+      .replace(/\./g, '0')
+      .replace(/[^0-9]/g, '');
 
   if (normalized.length !== 81) {
     return {

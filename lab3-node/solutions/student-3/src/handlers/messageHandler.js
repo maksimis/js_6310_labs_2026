@@ -196,131 +196,131 @@ export const handleMessage = async (bot, msg, stateManager) => {
       const argText = args.join(' ');
 
       switch (command) {
-        case '/start':
-        case '/help': {
-          const welcome = [
-            '👋 *Добро пожаловать в SudokuBot!*',
-            '',
-            'Доступные команды:',
-            '• `/generate` — сгенерировать судоку (лёгкая, средняя, сложная)',
-            '• `/solve` — проверить введённое поле и найти ошибки',
-            '• `/hint` — показать правильное значение в выбранной клетке (1 за партию)',
-            '• `/cancel` — отменить текущий шаг'
-          ].join('\n');
-          await bot.sendMessage(chatId, welcome, { parse_mode: 'Markdown' });
+      case '/start':
+      case '/help': {
+        const welcome = [
+          '👋 *Добро пожаловать в SudokuBot!*',
+          '',
+          'Доступные команды:',
+          '• `/generate` — сгенерировать судоку (лёгкая, средняя, сложная)',
+          '• `/solve` — проверить введённое поле и найти ошибки',
+          '• `/hint` — показать правильное значение в выбранной клетке (1 за партию)',
+          '• `/cancel` — отменить текущий шаг'
+        ].join('\n');
+        await bot.sendMessage(chatId, welcome, { parse_mode: 'Markdown' });
+        return;
+      }
+
+      case '/cancel': {
+        const game = stateManager.getGame(chatId);
+        if (game) {
+          stateManager.setState(chatId, FSM_STATES.PLAYING);
+          await bot.sendMessage(chatId, '↩️ Текущий ввод отменён. Вы вернулись к активной партии.');
+        } else {
+          stateManager.resetUser(chatId);
+          await bot.sendMessage(chatId, '↩️ Состояние сброшено. Введите /generate для начала новой игры.');
+        }
+        return;
+      }
+
+      case '/generate': {
+        if (argText) {
+          await processDifficultyStep(bot, chatId, argText, stateManager);
+          return;
+        }
+        stateManager.setState(chatId, FSM_STATES.WAITING_DIFFICULTY);
+        await bot.sendMessage(
+          chatId,
+          'Выберите сложность судоку:\n1 — Лёгкая\n2 — Средняя\n3 — Сложная\n\nОтправьте название или номер сложности:'
+        );
+        return;
+      }
+
+      case '/solve': {
+        const game = stateManager.getGame(chatId);
+        if (!game) {
+          await bot.sendMessage(chatId, '⚠️ У вас нет активной партии. Сначала запустите /generate.');
           return;
         }
 
-        case '/cancel': {
-          const game = stateManager.getGame(chatId);
-          if (game) {
-            stateManager.setState(chatId, FSM_STATES.PLAYING);
-            await bot.sendMessage(chatId, '↩️ Текущий ввод отменён. Вы вернулись к активной партии.');
-          } else {
-            stateManager.resetUser(chatId);
-            await bot.sendMessage(chatId, '↩️ Состояние сброшено. Введите /generate для начала новой игры.');
-          }
+        if (argText) {
+          await processSolveStep(bot, chatId, argText, stateManager);
           return;
         }
 
-        case '/generate': {
-          if (argText) {
-            await processDifficultyStep(bot, chatId, argText, stateManager);
-            return;
-          }
-          stateManager.setState(chatId, FSM_STATES.WAITING_DIFFICULTY);
+        stateManager.setState(chatId, FSM_STATES.WAITING_SOLVE_BOARD);
+        await bot.sendMessage(
+          chatId,
+          '📝 Отправьте заполненное поле (81 символ: цифры от 1 до 9, а для пустых клеток — 0 или точка `.`):',
+          { parse_mode: 'Markdown' }
+        );
+        return;
+      }
+
+      case '/hint': {
+        const game = stateManager.getGame(chatId);
+        if (!game) {
+          await bot.sendMessage(chatId, '⚠️ У вас нет активной партии. Сначала запустите /generate.');
+          return;
+        }
+
+        if (game.hintsRemaining <= 0) {
           await bot.sendMessage(
             chatId,
-            'Выберите сложность судоку:\n1 — Лёгкая\n2 — Средняя\n3 — Сложная\n\nОтправьте название или номер сложности:'
+            `❌ Лимит подсказок исчерпан! Осталось подсказок: ${game.hintsRemaining}.`
           );
           return;
         }
 
-        case '/solve': {
-          const game = stateManager.getGame(chatId);
-          if (!game) {
-            await bot.sendMessage(chatId, '⚠️ У вас нет активной партии. Сначала запустите /generate.');
-            return;
-          }
-
-          if (argText) {
-            await processSolveStep(bot, chatId, argText, stateManager);
-            return;
-          }
-
-          stateManager.setState(chatId, FSM_STATES.WAITING_SOLVE_BOARD);
-          await bot.sendMessage(
-            chatId,
-            '📝 Отправьте заполненное поле (81 символ: цифры от 1 до 9, а для пустых клеток — 0 или точка `.`):',
-            { parse_mode: 'Markdown' }
-          );
+        if (argText) {
+          await processHintStep(bot, chatId, argText, stateManager);
           return;
         }
 
-        case '/hint': {
-          const game = stateManager.getGame(chatId);
-          if (!game) {
-            await bot.sendMessage(chatId, '⚠️ У вас нет активной партии. Сначала запустите /generate.');
-            return;
-          }
+        stateManager.setState(chatId, FSM_STATES.WAITING_HINT_CELL);
+        await bot.sendMessage(
+          chatId,
+          `💡 Доступно подсказок: ${game.hintsRemaining}.\nВведите координаты клетки через пробел (строка и столбец от 1 до 9, например: \`2 5\`):`,
+          { parse_mode: 'Markdown' }
+        );
+        return;
+      }
 
-          if (game.hintsRemaining <= 0) {
-            await bot.sendMessage(
-              chatId,
-              `❌ Лимит подсказок исчерпан! Осталось подсказок: ${game.hintsRemaining}.`
-            );
-            return;
-          }
-
-          if (argText) {
-            await processHintStep(bot, chatId, argText, stateManager);
-            return;
-          }
-
-          stateManager.setState(chatId, FSM_STATES.WAITING_HINT_CELL);
-          await bot.sendMessage(
-            chatId,
-            `💡 Доступно подсказок: ${game.hintsRemaining}.\nВведите координаты клетки через пробел (строка и столбец от 1 до 9, например: \`2 5\`):`,
-            { parse_mode: 'Markdown' }
-          );
-          return;
-        }
-
-        default: {
-          await bot.sendMessage(chatId, '❓ Неизвестная команда. Используйте /help для просмотра доступных команд.');
-          return;
-        }
+      default: {
+        await bot.sendMessage(chatId, '❓ Неизвестная команда. Используйте /help для просмотра доступных команд.');
+        return;
+      }
       }
     }
 
     const currentState = stateManager.getState(chatId);
 
     switch (currentState) {
-      case FSM_STATES.WAITING_DIFFICULTY:
-        await processDifficultyStep(bot, chatId, text, stateManager);
-        break;
+    case FSM_STATES.WAITING_DIFFICULTY:
+      await processDifficultyStep(bot, chatId, text, stateManager);
+      break;
 
-      case FSM_STATES.WAITING_HINT_CELL:
-        await processHintStep(bot, chatId, text, stateManager);
-        break;
+    case FSM_STATES.WAITING_HINT_CELL:
+      await processHintStep(bot, chatId, text, stateManager);
+      break;
 
-      case FSM_STATES.WAITING_SOLVE_BOARD:
-        await processSolveStep(bot, chatId, text, stateManager);
-        break;
+    case FSM_STATES.WAITING_SOLVE_BOARD:
+      await processSolveStep(bot, chatId, text, stateManager);
+      break;
 
-      case FSM_STATES.PLAYING:
-        await bot.sendMessage(
-          chatId,
-          'Вы находитесь в режиме партии. Используйте /solve для проверки решения или /hint для получения подсказки.'
-        );
-        break;
+    case FSM_STATES.PLAYING:
+      await bot.sendMessage(
+        chatId,
+        'Вы находитесь в режиме партии. Используйте /solve для проверки решения или /hint для получения подсказки.'
+      );
+      break;
 
-      default:
-        await bot.sendMessage(
-          chatId,
-          'Используйте команду /generate для создания новой игры в Судоку или /help для справки.'
-        );
-        break;
+    default:
+      await bot.sendMessage(
+        chatId,
+        'Используйте команду /generate для создания новой игры в Судоку или /help для справки.'
+      );
+      break;
     }
   } catch (error) {
     console.error('Ошибка обработки сообщения:', error);
