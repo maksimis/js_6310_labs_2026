@@ -49,8 +49,12 @@ npm run dev
 Тесты используют Jest, `jest-environment-jsdom`, `ts-jest` и React Testing Library, как в учебном примере. В Jest-конфигурации `frontend` импорт `@my-app/ui-library` направляется на исходный код `ui-library/src/index.ts`, поэтому тесты frontend можно запускать до сборки библиотеки. Для отчёта о покрытии используйте `npm run test:coverage`. Для `TaskList` в Jest-конфигурации установлен порог не менее 90% по statements, branches, functions и lines. Фактическое прохождение порога нужно подтвердить запуском `npm run test:coverage` после установки зависимостей.
 
 ## Скриншоты
+Начальное состояние
+![Начальное состояние](images/main.jpg)
 
-Скриншоты интерфейса в архив не включены: их нужно сделать после запуска приложения в браузере и добавить в README перед сдачей. Не подменяйте реальные скриншоты макетами.
+Состояние выбора (checkbox)
+![Выбор](images/added_and_checkbox.jpg)
+
 ### Тестирование frontend
 
 В `frontend/jest.config.ts` исходники `ui-library` подключаются напрямую для тестов. Алиасы `react`, `react-dom` и JSX runtime направлены на экземпляры React из `frontend/node_modules`, чтобы избежать ошибки `Invalid hook call` из-за двух копий React. Для запуска приложения в браузере сначала соберите библиотеку командой `npm run build` в `ui-library`.
