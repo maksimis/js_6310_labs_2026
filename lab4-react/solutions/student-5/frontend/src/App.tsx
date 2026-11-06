@@ -5,6 +5,7 @@ import { GameBoard, GameControls } from '@my-app/ui-library'
 import { getBotMove, checkWinner } from './bot'
 
 import type { Difficulty } from '@my-app/ui-library'
+import '@my-app/ui-library/style.css'
 import './App.css'
 
 export const App: React.FC = () => {
