@@ -10,6 +10,7 @@ const config: Config = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^react$': '<rootDir>/node_modules/react',
     '^react-dom$': '<rootDir>/node_modules/react-dom',
+    '^ui-library$': '<rootDir>/../ui-library/src/index.ts',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 }
