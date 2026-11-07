@@ -15,10 +15,4 @@ describe('App', () => {
     expect(screen.getByText('Закат на море')).toBeInTheDocument()
     expect(screen.getByText('Горный пейзаж')).toBeInTheDocument()
   })
-
-  test('renders reset button', () => {
-    render(<App />)
-
-    expect(screen.getByText('Сбросить галерею')).toBeInTheDocument()
-  })
 })

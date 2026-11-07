@@ -34,7 +34,7 @@ const initialImages: ImageCardProps[] = [
     imageUrl: '/images/les.png',
     title: 'Лесная тропа',
     album: 'Природа',
-    onDownload: () => downloadImage('/images/les.jpg', 'les.jpg'),
+    onDownload: () => downloadImage('/images/les.png', 'les.png'),
     onDelete: () => alert('Удаление: Лесная тропа'),
   },
   {
@@ -48,6 +48,7 @@ const initialImages: ImageCardProps[] = [
 
 const downloadImage = (url: string, filename: string) => {
   const link = document.createElement('a')
+
   link.href = url
   link.download = filename
   document.body.appendChild(link)
