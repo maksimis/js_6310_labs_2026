@@ -1,0 +1,46 @@
+.wrapper {
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 12px;
+  background-color: #ffffff;
+  display: inline-block;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #222;
+}
+
+.grid {
+  display: grid;
+  width: fit-content;
+  gap: 3px;
+  background-color: #f6f8fa;
+  padding: 8px;
+  border: 1px solid #d8dee4;
+  border-radius: 4px;
+}
+
+.cell {
+  width: 24px;
+  height: 24px;
+  background-color: #eaeef2;
+  border: 1px solid #d0d7de;
+  box-sizing: border-box;
+}
+
+.filled {
+  border-color: #555;
+}
+
+.info {
+  margin: 8px 0 0 0;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.info p {
+  margin: 2px 0;
+}
