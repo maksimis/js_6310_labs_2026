@@ -1,0 +1,42 @@
+.chat-window, .sources-panel { color: #20382f; font-family: 'Segoe UI', sans-serif; }
+.chat-window { display: flex; flex-direction: column; min-height: 560px; }
+.chat-heading, .sources-heading { margin: 0; font-size: 1.1rem; font-weight: 650; }
+.chat-top { display: flex; align-items: center; justify-content: space-between; padding: 24px 28px; border-bottom: 1px solid #e2e6df; }
+.chat-status { font-size: .75rem; color: #496456; }
+.chat-status::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #42845c; margin-right: 7px; }
+.chat-log { flex: 1; overflow-y: auto; max-height: 440px; min-height: 280px; padding: 28px; scroll-behavior: smooth; }
+.chat-empty { padding: 55px 12px; text-align: center; color: #64746a; }
+.chat-empty p { margin: 8px 0 0; font-size: .9rem; }
+.chat-message { margin-bottom: 24px; max-width: 90%; }
+.chat-message--user { margin-left: auto; }
+.chat-author { display: block; margin-bottom: 7px; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: #63786a; }
+.chat-message--user .chat-author { text-align: right; }
+.chat-text { margin: 0; padding: 15px 18px; background: #eef3eb; border-radius: 2px 14px 14px; font-size: .94rem; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+.chat-message--user .chat-text { background: #1f4f40; color: #fff; border-radius: 14px 2px 14px 14px; }
+.chat-typing { display: flex; align-items: center; gap: 6px; color: #63786a; font-size: .8rem; }
+.chat-typing span { width: 5px; height: 5px; background: #527a60; border-radius: 50%; animation: chat-pulse 1s ease-in-out infinite alternate; }
+.chat-typing span:nth-child(2) { animation-delay: .15s; }
+.chat-typing span:nth-child(3) { animation-delay: .3s; margin-right: 5px; }
+.chat-form { display: flex; gap: 12px; padding: 18px 24px; border-top: 1px solid #e2e6df; background: #fafbf8; }
+.chat-label { flex: 1; min-width: 0; }
+.chat-input-label { display: block; font-size: .7rem; color: #627064; margin-bottom: 6px; }
+.chat-input { box-sizing: border-box; width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid #c5d0c3; border-radius: 6px; font: inherit; font-size: .9rem; color: #20382f; background: #fff; }
+.chat-send { align-self: flex-end; height: 42px; padding: 0 18px; border: 0; border-radius: 6px; background: #1f4f40; color: white; font: inherit; font-size: .85rem; cursor: pointer; }
+.chat-send:disabled { opacity: .45; cursor: not-allowed; }
+.chat-send:not(:disabled):hover { background: #143e30; }
+.chat-input:focus-visible, .chat-send:focus-visible, .source-link:focus-visible { outline: 3px solid #b88b38; outline-offset: 3px; }
+.sources-panel { padding: 24px; }
+.sources-header { display: flex; justify-content: space-between; align-items: center; }
+.sources-count { font-size: .75rem; background: #e9ede3; padding: 4px 9px; border-radius: 20px; }
+.sources-description { color: #6b786b; font-size: .8rem; line-height: 1.6; margin: 10px 0 22px; }
+.sources-list { list-style: none; padding: 0; margin: 0; }
+.source-card { border-top: 1px solid #dce1d4; padding: 20px 0; }
+.source-meta { display: flex; justify-content: space-between; color: #63735b; font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; }
+.source-score { font-weight: 700; color: #30583c; }
+.source-title { font-size: .96rem; margin: 12px 0 8px; line-height: 1.5; }
+.source-excerpt { font-size: .82rem; line-height: 1.7; color: #53624e; margin: 0 0 12px; overflow-wrap: anywhere; }
+.source-link { display: inline-flex; gap: 8px; align-items: center; color: #234d37; font-size: .78rem; font-weight: 600; text-underline-offset: 4px; }
+.sources-empty { color: #64725b; font-size: .9rem; line-height: 1.7; padding: 25px 0; }
+@keyframes chat-pulse { to { opacity: .25; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .chat-typing span { animation: none; } .chat-log { scroll-behavior: auto; } }
+@media (max-width: 560px) { .chat-top, .chat-log { padding: 20px; } .chat-form { padding: 16px; gap: 8px; } .chat-send { padding: 0 12px; } .chat-message { max-width: 95%; } }
