@@ -1,0 +1,40 @@
+
+.panel {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.label {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.value {
+    color: #0f172a;
+    font-size: 24px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+    .panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 380px) {
+    .panel {
+        grid-template-columns: 1fr;
+    }
+}
