@@ -1,9 +1,6 @@
 import { useState } from 'react'
 
-import { WordCard } from './WordCard'
-import { WordTable } from './WordTable'
-
-import type { Word } from './WordTable'
+import { WordTable, WordCard, type Word } from '../../ui-library/src'
 import './App.css'
 
 function App() {
