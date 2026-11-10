@@ -1,0 +1,370 @@
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.task-list--empty {
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1rem;
+
+  border: 1px dashed #d5d9e4;
+  border-radius: 18px;
+  background: #fff;
+  color: #747b8d;
+
+  text-align: center;
+}
+
+.empty-icon {
+  display: grid;
+  place-items: center;
+
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.6rem;
+
+  border-radius: 50%;
+  background: #fff2dc;
+  color: #d58b21;
+
+  font-size: 1.5rem;
+}
+
+.task-list--empty h2 {
+  margin: 0.2rem 0;
+  color: #20263a;
+  font-size: 1.1rem;
+}
+
+.task-list--empty p {
+  margin: 0.25rem 0 0;
+  font-size: 0.92rem;
+}
+
+/* Группировка задач по времени */
+
+.time-group__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  margin-bottom: 0.75rem;
+}
+
+.time-group__heading h3 {
+  margin: 0;
+  color: #687087;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.time-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+
+  border-radius: 50%;
+  background: #6b72db;
+
+  box-shadow: 0 0 0 4px #ececff;
+}
+
+.time-group__line {
+  flex: 1;
+  height: 1px;
+  background: #e8eaf1;
+}
+
+.time-group__tasks {
+  display: grid;
+  gap: 0.65rem;
+}
+
+/* Карточка задачи */
+
+.task-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+
+  padding: 1rem 1.1rem;
+
+  border: 1px solid #e9ebf2;
+  border-radius: 14px;
+  background: #fff;
+
+  box-shadow: 0 3px 12px rgb(34 43 75 / 3%);
+
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.task-card:hover {
+  border-color: #c9cbf5;
+  transform: translateY(-1px);
+}
+
+.task-card--completed {
+  background: #fafbfc;
+}
+
+/* Чекбокс выполнения */
+
+.task-card__check {
+  position: relative;
+
+  display: grid;
+  flex: 0 0 1.35rem;
+
+  width: 1.35rem;
+  height: 1.35rem;
+
+  cursor: pointer;
+}
+
+.task-card__check input {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-check {
+  display: grid;
+  place-items: center;
+
+  width: 1.25rem;
+  height: 1.25rem;
+
+  border: 1.5px solid #c9cedb;
+  border-radius: 6px;
+
+  color: transparent;
+  font-size: 0.8rem;
+
+  transition: all 0.15s ease;
+}
+
+.task-card__check input:checked + .custom-check {
+  border-color: #6b72db;
+  background: #6b72db;
+  color: #fff;
+}
+
+.task-card__check input:focus-visible + .custom-check {
+  outline: 3px solid #bfc2ff;
+  outline-offset: 2px;
+}
+
+/* Информация о задаче */
+
+.task-card__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.task-card__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.task-card__title {
+  color: #252b40;
+  font-size: 0.96rem;
+  font-weight: 600;
+
+  overflow-wrap: anywhere;
+}
+
+.task-card--completed .task-card__title {
+  color: #9298a8;
+  text-decoration: line-through;
+}
+
+.task-card__time {
+  color: #6b72db;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.repeat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 0.22rem 0.48rem;
+
+  border-radius: 6px;
+  background: #edf7f2;
+  color: #368367;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Форма создания задачи */
+
+.task-form {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 2fr)
+    minmax(120px, 0.85fr)
+    minmax(140px, 1fr)
+    auto;
+
+  align-items: start;
+  gap: 0.85rem;
+}
+
+.task-form__field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.task-form__field label {
+  color: #555d73;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.task-form__field input,
+.task-form__field select {
+  box-sizing: border-box;
+
+  width: 100%;
+  min-height: 46px;
+  padding: 0.7rem 0.8rem;
+
+  border: 1px solid #dfe2eb;
+  border-radius: 10px;
+
+  background: #fff;
+  color: #262c40;
+
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.task-form__field input:focus,
+.task-form__field select:focus {
+  border-color: #7479e0;
+  outline: 3px solid #eeefff;
+}
+
+.task-form__field [aria-invalid="true"] {
+  border-color: #d94f59;
+}
+
+.field-error {
+  margin: 0;
+  color: #c03945;
+  font-size: 0.76rem;
+}
+
+/* Кнопки */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+
+  border: 0;
+  border-radius: 10px;
+
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.button:focus-visible {
+  outline: 3px solid #bfc2ff;
+  outline-offset: 2px;
+}
+
+.button--primary {
+  background: #6268d7;
+  color: #fff;
+
+  box-shadow: 0 5px 12px rgb(98 104 215 / 22%);
+}
+
+.button--primary:hover {
+  background: #5056c4;
+}
+
+.button--primary:active {
+  transform: translateY(1px);
+}
+
+.task-form__submit {
+  margin-top: 1.4rem;
+  white-space: nowrap;
+}
+
+/* Адаптация под планшеты */
+
+@media (max-width: 850px) {
+  .task-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .task-form__field--title {
+    grid-column: 1 / -1;
+  }
+
+  .task-form__submit {
+    margin-top: 0;
+  }
+}
+
+/* Адаптация под телефоны */
+
+@media (max-width: 520px) {
+  .task-form {
+    grid-template-columns: 1fr;
+  }
+
+  .task-form__field--title {
+    grid-column: auto;
+  }
+
+  .task-form__submit {
+    width: 100%;
+  }
+
+  .task-card {
+    gap: 0.65rem;
+    padding: 0.85rem;
+  }
+
+  .task-card__title-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}
