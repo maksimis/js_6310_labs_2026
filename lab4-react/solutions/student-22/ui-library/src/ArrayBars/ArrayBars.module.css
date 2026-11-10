@@ -1,0 +1,41 @@
+.panel {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 28px 8px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.bar {
+  flex: 1;
+  position: relative;
+  min-height: 2px;
+  background: #4a90e2;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.2s;
+}
+
+.comparing {
+  background: #f5a623;
+}
+
+.sorted {
+  background: #4caf50;
+}
+
+.label {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+}
+
+.empty {
+  padding: 16px;
+  color: #888;
+  text-align: center;
+}
