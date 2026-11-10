@@ -8,10 +8,13 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// Отдельный ID для API, чтобы карточки из API не смешивались с карточками из ВК
+const API_USER_ID = 'api-user';
+
 app.get('/api/cards', (req, res) => {
   try {
-    const cards = getAllCards();
-    const progress = getProgress();
+    const cards = getAllCards(API_USER_ID);
+    const progress = getProgress(API_USER_ID);
     res.json({ cards, progress });
   } catch (error) {
     console.error('Ошибка GET:', error.message);
@@ -25,7 +28,7 @@ app.post('/api/cards', (req, res) => {
     if (!word || !translation) {
       return res.status(400).json({ error: 'Нужны word и translation' });
     }
-    const card = addCard(word, translation);
+    const card = addCard(API_USER_ID, word, translation);
     res.status(201).json(card);
   } catch (error) {
     console.error('Ошибка POST:', error.message);

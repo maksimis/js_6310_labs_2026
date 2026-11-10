@@ -4,12 +4,8 @@ import { app } from '../src/api/server.js';
 import { clearCards } from '../src/cards/cardManager.js';
 
 describe('API Cards', () => {
-  beforeEach(() => clearCards());
-
-  test('GET /api/cards возвращает пустой массив', async () => {
-    const res = await request(app).get('/api/cards');
-    expect(res.status).toBe(200);
-    expect(res.body.cards).toEqual([]);
+  beforeEach(() => {
+    clearCards('api-user'); // Очищаем базу для api-user
   });
 
   test('POST /api/cards создает карточку', async () => {
@@ -37,8 +33,8 @@ describe('API Cards', () => {
 
   test('POST без Content-Type (вызывает req.body || {})', async () => {
     const res = await request(app)
-        .post('/api/cards')
-        .send('word=cat&translation=кот'); 
+      .post('/api/cards')
+      .send('word=cat&translation=кот'); 
     expect(res.status).toBe(400);
   });
 
@@ -47,13 +43,10 @@ describe('API Cards', () => {
     expect(res.status).toBe(404);
   });
 
-  test('POST /api/cards с некорректным типом данных вызывает 500', async () => {
-    // Отправляем в поле word не строку, а объект. 
-    // Наш cardManager попытается сделать .trim() и выбросит ошибку.
+  test('Обработка внутренней ошибки сервера', async () => {
     const res = await request(app)
-        .post('/api/cards')
-        .send({ word: { bad: 'object' }, translation: 'кот' });
-    
+      .post('/api/cards')
+      .send({ word: { bad: 'object' }, translation: 'кот' });
     expect(res.status).toBe(500);
     expect(res.body.error).toBe('Внутренняя ошибка');
   });

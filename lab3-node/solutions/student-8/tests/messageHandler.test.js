@@ -4,52 +4,55 @@ import { clearCards, addCard, getProgress } from '../src/cards/cardManager.js';
 import { clearAllStates } from '../src/state/stateMachine.js';
 
 const mockReply = jest.fn(async () => {});
+const testUserId = 1;
 
 describe('messageHandler', () => {
   beforeEach(() => {
-    clearCards();
+    clearCards(testUserId); // Очищаем карточки только для этого тестового пользователя
     clearAllStates();
     mockReply.mockClear();
   });
 
   test('отвечает на /help', async () => {
-    await handleMessage(1, '/help', mockReply);
+    await handleMessage(testUserId, '/help', mockReply);
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('Доступные команды'));
   });
 
   test('добавляет слово через /progress', async () => {
-    await handleMessage(1, '/progress', mockReply); // просит слово
-    await handleMessage(1, 'apple', mockReply); // вводим слово
-    await handleMessage(1, 'яблоко', mockReply); // вводим перевод
+    await handleMessage(testUserId, '/progress', mockReply); // просит слово
+    await handleMessage(testUserId, 'apple', mockReply); // вводим слово
+    await handleMessage(testUserId, 'яблоко', mockReply); // вводим перевод
     
-    const stats = getProgress();
+    const stats = getProgress(testUserId);
     expect(stats.total).toBe(1);
   });
 
   test('/learn показывает карточку', async () => {
-    addCard('apple', 'яблоко');
-    await handleMessage(1, '/learn', mockReply);
+    addCard(testUserId, 'apple', 'яблоко');
+    await handleMessage(testUserId, '/learn', mockReply);
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('Слово: apple'));
   });
 
   test('/repeat без карточек', async () => {
-    await handleMessage(1, '/repeat', mockReply);
+    // База пуста
+    await handleMessage(testUserId, '/repeat', mockReply);
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('нет слов для повторения'));
   });
 
   test('/learn без карточек', async () => {
-    await handleMessage(1, '/learn', mockReply);
+    // База пуста
+    await handleMessage(testUserId, '/learn', mockReply);
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('Нет карточек'));
   });
 
   test('неизвестная команда', async () => {
-    await handleMessage(1, 'привет', mockReply);
+    await handleMessage(testUserId, 'привет', mockReply);
     expect(mockReply).toHaveBeenCalledWith(expect.stringContaining('Неизвестная команда'));
   });
 
   test('отмена действия', async () => {
-    await handleMessage(1, '/progress', mockReply); // ждем слово
-    await handleMessage(1, '/cancel', mockReply);  // отменяем
+    await handleMessage(testUserId, '/progress', mockReply); // ждем слово
+    await handleMessage(testUserId, '/cancel', mockReply);  // отменяем
     expect(mockReply).toHaveBeenCalledWith('Отменено.');
   });
 });

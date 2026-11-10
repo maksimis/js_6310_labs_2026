@@ -22,7 +22,7 @@ const getHelpText = () => [
 ].join('\n');
 
 const handleLearn = async (userId, reply) => {
-  const cardsToLearn = getCardsForReview();
+  const cardsToLearn = getCardsForReview(userId); // ДОБАВИЛИ userId
   if (cardsToLearn.length === 0) {
     await reply('Нет карточек для изучения. Добавьте слова через /progress.');
     return;
@@ -33,7 +33,7 @@ const handleLearn = async (userId, reply) => {
 };
 
 const handleRepeat = async (userId, reply) => {
-  const cardsToRepeat = getCardsForReview();
+  const cardsToRepeat = getCardsForReview(userId); // ДОБАВИЛИ userId
   if (cardsToRepeat.length === 0) {
     await reply('Сейчас нет слов для повторения. Отдохните!');
     return;
@@ -44,8 +44,8 @@ const handleRepeat = async (userId, reply) => {
 };
 
 const handleProgress = async (userId, reply) => {
-  const progress = getProgress();
-  const allCards = getAllCards(); 
+  const progress = getProgress(userId); // ДОБАВИЛИ userId
+  const allCards = getAllCards(userId); // ДОБАВИЛИ userId
   if (progress.total === 0) {
     await reply('Ваша база пуста. Введите слово для добавления:');
     setState(userId, STATES.AWAITING_WORD);
@@ -65,20 +65,17 @@ const handleLearning = async (userId, text, reply) => {
   const { cardId, showTranslation } = current.data;
   
   if (!showTranslation) {
-    // Пользователь написал что угодно, чтобы перевернуть карточку
     setState(userId, STATES.LEARNING, { cardId, showTranslation: true });
     
-    // Находим карточку, чтобы показать перевод
-    const card = getCardById(cardId);
+    const card = getCardById(userId, cardId); // ДОБАВИЛИ userId
     await reply(`Перевод: ${card.translation}\nНапишите "выучил" или "трудно".`);
   } else {
-    // Пользователь отвечает, выучил он или нет
     const lower = text.toLowerCase();
     if (lower.includes('выучил') || lower.includes('знаю')) {
-      updateCardLevel(cardId, LEVELS.LEARNED);
+      updateCardLevel(userId, cardId, LEVELS.LEARNED); // ДОБАВИЛИ userId
       await reply('Отлично! Слово выучено.');
     } else {
-      updateCardLevel(cardId, LEVELS.HARD);
+      updateCardLevel(userId, cardId, LEVELS.HARD); // ДОБАВИЛИ userId
       await reply('Ок, повторим позже.');
     }
     resetState(userId);
@@ -110,7 +107,7 @@ const handleMessage = async (userId, text, reply) => {
   
   if (current.state === STATES.AWAITING_TRANSLATION) {
     const word = current.data.word;
-    addCard(word, trimmed);
+    addCard(userId, word, trimmed); // ДОБАВИЛИ userId
     resetState(userId);
     await reply(`Слово "${word}" сохранено!`);
     return;
