@@ -1,0 +1,113 @@
+@import '@my-app/ui-library/style.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f4f4f4;
+  color: #222;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+.reviews {
+  display: grid;
+  gap: 16px;
+  margin: 30px 0;
+}
+
+.reviews h2 {
+  margin: 0;
+}
+
+.review-card,
+.voting-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #222;
+}
+
+.review-avatar {
+  background: #eee;
+  color: #444;
+}
+
+.review-rating {
+  color: #a66b00;
+}
+
+.review-text,
+.voting-description {
+  color: #444;
+}
+
+.review-reactions button {
+  border-radius: 4px;
+  color: #333;
+}
+
+.review-reactions button[aria-pressed="true"] {
+  background: #e5efff;
+  border-color: #527bb5;
+  color: #234a80;
+}
+
+.voting-eyebrow {
+  display: none;
+}
+
+.voting-card h2 {
+  max-width: none;
+  margin-top: 0;
+  color: #222;
+  font-size: 22px;
+  letter-spacing: normal;
+}
+
+.voting-option {
+  background: #fafafa;
+  border-color: #ccc;
+  border-radius: 4px;
+}
+
+.voting-option:hover:not(:disabled),
+.voting-option[aria-pressed="true"] {
+  background: #e5efff;
+  border-color: #527bb5;
+}
+
+.vote-track {
+  background: #ddd;
+}
+
+.vote-track > span {
+  background: #527bb5;
+}
+
+.vote-count,
+.voting-footer {
+  color: #555;
+}
+
+.note {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
