@@ -1,2 +1,2 @@
-export * from './components/WordCard';
-export * from './components/WordTable';
+export * from './components/WordCard'
+export * from './components/WordTable'
