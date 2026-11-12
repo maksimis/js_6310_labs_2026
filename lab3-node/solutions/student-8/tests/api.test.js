@@ -33,8 +33,8 @@ describe('API Cards', () => {
 
   test('POST без Content-Type (вызывает req.body || {})', async () => {
     const res = await request(app)
-      .post('/api/cards')
-      .send('word=cat&translation=кот'); 
+        .post('/api/cards')
+        .send('word=cat&translation=кот'); 
     expect(res.status).toBe(400);
   });
 
@@ -45,8 +45,8 @@ describe('API Cards', () => {
 
   test('Обработка внутренней ошибки сервера', async () => {
     const res = await request(app)
-      .post('/api/cards')
-      .send({ word: { bad: 'object' }, translation: 'кот' });
+        .post('/api/cards')
+        .send({ word: { bad: 'object' }, translation: 'кот' });
     expect(res.status).toBe(500);
     expect(res.body.error).toBe('Внутренняя ошибка');
   });
