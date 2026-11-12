@@ -1,0 +1,83 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  border: 3px solid #2c3e50;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Важно: убираем flex, который ломал ряды */
+}
+
+/* Наша структура в TSX использует div.row, поэтому возвращаем flex для рядов */
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bdc3c7;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: background-color 0.2s;
+}
+
+.cell:hover {
+  background-color: #f8f9fa;
+}
+
+.cell.initial {
+  background-color: #ecf0f1;
+  font-weight: bold;
+}
+
+.cell.selected {
+  background-color: #d6eaf8;
+  border: 2px solid #3498db; /* Более заметное выделение */
+  z-index: 2;
+}
+
+.cell.rightBorder {
+  border-right: 2px solid #2c3e50;
+}
+
+.cell.bottomBorder {
+  border-bottom: 2px solid #2c3e50;
+}
+
+.value {
+  font-size: 28px;
+  color: #2980b9;
+}
+
+.initial .value {
+  color: #2c3e50;
+}
+
+.notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.note {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7f8c8d;
+  font-weight: 500;
+}
