@@ -1,0 +1,25 @@
+{
+  "name": "quizbot",
+  "version": "1.0.0",
+  "description": "Telegram quiz bot with multiple modes and a records table",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand --coverage"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "jest": "^29.7.0"
+  }
+}
