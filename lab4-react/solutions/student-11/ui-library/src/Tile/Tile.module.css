@@ -1,0 +1,95 @@
+.tile {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 28px;
+  transition: all 0.15s ease;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.tile--empty {
+  background: rgba(255, 255, 255, 0.3);
+  border: 3px dashed rgba(184, 169, 201, 0.3);
+}
+
+.tile--2 {
+  background: linear-gradient(135deg, #fff5fa 0%, #ffeaf3 100%);
+  color: #7a6a8a;
+  box-shadow: 0 3px 8px rgba(255, 234, 243, 0.6);
+}
+
+.tile--4 {
+  background: linear-gradient(135deg, #e3f4ff 0%, #d2edff 100%);
+  color: #5a6a8a;
+  box-shadow: 0 3px 9px rgba(210, 237, 255, 0.7);
+}
+
+.tile--8 {
+  background: linear-gradient(135deg, #e0fbec 0%, #cff8e0 100%);
+  color: #4a7a62;
+  box-shadow: 0 4px 10px rgba(207, 248, 224, 0.7);
+}
+
+.tile--16 {
+  background: linear-gradient(135deg, #fff6d6 0%, #ffefbd 100%);
+  color: #8a7a3a;
+  box-shadow: 0 4px 11px rgba(255, 239, 189, 0.8);
+}
+
+.tile--32 {
+  background: linear-gradient(135deg, #ffe3c2 0%, #ffd6a8 100%);
+  color: #8a6a3a;
+  box-shadow: 0 4px 12px rgba(255, 214, 168, 0.8);
+}
+
+.tile--64 {
+  background: linear-gradient(135deg, #ffb1a8 0%, #ff9d92 100%);
+  color: #ffffff;
+  box-shadow: 0 5px 14px rgba(255, 157, 146, 0.85);
+}
+
+.tile--128 {
+  background: linear-gradient(135deg, #ff8fc0 0%, #ff7ab3 100%);
+  color: #ffffff;
+  font-size: 24px;
+  box-shadow: 0 5px 16px rgba(255, 122, 179, 0.85);
+}
+
+.tile--256 {
+  background: linear-gradient(135deg, #ff6ec7 0%, #ff54bb 100%);
+  color: #ffffff;
+  font-size: 24px;
+  box-shadow: 0 6px 18px rgba(255, 84, 187, 0.9);
+}
+
+/* 512 — сочная фиалка */
+.tile--512 {
+  background: linear-gradient(135deg, #b07cf0 0%, #9d64ec 100%);
+  color: #ffffff;
+  font-size: 24px;
+  box-shadow: 0 6px 20px rgba(157, 100, 236, 0.9);
+}
+
+.tile--1024 {
+  background: linear-gradient(135deg, #6ea8ff 0%, #5293ff 100%);
+  color: #ffffff;
+  font-size: 20px;
+  box-shadow: 0 7px 22px rgba(82, 147, 255, 0.95);
+}
+
+.tile--2048 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffdf33 100%);
+  color: #ffffff;
+  font-size: 20px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 7px 24px rgba(255, 215, 0, 0.9);
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
