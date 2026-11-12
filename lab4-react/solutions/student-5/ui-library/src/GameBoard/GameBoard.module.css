@@ -1,0 +1,26 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.cell {
+  background-color: #fbfbfb;
+  border: 2px solid #d8d8d8;
+  border-radius: 10px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #431465;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.winner {
+  background-color: #aac4b0;
+  border-color: #084c18;
+  color: #155724;
+}

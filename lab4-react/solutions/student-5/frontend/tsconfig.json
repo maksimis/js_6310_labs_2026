@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "ui-library": ["./../ui-library/src/index.ts"],
+      "ui-library/*": ["./../ui-library/src/*"]
+    }
+  }
+}
