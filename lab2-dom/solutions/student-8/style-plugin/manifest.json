@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Гриффиндор для КАИ",
+  "version": "1.0",
+  "description": "Тёмная тема в цветах Гриффиндора для сайта kai.ru",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://kai.ru/*",
+        "https://www.kai.ru/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
