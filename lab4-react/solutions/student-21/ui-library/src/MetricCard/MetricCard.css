@@ -1,0 +1,42 @@
+.metriccard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  min-width: 220px;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+}
+
+.metriccard__title {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.metriccard__value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #444;
+}
+
+.metriccard__change {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.metriccard__change--positive {
+  color: #16a34a;
+}
+
+.metriccard__change--negative {
+  color: #dc2626;
+}
+
+.metriccard__change--neutral {
+  color: #888;
+}
