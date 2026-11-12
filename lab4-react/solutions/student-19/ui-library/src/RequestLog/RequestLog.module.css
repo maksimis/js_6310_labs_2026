@@ -1,0 +1,140 @@
+.log {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.title {
+  color: #222;
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+.rules {
+  background: #f8faff;
+  border: 1px solid #dbe6ff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+}
+
+.rulesTitle {
+  color: #1e3a8a;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.rulesList {
+  color: #444;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.rulesList li + li {
+  margin-top: 4px;
+}
+
+.emptyRules {
+  color: #888;
+  font-size: 13px;
+  margin: 0;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.colProvider {
+  width: 20%;
+}
+
+.colModel {
+  width: 29%;
+}
+
+.colStatus {
+  width: 18%;
+}
+
+.colTime {
+  width: 22%;
+}
+
+.colTokens {
+  width: 11%;
+}
+
+.table th {
+  background: #f3f4f6;
+  border-bottom: 2px solid #e5e7eb;
+  color: #374151;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 10px 8px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table td {
+  border-bottom: 1px solid #eeeeee;
+  color: #333;
+  overflow-wrap: anywhere;
+  padding: 10px 8px;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.status {
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
+}
+
+.tokens {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.empty {
+  color: #888;
+  padding: 32px 12px !important;
+  text-align: center;
+}

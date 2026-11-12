@@ -1,0 +1,94 @@
+.app {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 20px 32px;
+}
+
+.app-header {
+  padding: 40px 0 28px;
+  text-align: center;
+}
+
+.app-header h1 {
+  color: #111827;
+  font-size: 38px;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+
+.app-header p {
+  color: #4b5563;
+  font-size: 16px;
+  margin: 0;
+}
+
+.app-main {
+  width: 100%;
+}
+
+.app-grid {
+  align-items: start;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+}
+
+.app-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.app-actions {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app-actions button {
+  font-size: 15px;
+  padding: 10px 16px;
+}
+
+.app-hint {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0;
+}
+
+.app-footer {
+  color: #6b7280;
+  font-size: 13px;
+  margin-top: 28px;
+  text-align: center;
+}
+
+.app-footer p {
+  margin: 2px 0;
+}
+
+@media (max-width: 900px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-header h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0 12px 24px;
+  }
+
+  .app-header {
+    padding: 28px 0 20px;
+  }
+
+  .app-header h1 {
+    font-size: 26px;
+  }
+}
