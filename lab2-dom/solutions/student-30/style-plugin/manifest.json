@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "KAI High Visibility",
+  "version": "1.0",
+  "description": "Неоново-жёлтый стиль высокой видимости для сайта kai.ru",
+  "content_scripts": [
+    {
+      "matches": ["*://*.kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
