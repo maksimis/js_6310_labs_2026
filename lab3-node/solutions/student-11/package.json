@@ -1,0 +1,24 @@
+{
+  "name": "2048 bot",
+  "version": "1.0.0",
+  "description": "Бот для игры 2048",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.7",
+    "vk-io": "^4.10.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.36.0",
+    "jest": "^30.5.2"
+  }
+}
