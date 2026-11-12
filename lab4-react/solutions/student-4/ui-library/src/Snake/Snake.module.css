@@ -1,0 +1,29 @@
+.segment {
+  position: absolute;
+  border-radius: 4px;
+  transition: all 0.1s ease;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.head {
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.eyes {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.eye {
+  width: 20%;
+  height: 20%;
+  background-color: #000;
+  border-radius: 50%;
+}
