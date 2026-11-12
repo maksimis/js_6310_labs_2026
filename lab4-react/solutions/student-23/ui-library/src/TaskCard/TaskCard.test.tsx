@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import { TaskCard } from './TaskCard'
 
 describe('TaskCard', () => {
@@ -25,6 +26,7 @@ describe('TaskCard', () => {
 
   it('вызывает onCheck с true при правильном текстовом ответе', async () => {
     const user = userEvent.setup()
+
     render(<TaskCard {...defaultProps} />)
     await user.type(screen.getByLabelText(/поле ввода ответа/i), '4')
     await user.click(screen.getByRole('button', { name: /проверить/i }))
@@ -34,6 +36,7 @@ describe('TaskCard', () => {
 
   it('вызывает onCheck с false при неправильном текстовом ответе', async () => {
     const user = userEvent.setup()
+
     render(<TaskCard {...defaultProps} />)
     await user.type(screen.getByLabelText(/поле ввода ответа/i), '5')
     await user.click(screen.getByRole('button', { name: /проверить/i }))
@@ -43,6 +46,7 @@ describe('TaskCard', () => {
   it('не вызывает onCheck при отправке пустой формы', () => {
     render(<TaskCard {...defaultProps} />)
     const form = screen.getByRole('button', { name: /проверить/i }).closest('form')
+
     if (form) {
       fireEvent.submit(form)
     }
@@ -51,6 +55,7 @@ describe('TaskCard', () => {
 
   it('вызывает onCheck при выборе варианта (тест)', async () => {
     const user = userEvent.setup()
+
     render(
       <TaskCard
         condition="Выберите правильный ответ"

@@ -28,7 +28,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       const answerIndex = String(selectedOption + 1)
       
       const isCorrect = answerLetter === correctLetter || answerIndex === correctIndex
+
       onCheck(isCorrect, options[selectedOption])
+
       return
     }
 
