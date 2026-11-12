@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Rick and Morty Multiverse",
+  "version": "1.0",
+  "description": "Превращает сайт kai.ru в портал мультивселенной Рика и Морти",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.kai.ru/*",
+        "https://kai.ru/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
