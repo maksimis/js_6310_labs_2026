@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Terminal / Matrix — вариант 4",
+  "version": "1.0.0",
+  "description": "Чёрный фон, зелёный текст и оформление kai.ru в стиле терминала. Лабораторная работа 2, вариант 4.",
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*", "https://www.kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
