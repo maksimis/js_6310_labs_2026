@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320">
+  <rect width="760" height="320" fill="#17212b" rx="14"/>
+  <text x="32" y="45" fill="#75c0ff" font-family="Arial" font-size="18">/report</text>
+  <text x="32" y="85" fill="#ffffff" font-family="Arial" font-size="22" font-weight="bold">Отчёт за текущий месяц</text>
+  <text x="32" y="120" fill="#e8f0f7" font-family="Arial" font-size="18">Всего: 1 350.00 ₽</text>
+  <text x="32" y="160" fill="#e8f0f7" font-family="Arial" font-size="18">• продукты: 900.00 ₽ (66.7%)</text>
+  <text x="32" y="190" fill="#e8f0f7" font-family="Arial" font-size="18">• транспорт: 300.00 ₽ (22.2%)</text>
+  <text x="32" y="220" fill="#e8f0f7" font-family="Arial" font-size="18">• развлечения: 150.00 ₽ (11.1%)</text>
+  <text x="32" y="275" fill="#8ee8a1" font-family="Arial" font-size="18">Топ-3: 1. продукты  2. транспорт  3. развлечения</text>
+</svg>
