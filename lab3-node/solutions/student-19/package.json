@@ -1,0 +1,30 @@
+{
+  "name": "llamabot",
+  "version": "1.0.0",
+  "description": "Multi-functional LLM hub bot with Telegram interface and REST API",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage --passWithNoTests"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "openai": "^4.52.0",
+    "telegraf": "^4.16.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@jest/globals": "^30.2.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.0.0"
+  }
+}
