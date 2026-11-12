@@ -1,0 +1,112 @@
+.card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgba(30, 27, 46, 0.04);
+  border: 1px solid #e6e1f2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #1e1b2e;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e1b2e;
+  line-height: 1.3;
+}
+
+.status {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusDone {
+  background: #7c6bf5;
+  color: #ffffff;
+}
+
+.statusWait {
+  background: #f7f5ff;
+  color: #7c6bf5;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #f7f5ff;
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  color: #6b6578;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e1b2e;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+  font-family: inherit;
+  width: 100%;
+}
+
+.button:disabled {
+  cursor: default;
+}
+
+.buttonPrimary {
+  background-color: #7c6bf5;
+  color: #ffffff;
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.buttonCompleted {
+  background-color: #5b45d6;
+  color: #ffffff;
+}

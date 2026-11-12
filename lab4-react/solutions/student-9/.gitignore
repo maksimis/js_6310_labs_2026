@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+habit-tracker-demo/
+habit-tracker-*.zip
+ui-lib/
+app/
+searched_images/
