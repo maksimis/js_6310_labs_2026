@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Earth",
+  "version": "1.0",
+  "description": "Расширение изменяет стиль сайта kai.ru в соответствии с темой «Земля (Царство Земли)».",
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
