@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "KAI to Autumn",
+  "version": "1.0",
+  "description": "Осенняя тема для kai.ru: фон цвета охры, коричневый текст и кнопка включения/выключения стиля",
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
