@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Dark КАИ",
+  "version": "1.0",
+  "description": "Тёмная тема для вечернего просмотра сайта kai.ru",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://kai.ru/*",
+        "*://www.kai.ru/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
