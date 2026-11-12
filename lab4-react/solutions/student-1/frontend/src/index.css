@@ -1,0 +1,1 @@
+*{box-sizing:border-box}body{min-width:360px;min-height:100vh;margin:0}button,select{font:inherit}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #aaa6ff;outline-offset:2px}::selection{background:#dcdafe;color:#322e82}
