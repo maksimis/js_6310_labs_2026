@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Ravenclaw Style",
+  "version": "1.0",
+  "description": "Меняет стиль сайта kai.ru в стилистике факультета Когтевран",
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_end"
+    }
+  ]
+}
