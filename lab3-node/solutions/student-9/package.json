@@ -1,0 +1,32 @@
+{
+  "name": "habit-bot",
+  "version": "1.0.0",
+  "description": "HabitBot for tracking habits",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests --watch",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "telegraf": "^4.16.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": []
+}
