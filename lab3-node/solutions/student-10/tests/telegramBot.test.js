@@ -1,7 +1,6 @@
 import { describe, test, expect, jest, beforeEach } from '@jest/globals';
 
 let botInstances = [];
-let messageHandlers = [];
 
 jest.unstable_mockModule('node-telegram-bot-api', () => ({
   default: jest.fn().mockImplementation(() => {
@@ -10,8 +9,6 @@ jest.unstable_mockModule('node-telegram-bot-api', () => ({
       on: jest.fn(),
       sendMessage: jest.fn().mockResolvedValue({}),
     };
-    bot.onText.mockImplementation((re, cb) => { messageHandlers.push(cb); });
-    bot.on.mockImplementation((event, cb) => { messageHandlers.push(cb); });
     botInstances.push(bot);
     return bot;
   }),
@@ -21,6 +18,13 @@ const { default: runTelegramBot } = await import('../src/bots/telegramBot');
 const { default: TelegramBot } = await import('node-telegram-bot-api');
 
 const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+// Все обработчики события message, зарегистрированные ботом
+const messageListeners = (bot) =>
+  bot.on.mock.calls.filter(([event]) => event === 'message').map(([, cb]) => cb);
+
+// Имитация Telegram: событие получают ВСЕ зарегистрированные обработчики
+const emit = (bot, msg) => messageListeners(bot).forEach((cb) => cb(msg));
 
 describe('runTelegramBot', () => {
   beforeEach(() => {
@@ -32,29 +36,37 @@ describe('runTelegramBot', () => {
     expect(TelegramBot).toHaveBeenCalled();
   });
 
-  test('replies to /start through the registered handler', async () => {
+  test('registers exactly one message handler', () => {
+    expect(messageListeners(botInstances[0])).toHaveLength(1);
+  });
+
+  test('replies to /start once, to the chat it came from', async () => {
     const bot = botInstances[0];
-    const cb = messageHandlers.find((h) => h.toString().includes('msg.text'));
-    cb({ chat: { id: 1 }, from: { id: 7 }, text: '/start' });
+    bot.sendMessage.mockClear();
+    emit(bot, { chat: { id: 1 }, from: { id: 7 }, text: '/start' });
     await tick();
+    expect(bot.sendMessage).toHaveBeenCalledTimes(1);
     expect(bot.sendMessage).toHaveBeenCalledWith(1, expect.stringContaining('RecipeBot'));
   });
 
   test('keeps state of different users in the same group chat separate', async () => {
     const bot = botInstances[0];
-    const cb = messageHandlers.find((h) => h.toString().includes('msg.text'));
-    cb({ chat: { id: -100 }, from: { id: 11 }, text: '/recipes add' });
-    cb({ chat: { id: -100 }, from: { id: 22 }, text: 'Борщ' });
+    bot.sendMessage.mockClear();
+    emit(bot, { chat: { id: -100 }, from: { id: 11 }, text: '/recipes add' });
     await tick();
-    expect(bot.sendMessage).toHaveBeenLastCalledWith(-100, expect.stringContaining('/help'));
+    emit(bot, { chat: { id: -100 }, from: { id: 22 }, text: 'Борщ' });
+    await tick();
+    expect(bot.sendMessage).toHaveBeenCalledTimes(2);
+    expect(bot.sendMessage).toHaveBeenNthCalledWith(1, -100, expect.stringContaining('название'));
+    expect(bot.sendMessage).toHaveBeenNthCalledWith(2, -100, expect.stringContaining('/help'));
   });
 
   test('ignores messages without a sender', async () => {
     const bot = botInstances[0];
-    const cb = messageHandlers.find((h) => h.toString().includes('msg.text'));
-    cb({ chat: { id: 5 }, text: '/start' });
+    bot.sendMessage.mockClear();
+    emit(bot, { chat: { id: 5 }, text: '/start' });
     await tick();
-    expect(bot.sendMessage).not.toHaveBeenCalledWith(5, expect.anything());
+    expect(bot.sendMessage).not.toHaveBeenCalled();
   });
 
   test('does not use onText subscription', () => {

@@ -15,6 +15,13 @@ const runTelegramBot = () => {
   const bot = new TelegramBot(token, { polling: true });
 
   // Не роняем процесс при ошибках API (например, невалидный токен)
+  bot.on('error', (error) => {
+    console.error('Ошибка Telegram-бота:', error.message);
+  });
+
+  const reply = (msg) => (text) => bot.sendMessage(msg.chat.id, text);
+
+  // Обрабатываем текстовые сообщения
   bot.on('message', (msg) => {
     // Состояние хранится по пользователю (msg.from.id), а не по чату,
     // чтобы участники группового чата не мешали друг другу
@@ -22,13 +29,6 @@ const runTelegramBot = () => {
       return;
     }
     handleMessage(msg.from.id, msg.text, reply(msg));
-  });
-
-  const reply = (msg) => (text) => bot.sendMessage(msg.chat.id, text);
-
-  // Обрабатываем текстовые сообщения
-  bot.on('message', (msg) => {
-    handleMessage(msg.chat.id, msg.text, reply(msg));
   });
 
   console.log('Telegram-бот запущен...');
