@@ -16,7 +16,7 @@ const INITIAL_BOOKS: Book[] = [
   { id: '10', title: 'Мёртвые души', author: 'Н.В. Гоголь', cover: '/covers/dushi.png', status: 'want', rating: 0 },
 ]
 
-export function App(): JSX.Element {
+export function App(): React.JSX.Element {
   const [books, setBooks] = useState<Book[]>(INITIAL_BOOKS)
 
   const handleRatingChange = (bookId: string, rating: number): void => {
