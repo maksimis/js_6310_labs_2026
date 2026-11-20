@@ -1,12 +1,18 @@
 import { describe, test, expect, jest, beforeEach } from '@jest/globals';
 import handleMessage from '../src/handlers/messageHandler.js';
-import { clearStore } from '../src/store.js';
+import { getUser, clearStore } from '../src/store.js';
 import {
   categorize,
   buildShoppingList,
   parseDays,
   parseNumbers,
 } from '../src/utils/index.js';
+
+// Количество стартовых рецептов: свои тестовые рецепты идут сразу после них
+const DEFAULT_COUNT = getUser('defaults').recipes.length;
+clearStore();
+const OMELET = DEFAULT_COUNT + 1;
+const SALAD = DEFAULT_COUNT + 2;
 
 const send = async (userId, text) => {
   const reply = jest.fn();
@@ -15,6 +21,19 @@ const send = async (userId, text) => {
 };
 
 const lastText = (reply) => reply.mock.calls.at(-1)[0];
+
+const addRecipe = async (userId, name, ingredients) => {
+  await send(userId, '/recipes add');
+  await send(userId, name);
+  await send(userId, ingredients);
+  await send(userId, 'Приготовить');
+};
+
+// Добавляет два тестовых рецепта с известными ингредиентами
+const addTestRecipes = async (userId) => {
+  await addRecipe(userId, 'Тестовый омлет', 'яйца - 3 шт\nмолоко - 100 мл\nсыр - 50 г');
+  await addRecipe(userId, 'Тестовый салат', 'помидоры - 2 шт\nогурцы - 2 шт\nмасло - 20 мл');
+};
 
 // Назначает рецепт с номером recipeNo на день dayNo
 const assign = async (userId, dayNo, recipeNo) => {
@@ -30,6 +49,7 @@ describe('categorize', () => {
     expect(categorize('курица')).toBe('Мясо и рыба');
     expect(categorize('макароны')).toBe('Бакалея');
     expect(categorize('сливочное масло')).toBe('Молочное и яйца');
+    expect(categorize('мед')).toBe('Бакалея');
   });
 
   test('неизвестный продукт попадает в «Прочее»', () => {
@@ -119,15 +139,17 @@ describe('/shopping_list', () => {
   });
 
   test('предлагает только дни с назначенными блюдами', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     const text = lastText(await send(1, '/shopping_list'));
-    expect(text).toContain('1. Понедельник — Омлет');
+    expect(text).toContain('1. Понедельник — Тестовый омлет');
     expect(text).not.toContain('Вторник');
   });
 
   test('формирует список, сгруппированный по категориям', async () => {
-    await assign(1, 1, 1);
-    await assign(1, 2, 2);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
+    await assign(1, 2, SALAD);
     await send(1, '/shopping_list');
     const text = lastText(await send(1, '1 2'));
     expect(text).toContain('Список покупок (Понедельник, Вторник)');
@@ -138,14 +160,16 @@ describe('/shopping_list', () => {
   });
 
   test('суммирует ингредиенты одинаковых блюд на разные дни', async () => {
-    await assign(1, 1, 1);
-    await assign(1, 3, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
+    await assign(1, 3, OMELET);
     await send(1, '/shopping_list');
     expect(lastText(await send(1, 'все'))).toContain('яйца — 6 шт');
   });
 
   test('при неверных днях остаётся на том же шаге', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     expect(lastText(await send(1, 'abc'))).toContain('Не понял дни');
     expect(lastText(await send(1, '5'))).toContain('не назначены');
@@ -153,7 +177,8 @@ describe('/shopping_list', () => {
   });
 
   test('отмечает и снимает отметку о покупке', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     await send(1, '1');
     expect(lastText(await send(1, '1 2'))).toContain('1. ✅');
@@ -161,14 +186,16 @@ describe('/shopping_list', () => {
   });
 
   test('при неверном номере остаётся на том же шаге', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     await send(1, '1');
     expect(lastText(await send(1, '99'))).toContain('Отправьте номера от 1 до 3');
   });
 
   test('«готово» завершает работу со списком', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     await send(1, '1');
     expect(lastText(await send(1, 'Готово'))).toContain('Готово');
@@ -176,7 +203,8 @@ describe('/shopping_list', () => {
   });
 
   test('когда всё куплено, сценарий завершается', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     await send(1, '1');
     expect(lastText(await send(1, '1 2 3'))).toContain('Всё куплено');
@@ -184,19 +212,22 @@ describe('/shopping_list', () => {
   });
 
   test('/cancel прерывает составление списка', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     await send(1, '/cancel');
     expect(lastText(await send(1, '1'))).toContain('/help');
   });
 
   test('списки пользователей не пересекаются', async () => {
-    await assign(1, 1, 1);
+    await addTestRecipes(1);
+    await assign(1, 1, OMELET);
     await send(1, '/shopping_list');
     await send(1, '1');
     await send(1, '1');
     expect(lastText(await send(2, '/shopping_list'))).toContain('/plan set');
-    await assign(2, 1, 1);
+    await addTestRecipes(2);
+    await assign(2, 1, OMELET);
     await send(2, '/shopping_list');
     expect(lastText(await send(2, '1'))).toContain('1. ⬜');
   });

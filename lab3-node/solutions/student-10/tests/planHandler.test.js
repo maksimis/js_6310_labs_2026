@@ -1,7 +1,11 @@
 import { describe, test, expect, jest, beforeEach } from '@jest/globals';
 import handleMessage from '../src/handlers/messageHandler.js';
-import { clearStore } from '../src/store.js';
+import { getUser, clearStore } from '../src/store.js';
 import { parseDay } from '../src/utils/index.js';
+
+// Названия стартовых рецептов берём из хранилища, чтобы тесты не зависели от них
+const names = getUser('defaults').recipes.map((recipe) => recipe.name);
+clearStore();
 
 const send = async (userId, text) => {
   const reply = jest.fn();
@@ -38,9 +42,9 @@ describe('/plan', () => {
 
   test('назначает рецепт на день по шагам', async () => {
     expect(lastText(await send(1, '/plan set'))).toContain('На какой день');
-    expect(lastText(await send(1, 'вторник'))).toContain('1. Омлет');
-    expect(lastText(await send(1, '1'))).toContain('Назначено: Вторник — Омлет');
-    expect(lastText(await send(1, '/plan'))).toContain('2. Вторник — Омлет');
+    expect(lastText(await send(1, 'вторник'))).toContain(`1. ${names[0]}`);
+    expect(lastText(await send(1, '1'))).toContain(`Назначено: Вторник — ${names[0]}`);
+    expect(lastText(await send(1, '/plan'))).toContain(`2. Вторник — ${names[0]}`);
   });
 
   test('можно выбрать день по номеру и перезаписать рецепт', async () => {
@@ -50,7 +54,7 @@ describe('/plan', () => {
     await send(1, '/plan set');
     await send(1, 'понедельник');
     await send(1, '2');
-    expect(lastText(await send(1, '/plan'))).toContain('1. Понедельник — Салат овощной');
+    expect(lastText(await send(1, '/plan'))).toContain(`1. Понедельник — ${names[1]}`);
   });
 
   test('при неверном дне остаётся на том же шаге', async () => {
@@ -64,7 +68,7 @@ describe('/plan', () => {
     await send(1, '1');
     expect(lastText(await send(1, '99'))).toContain('Нет такого рецепта');
     expect(lastText(await send(1, 'abc'))).toContain('Нет такого рецепта');
-    expect(lastText(await send(1, '3'))).toContain('Паста с курицей');
+    expect(lastText(await send(1, String(names.length)))).toContain(names.at(-1));
   });
 
   test('/plan clear очищает план', async () => {
@@ -99,6 +103,6 @@ describe('/plan', () => {
     await send(1, 'Сварить');
     await send(1, '/plan set');
     await send(1, '1');
-    expect(lastText(await send(1, '4'))).toContain('Понедельник — Борщ');
+    expect(lastText(await send(1, String(names.length + 1)))).toContain('Понедельник — Борщ');
   });
 });
