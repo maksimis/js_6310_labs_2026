@@ -1,0 +1,26 @@
+{
+  "name": "recipe-bot",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "type": "module",
+  "license": "ISC",
+  "description": "Telegram-бот для планирования рецептов и списков покупок",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "jest": "^30.2.0"
+  }
+}
