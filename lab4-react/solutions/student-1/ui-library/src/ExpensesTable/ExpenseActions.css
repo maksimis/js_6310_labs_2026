@@ -1,0 +1,26 @@
+.expenses-table__actions {
+  white-space: nowrap;
+}
+
+.expenses-table__actions button {
+  border: 0;
+  border-radius: 7px;
+  background: #f1f0ff;
+  color: #5149d8;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px 9px;
+}
+
+.expenses-table__actions button + button {
+  margin-left: 6px;
+}
+
+.expenses-table__actions button:last-child {
+  background: #fff1f1;
+  color: #bd4040;
+}
+
+.expenses-table__actions button:hover {
+  filter: brightness(.96);
+}

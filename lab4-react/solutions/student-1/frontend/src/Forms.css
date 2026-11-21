@@ -1,0 +1,29 @@
+.sidebar__bottom {
+  width: 100%;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar__bottom:hover, .topbar__profile:hover { color: #5149d8; }
+.topbar__profile { margin-left: auto; margin-right: 12px; padding: 7px 10px; border: 0; border-radius: 7px; background: transparent; color: #60687a; font: inherit; cursor: pointer; }
+.modal-backdrop { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 18px; background: #111b35a6; }
+.modal { width: min(100%, 430px); padding: 24px; border-radius: 15px; background: #fff; box-shadow: 0 24px 80px #10162e48; }
+.modal--small { width: min(100%, 390px); }
+.modal__heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.modal__heading h2 { margin: 0; font-size: 19px; }
+.modal__close { border: 0; background: transparent; color: #858da0; font-size: 26px; cursor: pointer; }
+.modal__form { display: grid; gap: 14px; }
+.modal__form label { display: grid; gap: 6px; color: #586174; font-size: 12px; font-weight: 650; }
+.modal__form input, .modal__form select { width: 100%; min-height: 39px; padding: 8px 10px; border: 1px solid #dfe2ec; border-radius: 8px; background: #fff; color: #172033; font: inherit; font-size: 13px; }
+.modal__form input:focus, .modal__form select:focus { outline: 2px solid #bbb8fb; border-color: #615cf3; }
+.modal__hint, .modal--small p { margin: 0; color: #858da0; font-size: 12px; line-height: 1.5; }
+.modal__actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 8px; }
+.button-secondary, .button-danger { padding: 10px 14px; border: 0; border-radius: 8px; font-size: 11px; font-weight: 650; cursor: pointer; }
+.button-secondary { background: #f1f2f7; color: #586174; }
+.button-danger { background: #d94f59; color: #fff; }
+@media(max-width:680px) { .topbar__profile { margin-right: 0; padding: 6px; font-size: 10px; } .topbar__date { display: none; } }
