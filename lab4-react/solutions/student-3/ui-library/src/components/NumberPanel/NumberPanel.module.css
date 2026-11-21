@@ -1,0 +1,32 @@
+.panel {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  max-width: 380px;
+  justify-content: center;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #ddd;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button[data-testid="btn-clear"] {
+  width: auto;
+  padding: 0 16px;
+}

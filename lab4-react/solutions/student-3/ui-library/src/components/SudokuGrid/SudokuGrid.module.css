@@ -1,0 +1,50 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(9, 40px);
+  grid-template-rows: repeat(9, 40px);
+  gap: 1px;
+  background-color: #000;
+  border: 2px solid #000;
+  width: max-content;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.borderRight {
+  border-right: 2px solid #000;
+}
+
+.borderBottom {
+  border-bottom: 2px solid #000;
+}
+
+.initial {
+  font-weight: bold;
+  color: #000;
+}
+
+.user {
+  color: #0055cc;
+}
+
+.conflict {
+  color: #cc0000;
+  background-color: #ffcccc;
+}
+
+.empty {
+  color: transparent;
+}
+
+.selected {
+  background-color: #e0e0ff;
+}
