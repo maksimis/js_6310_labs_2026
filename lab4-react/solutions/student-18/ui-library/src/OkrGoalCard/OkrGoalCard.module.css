@@ -1,0 +1,145 @@
+.card {
+  background: #222328;
+  border: 1px solid #32343c;
+  border-radius: 14px;
+  padding: 20px;
+  color: #f4f4f5;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.deadline {
+  font-size: 13px;
+  color: #a1a1aa;
+}
+
+.statusActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid #3f3f46;
+  background: #27272a;
+  color: #e4e4e7;
+}
+
+.status--not_started {
+  background: #27272a;
+  color: #a1a1aa;
+  border-color: #3f3f46;
+}
+
+.status--in_progress {
+  background: #2e3038;
+  color: #f4f4f5;
+  border-color: #52525b;
+}
+
+.status--urgent {
+  background: #3b2828;
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+.status--completed {
+  background: #f4f4f5;
+  color: #18181b;
+  border-color: #f4f4f5;
+}
+
+.urgentToggle {
+  background: transparent;
+  border: 1px solid #3f3f46;
+  color: #a1a1aa;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.urgentToggle:hover {
+  color: #ffffff;
+  border-color: #71717a;
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #1b1c20;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #2c2e35;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.progressLabel {
+  color: #a1a1aa;
+}
+
+.progressValue {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.squaresBar {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+}
+
+.square {
+  height: 12px;
+  border-radius: 4px;
+  background: #27272a;
+  border: 1px solid #383840;
+  transition: background-color 0.15s ease;
+}
+
+.squareFilled {
+  background: #f4f4f5;
+  border-color: #f4f4f5;
+}
+
+.content {
+  border-top: 1px solid #2e3038;
+  padding-top: 14px;
+}

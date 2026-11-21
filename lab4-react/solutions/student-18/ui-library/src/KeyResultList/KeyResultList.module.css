@@ -1,0 +1,117 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty {
+  padding: 12px;
+  border-radius: 10px;
+  background: #1b1c20;
+  border: 1px dashed #32343c;
+  color: #a1a1aa;
+  font-size: 13px;
+  text-align: center;
+}
+
+.item {
+  background: #1b1c20;
+  border: 1px solid #2c2e35;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.itemTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f4f4f5;
+}
+
+.contributionBadge {
+  font-size: 12px;
+  color: #d4d4d8;
+  background: #27272a;
+  border: 1px solid #3f3f46;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.statsText {
+  font-size: 13px;
+  color: #a1a1aa;
+}
+
+.miniSquares {
+  display: flex;
+  gap: 4px;
+}
+
+.miniSquare {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: #27272a;
+  border: 1px solid #383840;
+}
+
+.miniSquareFilled {
+  background: #f4f4f5;
+  border-color: #f4f4f5;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider {
+  flex: 1;
+  accent-color: #f4f4f5;
+  cursor: pointer;
+}
+
+.slider:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.numberInput {
+  width: 76px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #3f3f46;
+  background: #222328;
+  color: #f4f4f5;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.numberInput:focus {
+  outline: none;
+  border-color: #a1a1aa;
+}
+
+.numberInput:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
