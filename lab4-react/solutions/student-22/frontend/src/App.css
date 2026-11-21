@@ -1,0 +1,48 @@
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.app h1 {
+  margin-bottom: 16px;
+}
+
+.bars {
+  margin-top: 40px;
+}
+
+.info {
+  margin-top: 12px;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.legend-item::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+.legend-default::before {
+  background: #4a90e2;
+}
+
+.legend-comparing::before {
+  background: #f5a623;
+}
+
+.legend-sorted::before {
+  background: #4caf50;
+}
