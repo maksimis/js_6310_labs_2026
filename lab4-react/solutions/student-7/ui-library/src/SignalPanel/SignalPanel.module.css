@@ -1,0 +1,66 @@
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки */
+  gap: 20px; /* Расстояние между кнопками */
+  max-width: 400px; /* Ширина всей панели */
+  margin: 20px auto;
+}
+
+.button {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Делает кнопки идеально квадратными */
+  border: 4px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  /* По умолчанию кнопки немного приглушены */
+  opacity: 0.6;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Эффект при наведении (если не заблокировано) */
+.button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+
+.red { background-color: #e74c3c; }
+.green { background-color: #2ecc71; }
+.blue { background-color: #3498db; }
+.yellow { background-color: #f1c40f; }
+
+
+.active {
+  opacity: 1;
+  transform: scale(1.05); /* Кнопка немного увеличивается */
+}
+
+.red.active {
+  background-color: #ff5e4d; /* Делаем цвет ярче */
+  border-color: #ffb3aa;
+  box-shadow: 0 0 30px 10px rgba(231, 76, 60, 0.8); /* Неоновое свечение */
+}
+
+.green.active {
+  background-color: #42e385;
+  border-color: #a3f5c9;
+  box-shadow: 0 0 30px 10px rgba(46, 204, 113, 0.8);
+}
+
+.blue.active {
+  background-color: #4cb8ff;
+  border-color: #ade0ff;
+  box-shadow: 0 0 30px 10px rgba(52, 152, 219, 0.8);
+}
+
+.yellow.active {
+  background-color: #ffe066;
+  border-color: #fff2b3;
+  box-shadow: 0 0 30px 10px rgba(241, 196, 15, 0.8);
+}
