@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "KAI Comic Sans Theme",
+  "version": "1.0",
+  "description": "Меняет стиль сайта kai.ru на Comic Sans (Вариант 10)",
+  "content_scripts": [
+    {
+      "matches": ["*://kai.ru/*", "*://*.kai.ru/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
