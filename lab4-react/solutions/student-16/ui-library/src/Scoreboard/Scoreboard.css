@@ -1,0 +1,66 @@
+.scoreboard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  max-width: 720px;
+}
+
+.scoreboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.scoreboard__title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1f2937;
+}
+
+.scoreboard__filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.scoreboard__filter select {
+  padding: 6px 10px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  font-size: 0.95rem;
+}
+
+.scoreboard__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scoreboard__table th,
+.scoreboard__table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.scoreboard__table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.scoreboard__table tr:hover td {
+  background: #f9fafb;
+}
+
+.scoreboard__empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 24px 0;
+}

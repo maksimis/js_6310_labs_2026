@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/setuptests.ts","./src/types.ts","./src/vite-env.d.ts","./src/questioncard/questioncard.test.tsx","./src/questioncard/questioncard.tsx","./src/scoreboard/scoreboard.test.tsx","./src/scoreboard/scoreboard.tsx"],"version":"5.9.3"}
