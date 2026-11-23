@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": [
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
+    ],
+    "paths": {
+      "@my-app/ui-library": [
+        "../ui-library/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "../ui-library/src"
+  ]
+}
