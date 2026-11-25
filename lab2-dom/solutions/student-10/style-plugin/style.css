@@ -1,0 +1,92 @@
+.aui body.normal_view.ravenclaw-on h1{
+    color : #c49a55 !important;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.aui body.normal_view.ravenclaw-on {
+    background-color: #0e1a40;
+}
+.aui body.normal_view.ravenclaw-on .columns-2 {
+    background-color: #0e1a40;
+ }
+
+.aui body.normal_view.ravenclaw-on .section {
+    background-color: #0e1a40 !important;
+ }
+
+.aui body.normal_view.ravenclaw-on .inst-slide next {
+    background-color: #0e1a40 !important;
+ }
+
+.aui body.normal_view.ravenclaw-on footer {
+    background-color: #0e1a40 !important;
+    color: #c49a55;
+ }
+
+.aui body.normal_view.ravenclaw-on .portlet-boundary {
+    background-color: #0e1a40 !important;
+ }
+
+.aui body.normal_view.ravenclaw-on .slogan {
+    color: #c49a55;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    text-transform: uppercase;
+ }
+
+
+ .aui body.normal_view.ravenclaw-on .note {
+    color: #a9c7e8;
+    font-family: "Times New Roman", cursive !important;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.3;
+    margin-top: 4px;
+ }
+ .aui body.normal_view.ravenclaw-on .ravenclaw-week{
+    background-color: #946b2d !important;
+    color : #d8b683 !important;
+ }
+
+ .aui body.normal_view.ravenclaw-on .ravenclaw-menu-item{
+    background-color: #946b2d !important;
+    
+ }
+
+ .aui body.normal_view.ravenclaw-on .ravenclaw-first{
+    background-color: #3b4e81 !important;
+    
+ }
+ .aui body.normal_view.ravenclaw-on #login_btn{
+    color: #946b2d !important;
+    
+ }
+
+.aui body.normal_view.ravenclaw-on .box_links .priority{
+    filter : brightness(0) invert(1);
+}
+
+
+.ravenclaw-btn {
+    width: 70px;
+    height: 30px;
+    background-color: #946b2d;
+    line-height: 30px;
+    font-size: 12px;
+    text-align: center;
+    color: #0e1a40;
+    cursor: pointer;
+    border-radius: 40%;
+    position : fixed;
+    transition: all 0.5s;
+    bottom : 50px;
+    right : 20px;
+    z-index: 9999;
+
+}
