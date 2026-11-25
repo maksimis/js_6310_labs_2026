@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 const originalError = console.error
+
 beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation((...args) => {
     if (

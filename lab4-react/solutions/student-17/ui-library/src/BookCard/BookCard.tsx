@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import type { JSX } from 'react'
+
 import { Card } from '../Card/Card'
 import type { Book, ReadingStatus } from '../types'
+
 import styles from './BookCard.module.css'
 
 export interface BookCardProps {
@@ -26,6 +28,7 @@ export function BookCard({
   const handleStarClick = (value: number): void => {
     if (onRatingChange) {
       const newRating = book.rating === value ? 0 : value
+
       onRatingChange(book.id, newRating)
     }
   }
@@ -71,6 +74,7 @@ export function BookCard({
         >
           {[1, 2, 3, 4, 5].map((star) => {
             const active = (hovered || book.rating) >= star
+
             return (
               <button
                 key={star}

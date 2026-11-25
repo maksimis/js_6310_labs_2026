@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
 import type { JSX } from 'react'
-import type { Book, ReadingStatus } from '../types'
+
 import { BookCard } from '../BookCard/BookCard'
 import { Button } from '../Button/Button'
+import type { Book, ReadingStatus } from '../types'
+
 import styles from './BookShelf.module.css'
 
 export interface BookShelfProps {
@@ -30,12 +32,14 @@ export function BookShelf({
 
   const visibleBooks = useMemo<Book[]>(() => {
     const normalizedQuery = query.trim().toLowerCase()
+
     return books.filter((book) => {
       const matchesStatus = filter === 'all' || book.status === filter
       const matchesQuery =
         normalizedQuery.length === 0 ||
         book.title.toLowerCase().includes(normalizedQuery) ||
         book.author.toLowerCase().includes(normalizedQuery)
+
       return matchesStatus && matchesQuery
     })
   }, [books, filter, query])
