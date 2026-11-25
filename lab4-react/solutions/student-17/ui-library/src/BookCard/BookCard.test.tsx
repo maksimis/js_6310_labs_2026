@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import type { Book } from '../types'
-
 import { BookCard } from './BookCard'
+
+import type { Book } from '../types'
 
 const book: Book = {
   id: 'b1',

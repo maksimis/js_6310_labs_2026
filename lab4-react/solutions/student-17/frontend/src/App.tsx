@@ -1,6 +1,9 @@
 import { useState } from 'react'
+
 import { BookShelf } from 'ui-library'
+
 import type { Book, ReadingStatus } from 'ui-library'
+
 import './App.css'
 
 const INITIAL_BOOKS: Book[] = [

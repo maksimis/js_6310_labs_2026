@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import type { Book } from '../types'
-
 import { BookShelf } from './BookShelf'
+
+import type { Book } from '../types'
 
 const books: Book[] = [
   { id: '1', title: 'Альфа', author: 'Автор А', cover: 'a.png', status: 'read', rating: 5 },

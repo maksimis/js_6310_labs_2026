@@ -41,9 +41,17 @@
 
 Для запуска потребуется Node.js (версия 18 или выше) и npm.
 
-## Запуск (Библиотека)
+## Запуск
 ```bash
 cd ui-library
 npm install
 npm run test:coverage
 npm run build
+```
+Затем установите зависимости и запустите демонстрационное приложение.
+```sh
+cd ../frontend
+npm ci
+npm run dev
+```
+Откройте адрес, который выведет Vite (обычно http://localhost:3000).

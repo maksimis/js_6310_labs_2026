@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import type { JSX } from 'react'
 
-import { Card } from '../Card/Card'
-import type { Book, ReadingStatus } from '../types'
-
 import styles from './BookCard.module.css'
+import { Card } from '../Card/Card'
+
+import type { Book, ReadingStatus } from '../types'
 
 export interface BookCardProps {
   book: Book

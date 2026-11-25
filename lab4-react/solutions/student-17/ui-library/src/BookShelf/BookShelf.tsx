@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react'
 import type { JSX } from 'react'
 
+import styles from './BookShelf.module.css'
 import { BookCard } from '../BookCard/BookCard'
 import { Button } from '../Button/Button'
-import type { Book, ReadingStatus } from '../types'
 
-import styles from './BookShelf.module.css'
+import type { Book, ReadingStatus } from '../types'
 
 export interface BookShelfProps {
   books: Book[]
